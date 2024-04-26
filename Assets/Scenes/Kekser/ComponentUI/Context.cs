@@ -12,7 +12,7 @@ namespace Scenes.Kekser.ComponentUI
         private List<int> _usedChildren;
         private Props _props;
         
-        private Component _component;
+        private UIComponent _uiComponent;
 
         private int _index;
         
@@ -43,14 +43,14 @@ namespace Scenes.Kekser.ComponentUI
             {
                 Props.IsDirty = false;
                 _usedChildren.Clear();
-                if (_component != null)
-                    _component.Render(render);
+                if (_uiComponent != null)
+                    _uiComponent.Render(render);
                 else
                     render?.Invoke(this);
 
                 foreach (int key in _children.Keys.Except(_usedChildren).ToArray())
                 {
-                    _children[key]._component.Unmount();
+                    _children[key]._uiComponent.Unmount();
                     _children.Remove(key);
                 }
                 
@@ -63,24 +63,24 @@ namespace Scenes.Kekser.ComponentUI
             }
         }
 
-        private Context Child<TComponent>(int key) where TComponent : Component
+        private Context Child<TComponent>(int key) where TComponent : UIComponent
         {
             _usedChildren.Add(key);
             if (!_children.TryGetValue(key, out Context child))
             {
                 child = new Context(this);
                 _children.Add(key.GetHashCode(), child);
-                child._component = Activator.CreateInstance<TComponent>();
-                child._component.SetContext(child);
+                child._uiComponent = Activator.CreateInstance<TComponent>();
+                child._uiComponent.SetContext(child);
                 child._props = new Props();
-                child._component.Mount(_component?.Node);
+                child._uiComponent.Mount(_uiComponent?.Node);
             }
             child._index = 0;
-            child._component.Node.SetSiblingIndex(_index);
+            child._uiComponent.Node.SetSiblingIndex(_index);
             return child;
         }
         
-        public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null) where TComponent : Component
+        public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null) where TComponent : UIComponent
         {
             _index++;
             int hash = key?.GetHashCode() ?? render?.GetHashCode() ?? _index;

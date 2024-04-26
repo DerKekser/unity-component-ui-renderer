@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace Scenes.Kekser.ComponentUI
 {
-    public abstract class Component
+    public abstract class UIComponent
     {
         private RectTransform _node;
         private Context _ctx;
@@ -14,7 +14,7 @@ namespace Scenes.Kekser.ComponentUI
         public RectTransform Node => _node;
         public Props Props => _ctx?.Props ?? new Props();
         
-        public Component()
+        public UIComponent()
         {
             _node = new GameObject(GetType().Name, typeof(RectTransform)).transform as RectTransform;
             _styleParser = new StyleParser(_node);
@@ -37,13 +37,13 @@ namespace Scenes.Kekser.ComponentUI
         public void Render(Action<Context> children)
         {
             Debug.Log("Rendering " + GetType().Name);
-            ApplyStyle(Props.Get<Style>("style"));
+            ApplyStyle(/*Props.Get<Style>("style")*/);
             OnRender(_ctx, children);
         }
-
-        public void ApplyStyle(Style style)
+        
+        public void ApplyStyle()
         {
-            _styleParser.Parse(style);
+            _styleParser.Parse();
         }
         
         public void SetContext(Context ctx)

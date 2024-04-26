@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI.Components
 {
-    public class Canvas : Component
+    public class Canvas : UIComponent
     {
         private UnityEngine.Canvas _canvas;
         

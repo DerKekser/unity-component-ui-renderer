@@ -46,14 +46,14 @@ namespace Scenes.Kekser.ComponentUI
             return false;
         }
         
-        public void Parse(Style style)
+        public void Parse()
         {
-            GetSize(style.Width, out float width, out SizeType widthType);
+            /*GetSize(style.Width, out float width, out SizeType widthType);
             GetSize(style.Height, out float height, out SizeType heightType);
             GetSize(style.Top, out float top, out SizeType topType);
             GetSize(style.Left, out float left, out SizeType leftType);
             GetSize(style.Right, out float right, out SizeType rightType);
-            GetSize(style.Bottom, out float bottom, out SizeType bottomType);
+            GetSize(style.Bottom, out float bottom, out SizeType bottomType);*/
             
             // TODO: Apply styles to RectTransform
             

@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI.Components
 {
-    public class Button : Component
+    public class Button : UIComponent
     {
         private UnityEngine.UI.Image _image;
         private UnityEngine.UI.Button _button;
         
         private void Click()
         {
-            Event e = Props.Get<Event>("onClick");
-            e.Callback?.Invoke();
+            Action e = Props.Get<Action>("onClick");
+            e?.Invoke();
         }
         
         public override void OnMount()
