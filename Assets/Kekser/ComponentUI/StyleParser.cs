@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Kekser.ComponentUI
 {
@@ -61,6 +62,8 @@ namespace Kekser.ComponentUI
             _rectTransform.anchorMax = Vector2.one;
             _rectTransform.anchoredPosition = Vector2.zero;
             _rectTransform.sizeDelta = new Vector2(0, 0);
+            
+            LayoutRebuilder.MarkLayoutForRebuild(_rectTransform.parent as RectTransform);
         }
         
     }
