@@ -16,6 +16,7 @@ namespace Kekser.ComponentUI
         
         public UIComponent()
         {
+            // TODO: Add support for fragments
             _node = new GameObject(GetType().Name, typeof(RectTransform)).transform as RectTransform;
             _styleParser = new StyleParser(_node);
         }

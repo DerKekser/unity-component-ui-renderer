@@ -19,6 +19,7 @@ namespace Kekser.ComponentUI
 
         public bool NeedsRerender => Props.IsDirty;
         
+        // TODO: make abstract create separate context classes for different node types
         public Context(Transform mainNode)
         {
             _mainNode = mainNode;
