@@ -16,13 +16,22 @@ namespace Scenes.Test
 
         public override void OnRender(Context ctx, Action<Context> children)
         {
-            if (_clicks % 2 == 0) ctx._<Box>();
-            ctx._<Box>(render: ctx =>
+            ctx._<VerticalLayout>(render: ctx =>
             {
-                ctx._<Button>(
-                    props: props => props.Set<Action>("onClick", () => Props.Set("text", "Clicked " + ++_clicks + " times")),
-                    render: ctx => ctx._<Text>(props: props => props.Set("text", Props.Get("text")))
-                );
+                if (_clicks % 2 == 0) ctx._<Box>();
+                ctx._<Box>(render: ctx =>
+                {
+                    ctx._<Button>(
+                        props: props =>
+                            props.Set<Action>("onClick", () => Props.Set("text", "Clicked " + ++_clicks + " times")),
+                        render: ctx => ctx._<Text>(props: props =>
+                        {
+                            props.Set("text", Props.Get("text"));
+                            props.Set("fontSize", 24);
+                            props.Set("color", Color.red);
+                        })
+                    );
+                });
             });
         }
     }

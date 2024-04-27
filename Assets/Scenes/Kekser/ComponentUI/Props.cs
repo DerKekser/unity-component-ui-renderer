@@ -19,16 +19,18 @@ namespace Scenes.Kekser.ComponentUI
             set => _isDirty = value;
         }
         
-        public T Get<T>(string prop)
+        public T Get<T>(string prop, T defaultValue = default)
         {
             if (_props.TryGetValue(prop, out object p))
                 return (T) p;
-            return default;
+            return defaultValue;
         }
         
-        public object Get(string prop)
+        public object Get(string prop, object defaultValue = null)
         {
-            return _props[prop];
+            if (_props.TryGetValue(prop, out object p))
+                return p;
+            return defaultValue;
         }
         
         public void Set<T>(string prop, T p)
@@ -99,6 +101,18 @@ namespace Scenes.Kekser.ComponentUI
         {
             _isDirty = true;
             return _props.Remove(key);
+        }
+        
+        public bool TryGetValue<T>(string key, out T value)
+        {
+            if (_props.TryGetValue(key, out object v))
+            {
+                value = (T) v;
+                return true;
+            }
+
+            value = default;
+            return false;
         }
 
         public bool TryGetValue(string key, out object value)
