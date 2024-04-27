@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI
 {
-    public class Props: IDictionary<string, object>
+    public sealed class Props: IDictionary<string, object>
     {
         private Dictionary<string, object> _props = new Dictionary<string, object>();
         private bool _isDirty = true;
@@ -21,21 +21,21 @@ namespace Scenes.Kekser.ComponentUI
         
         public T Get<T>(string prop, T defaultValue = default)
         {
-            if (_props.TryGetValue(prop, out object p))
+            if (TryGetValue(prop, out object p))
                 return (T) p;
             return defaultValue;
         }
         
         public object Get(string prop, object defaultValue = null)
         {
-            if (_props.TryGetValue(prop, out object p))
+            if (TryGetValue(prop, out object p))
                 return p;
             return defaultValue;
         }
         
         public void Set<T>(string prop, T p)
         {
-            if (_props.TryGetValue(prop, out object current) && current.Equals(p))
+            if (TryGetValue(prop, out object current) && current.Equals(p))
                 return;
             _props[prop] = p;
             _isDirty = true;
@@ -43,7 +43,7 @@ namespace Scenes.Kekser.ComponentUI
         
         public void Set(string prop, object p)
         {
-            if (_props.TryGetValue(prop, out object current) && current.Equals(p))
+            if (TryGetValue(prop, out object current) && current.Equals(p))
                 return;
             _props[prop] = p;
             _isDirty = true;
@@ -105,7 +105,7 @@ namespace Scenes.Kekser.ComponentUI
         
         public bool TryGetValue<T>(string key, out T value)
         {
-            if (_props.TryGetValue(key, out object v))
+            if (TryGetValue(key, out object v))
             {
                 value = (T) v;
                 return true;
@@ -117,7 +117,7 @@ namespace Scenes.Kekser.ComponentUI
 
         public bool TryGetValue(string key, out object value)
         {
-            return _props.TryGetValue(key, out value);
+            return _props.TryGetValue(key, out value) && value != null;
         }
 
         public object this[string key]

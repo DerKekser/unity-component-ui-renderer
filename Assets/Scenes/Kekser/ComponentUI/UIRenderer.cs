@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI
 {
-    public class UIRenderer
+    public sealed class UIRenderer
     {
         private Context _context;
         
@@ -17,8 +17,8 @@ namespace Scenes.Kekser.ComponentUI
 
         public void Update()
         {
-            _context.Props.Set("ScreenWidth", Screen.width);
-            _context.Props.Set("ScreenHeight", Screen.height);
+            _context.Props.Set("screenWidth", Screen.width);
+            _context.Props.Set("screenHeight", Screen.height);
             _context.Traverse(_render);
         }
     }

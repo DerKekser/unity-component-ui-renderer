@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI.Components
 {
-    public class Canvas : UIComponent
+    public sealed class Canvas : UIComponent
     {
         private UnityEngine.Canvas _canvas;
         private UnityEngine.UI.GraphicRaycaster _raycaster;

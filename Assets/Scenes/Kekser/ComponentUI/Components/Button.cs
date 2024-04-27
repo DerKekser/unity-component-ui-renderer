@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scenes.Kekser.ComponentUI.Components
 {
-    public class Button : UIComponent
+    public sealed class Button : UIComponent
     {
         private UnityEngine.UI.Image _image;
         private UnityEngine.UI.Button _button;
