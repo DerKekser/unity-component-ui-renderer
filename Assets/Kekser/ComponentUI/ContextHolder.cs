@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Kekser.ComponentUI
 {
@@ -42,6 +43,11 @@ namespace Kekser.ComponentUI
             {
                 Context child = new Context(_context);
                 contexts.Add(child);
+            }
+
+            if (subIndex > 0)
+            {
+                Debug.LogWarning("Multiple contexts with the same key are not supported! It might lead to unexpected behavior.");
             }
             
             Context context = contexts[subIndex];

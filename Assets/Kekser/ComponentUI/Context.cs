@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Kekser.ComponentUI
@@ -105,10 +106,9 @@ namespace Kekser.ComponentUI
             return context;
         }
         
-        public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null) where TComponent : UIFragment
+        public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null, [CallerLineNumber] int callerLine = 0) where TComponent : UIFragment
         {
-            // TODO: improve key generation algorithm to identify components
-            int? hash = key?.GetHashCode() ?? typeof(TComponent).GetHashCode();
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             Context child = Child<TComponent>(hash);
             _nodeIndexHolder.UpdateNode(child);
