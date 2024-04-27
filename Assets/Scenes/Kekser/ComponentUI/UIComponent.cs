@@ -20,23 +20,24 @@ namespace Scenes.Kekser.ComponentUI
             _styleParser = new StyleParser(_node);
         }
         
-        public void Mount(RectTransform parent)
+        public void Mount(Transform parent)
         {
-            Debug.Log("Mounting " + GetType().Name);
+            UIRenderer.Log("Mounting " + GetType().Name);
             _node.SetParent(parent);
+            _node.localScale = Vector3.one;
             OnMount();
         }
         
         public void Unmount()
         {
-            Debug.Log("Unmounting " + GetType().Name);
+            UIRenderer.Log("Unmounting " + GetType().Name);
             OnUnmount();
             Object.Destroy(_node.gameObject);
         }
 
         public void Render(Action<Context> children)
         {
-            Debug.Log("Rendering " + GetType().Name);
+            UIRenderer.Log("Rendering " + GetType().Name);
             ApplyStyle(/*Props.Get<Style>("style")*/);
             OnRender(_ctx, children);
         }

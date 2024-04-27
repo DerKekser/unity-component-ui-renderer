@@ -8,10 +8,16 @@ namespace Scenes.Kekser.ComponentUI
         private Context _context;
         
         private Action<Context> _render;
-        
-        public void Render(Action<Context> render)
+     
+        public bool Logging
         {
-            _context = new Context(null);
+            get => _log;
+            set => _log = value;
+        }
+        
+        public void Render(Action<Context> render, Canvas canvas)
+        {
+            _context = new Context(canvas.transform);
             _render = render;
         }
 
@@ -20,6 +26,15 @@ namespace Scenes.Kekser.ComponentUI
             _context.Props.Set("screenWidth", Screen.width);
             _context.Props.Set("screenHeight", Screen.height);
             _context.Traverse(_render);
+        }
+        
+        private static bool _log = false;
+
+        public static void Log(string message)
+        {
+            if (!_log)
+                return;
+            Debug.Log(message);
         }
     }
 }

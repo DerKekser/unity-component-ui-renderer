@@ -1,17 +1,19 @@
 ﻿using Scenes.Kekser.ComponentUI;
 using UnityEngine;
-using Canvas = Scenes.Kekser.ComponentUI.Components.Canvas;
 
 namespace Scenes.Test
 {
     public class Test : MonoBehaviour
     {
+        [SerializeField]
+        private Canvas _canvas;
+        
         private UIRenderer _renderer;
         
         private void Start()
         {
             _renderer = new UIRenderer();
-            _renderer.Render(ctx => ctx._<Canvas>(render: ctx => ctx._<Menu>()));
+            _renderer.Render(ctx => ctx._<App>(), _canvas);
         }
         
         private void Update()

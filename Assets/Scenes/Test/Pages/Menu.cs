@@ -2,15 +2,14 @@
 using Scenes.Kekser.ComponentUI;
 using Scenes.Kekser.ComponentUI.Components;
 using Scenes.Test.Components;
-using UnityEngine;
 
-namespace Scenes.Test
+namespace Scenes.Test.Pages
 {
     public class Menu: UIComponent
     {
         private int _clicks = 0;
 
-        private void Quit()
+        private void HandleQuit()
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -19,6 +18,11 @@ namespace Scenes.Test
 #else
             Application.Quit();
 #endif
+        }
+        
+        private void HandleOptions()
+        {
+            Props.Get<Action>("onOptions")?.Invoke();
         }
         
         public override void OnMount()
@@ -42,13 +46,14 @@ namespace Scenes.Test
                 ctx._<MenuButton>(
                     props: props =>
                     {
+                        props.Set<Action>("onClick", HandleOptions);
                         props.Set("text", "Options");
                     }
                 );
                 ctx._<MenuButton>(
                     props: props =>
                     {
-                        props.Set<Action>("onClick", Quit);
+                        props.Set<Action>("onClick", HandleQuit);
                         props.Set("text", "Exit");
                     }
                 );

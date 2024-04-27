@@ -12,6 +12,7 @@ namespace Scenes.Kekser.ComponentUI
         private List<Context> _usedContexts;
         private Props _props;
         
+        private Transform _mainNode;
         private UIComponent _uiComponent;
 
         public Props Props
@@ -26,8 +27,18 @@ namespace Scenes.Kekser.ComponentUI
         
         public bool NeedsRerender => Props.IsDirty;
         
+        public Context(Transform mainNode)
+        {
+            _mainNode = mainNode;
+            _contextHolder = new ContextHolder(this);
+            _contextHolder.Reset();
+            _usedContexts = new List<Context>();
+            _props = new Props();
+        }
+        
         public Context(Context parent)
         {
+            _mainNode = parent._mainNode;
             _parent = parent;
             _contextHolder = new ContextHolder(this);
             _contextHolder.Reset();
@@ -49,7 +60,7 @@ namespace Scenes.Kekser.ComponentUI
 
                 foreach (Context context in _contextHolder.GetContexts().Except(_usedContexts).ToArray())
                 {
-                    context._uiComponent.Unmount();
+                    context.Remove();
                     _contextHolder.Remove(context);
                 }
                 
@@ -60,6 +71,15 @@ namespace Scenes.Kekser.ComponentUI
             {
                 child.Traverse(render);
             }
+        }
+        
+        private void Remove()
+        {
+            foreach (Context child in _contextHolder.GetContexts())
+            {
+                child.Remove();
+            }
+            _uiComponent.Unmount();
         }
 
         private Context Child<TComponent>(int? key) where TComponent : UIComponent
@@ -76,14 +96,14 @@ namespace Scenes.Kekser.ComponentUI
             
             context._uiComponent = Activator.CreateInstance<TComponent>();
             context._uiComponent.SetContext(context);
-            context._uiComponent.Mount(_uiComponent?.Node);
+            context._uiComponent.Mount(_uiComponent?.Node ?? _mainNode);
             context._uiComponent.Node.SetSiblingIndex(_contextHolder.Index);
             return context;
         }
         
         public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null) where TComponent : UIComponent
         {
-            int? hash = key?.GetHashCode() ?? render?.GetHashCode();
+            int? hash = key?.GetHashCode() ?? render?.GetHashCode() ?? typeof(TComponent).GetHashCode();
 
             Context child = Child<TComponent>(hash);
             if (props != null)
