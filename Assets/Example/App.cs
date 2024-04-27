@@ -1,6 +1,7 @@
 ﻿using System;
 using Example.Components;
 using Example.Pages;
+using Example.Providers;
 using Kekser.ComponentUI;
 
 namespace Example
@@ -32,18 +33,21 @@ namespace Example
         {
             ctx._<Layout>(render: ctx => 
             {
-                if (Props.Get<Pages>("page") == Pages.Menu)
+                ctx._<CountingProvider>(render: ctx =>
                 {
-                    ctx._<Menu>(
-                        props: props => props.Set<Action>("onOptions", HandleOptions)
-                    );
-                }
-                else
-                {
-                    ctx._<Options>(
-                        props: props => props.Set<Action>("onBack", HandleMenu)
-                    );
-                }
+                    if (Props.Get<Pages>("page") == Pages.Menu)
+                    {
+                        ctx._<Menu>(
+                            props: props => props.Set<Action>("onOptions", HandleOptions)
+                        );
+                    }
+                    else
+                    {
+                        ctx._<Options>(
+                            props: props => props.Set<Action>("onBack", HandleMenu)
+                        );
+                    }
+                });
             });
         }
     }

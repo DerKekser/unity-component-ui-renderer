@@ -47,7 +47,7 @@ namespace Kekser.ComponentUI
             return false;
         }
         
-        public void Parse()
+        public void Parse(Props props)
         {
             /*GetSize(style.Width, out float width, out SizeType widthType);
             GetSize(style.Height, out float height, out SizeType heightType);

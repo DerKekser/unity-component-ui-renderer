@@ -1,5 +1,6 @@
 ﻿using System;
 using Example.Components;
+using Example.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 
@@ -32,6 +33,8 @@ namespace Example.Pages
 
         public override void OnRender(Context ctx, Action<Context> children)
         {
+            CountingProvider provider = GetProvider<CountingProvider>();
+            
             ctx._<VerticalLayout>(
                 props: props => props.Set("spacing", 10),
                 render: ctx =>
@@ -41,6 +44,12 @@ namespace Example.Pages
                     {
                         props.Set<Action>("onClick", () => Props.Set("text", "Clicked " + ++_clicks + " times"));
                         props.Set("text", Props.Get("text"));
+                    }
+                );
+                ctx._<MenuButton>(
+                    props: props =>
+                    {
+                        props.Set("text", "Count: " + provider.GetCount());
                     }
                 );
                 ctx._<MenuButton>(

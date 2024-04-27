@@ -7,8 +7,6 @@ namespace Kekser.ComponentUI
     {
         private Context _context;
         
-        private Action<Context> _render;
-     
         public bool Logging
         {
             get => _log;
@@ -18,14 +16,14 @@ namespace Kekser.ComponentUI
         public void Render(Action<Context> render, Canvas canvas)
         {
             _context = new Context(canvas.transform);
-            _render = render;
+            _context.SetRender(render);
         }
 
         public void Update()
         {
             _context.Props.Set("screenWidth", Screen.width);
             _context.Props.Set("screenHeight", Screen.height);
-            _context.Traverse(_render);
+            _context.Traverse();
         }
         
         private static bool _log = false;

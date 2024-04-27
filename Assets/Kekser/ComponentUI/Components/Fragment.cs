@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Kekser.ComponentUI
+namespace Kekser.ComponentUI.Components
 {
-    public class UIProvider: UIFragment
+    public sealed class Fragment: UIFragment
     {
         public override void OnRender(Context ctx, Action<Context> children)
         {
