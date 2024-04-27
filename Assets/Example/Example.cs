@@ -1,9 +1,9 @@
-﻿using Scenes.Kekser.ComponentUI;
+﻿using Kekser.ComponentUI;
 using UnityEngine;
 
-namespace Scenes.Test
+namespace Example
 {
-    public class Test : MonoBehaviour
+    public class Example : MonoBehaviour
     {
         [SerializeField]
         private Canvas _canvas;

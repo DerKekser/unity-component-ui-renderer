@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Scenes.Kekser.ComponentUI.Components
+namespace Kekser.ComponentUI.Components
 {
-    public sealed class VerticalLayout: UIComponent
+    public sealed class HorizontalLayout: UIComponent
     {
-        private UnityEngine.UI.VerticalLayoutGroup _layoutGroup;
+        private UnityEngine.UI.HorizontalLayoutGroup _layoutGroup;
 
         public override void OnMount()
         {
-            _layoutGroup = Node.gameObject.AddComponent<UnityEngine.UI.VerticalLayoutGroup>();
+            _layoutGroup = Node.gameObject.AddComponent<UnityEngine.UI.HorizontalLayoutGroup>();
         }
 
         public override void OnRender(Context ctx, Action<Context> children)

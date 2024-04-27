@@ -2,7 +2,7 @@
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Scenes.Kekser.ComponentUI
+namespace Kekser.ComponentUI
 {
     public abstract class UIComponent
     {

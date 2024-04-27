@@ -1,9 +1,8 @@
 ﻿using System;
-using Scenes.Kekser.ComponentUI;
-using Scenes.Test.Pages;
-using UnityEngine;
+using Example.Pages;
+using Kekser.ComponentUI;
 
-namespace Scenes.Test
+namespace Example
 {
     public class App: UIComponent
     {

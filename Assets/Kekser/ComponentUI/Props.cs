@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace Scenes.Kekser.ComponentUI
+namespace Kekser.ComponentUI
 {
     public sealed class Props: IDictionary<string, object>
     {

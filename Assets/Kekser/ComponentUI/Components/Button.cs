@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scenes.Kekser.ComponentUI.Components
+namespace Kekser.ComponentUI.Components
 {
     public sealed class Button : UIComponent
     {

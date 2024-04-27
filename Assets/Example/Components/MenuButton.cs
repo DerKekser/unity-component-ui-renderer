@@ -1,9 +1,9 @@
 ﻿using System;
-using Scenes.Kekser.ComponentUI;
-using Scenes.Kekser.ComponentUI.Components;
+using Kekser.ComponentUI;
+using Kekser.ComponentUI.Components;
 using UnityEngine;
 
-namespace Scenes.Test.Components
+namespace Example.Components
 {
     public class MenuButton: UIComponent
     {

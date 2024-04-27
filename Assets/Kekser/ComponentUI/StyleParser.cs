@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scenes.Kekser.ComponentUI
+namespace Kekser.ComponentUI
 {
     public class StyleParser
     {

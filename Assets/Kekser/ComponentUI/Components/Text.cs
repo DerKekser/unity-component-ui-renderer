@@ -1,7 +1,7 @@
 ﻿using System;
 using TMPro;
 
-namespace Scenes.Kekser.ComponentUI.Components
+namespace Kekser.ComponentUI.Components
 {
     public sealed class Text: UIComponent
     {

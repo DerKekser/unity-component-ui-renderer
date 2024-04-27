@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scenes.Kekser.ComponentUI
+namespace Kekser.ComponentUI
 {
     public sealed class UIRenderer
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using Scenes.Kekser.ComponentUI;
-using Scenes.Kekser.ComponentUI.Components;
-using Scenes.Test.Components;
+using Example.Components;
+using Kekser.ComponentUI;
+using Kekser.ComponentUI.Components;
 
-namespace Scenes.Test.Pages
+namespace Example.Pages
 {
     public class Menu: UIComponent
     {

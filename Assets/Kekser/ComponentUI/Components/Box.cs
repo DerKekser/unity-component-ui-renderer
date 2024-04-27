@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scenes.Kekser.ComponentUI.Components
+namespace Kekser.ComponentUI.Components
 {
     public sealed class Box : UIComponent
     {

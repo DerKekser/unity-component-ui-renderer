@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Scenes.Kekser.ComponentUI
+namespace Kekser.ComponentUI
 {
     public class Context
     {
@@ -15,16 +15,8 @@ namespace Scenes.Kekser.ComponentUI
         private Transform _mainNode;
         private UIComponent _uiComponent;
 
-        public Props Props
-        {
-            get
-            {
-                if (_props == null)
-                    _props = new Props();
-                return _props;
-            }
-        }
-        
+        public Props Props => _props ??= new Props();
+
         public bool NeedsRerender => Props.IsDirty;
         
         public Context(Transform mainNode)
