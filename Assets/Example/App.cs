@@ -3,6 +3,7 @@ using Example.Components;
 using Example.Pages;
 using Example.Providers;
 using Kekser.ComponentUI;
+using Kekser.ComponentUI.PropSystem;
 
 namespace Example
 {
@@ -38,13 +39,13 @@ namespace Example
                     if (Props.Get<Pages>("page") == Pages.Menu)
                     {
                         ctx._<Menu>(
-                            props: props => props.Set<Action>("onOptions", HandleOptions)
+                            props: new EventProp("onOptions", HandleOptions)
                         );
                     }
                     else
                     {
                         ctx._<Options>(
-                            props: props => props.Set<Action>("onBack", HandleMenu)
+                            props: new EventProp("onBack", HandleMenu)
                         );
                     }
                 });

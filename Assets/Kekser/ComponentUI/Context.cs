@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
 
 namespace Kekser.ComponentUI
@@ -106,18 +107,22 @@ namespace Kekser.ComponentUI
             return context;
         }
         
-        public void _<TComponent>(string key = null, Action<Props> props = null, Action<Context> render = null, [CallerLineNumber] int callerLine = 0) where TComponent : UIFragment
+        public TComponent _<TComponent>(string key = null, Action<Context> render = null, [CallerLineNumber] int callerLine = 0, params IProp[] props) where TComponent : UIFragment
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             Context child = Child<TComponent>(hash);
             _nodeIndexHolder.UpdateNode(child);
             child.SetRender(render);
-            if (props != null)
-                props.Invoke(child.Props);
+            foreach (IProp prop in props)
+            {
+                prop.AddToProps(child.Props);
+            }
             
             child.Props.IsDirty = true;
             child.Traverse();
+            
+            return (TComponent) child._uiFragment;
         }
     }
 }

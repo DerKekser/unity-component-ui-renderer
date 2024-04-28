@@ -1,4 +1,5 @@
 ﻿using System;
+using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

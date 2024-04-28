@@ -2,6 +2,7 @@
 using Example.Components;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
+using Kekser.ComponentUI.PropSystem;
 
 namespace Example.Pages
 {
@@ -15,41 +16,30 @@ namespace Example.Pages
         public override void OnRender(Context ctx, Action<Context> children)
         {
             ctx._<VerticalLayout>(
-                props: props => props.Set("spacing", 10),
+                props: new Prop("spacing", 10),
                 render: ctx =>
                 {
                     ctx._<MenuButton>(
-                        props: props =>
-                        {
-                            props.Set("text", "Option 1");
-                        }
+                        props: new Prop("text", "Option 1")
                     );
                     ctx._<MenuButton>(
-                        props: props =>
-                        {
-                            props.Set("text", "Option 2");
-                        }
+                        props: new Prop("text", "Option 2")
                     );
                     ctx._<MenuButton>(
-                        props: props =>
-                        {
-                            props.Set("text", "Option 3");
-                        }
+                        props: new Prop("text", "Option 3")
                     );
                     ctx._<MenuButton>(
-                        props: props =>
-                        {
-                            props.Set("text", "Option 4");
-                        }
+                        props: new Prop("text", "Option 4")
                     );
                     ctx._<MenuButton>(
-                        props: props =>
+                        props: new IProp[]
                         {
-                            props.Set<Action>("onClick", HandleBack);
-                            props.Set("text", "Back");
+                            new EventProp("onClick", HandleBack),
+                            new Prop("text", "Back")
                         }
                     );
-                });
+                }
+            );
         }
     }
 }

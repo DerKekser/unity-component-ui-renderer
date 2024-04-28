@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Kekser.ComponentUI
+namespace Kekser.ComponentUI.PropSystem
 {
     public sealed class Props: IDictionary<string, object>
     {

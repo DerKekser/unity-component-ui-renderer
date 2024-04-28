@@ -3,6 +3,7 @@ using Example.Components;
 using Example.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
+using Kekser.ComponentUI.PropSystem;
 
 namespace Example.Pages
 {
@@ -36,37 +37,35 @@ namespace Example.Pages
             CountingProvider provider = GetProvider<CountingProvider>();
             
             ctx._<VerticalLayout>(
-                props: props => props.Set("spacing", 10),
+                props: new Prop("spacing", 10),
                 render: ctx =>
-            {
-                ctx._<MenuButton>(
-                    props: props =>
-                    {
-                        props.Set<Action>("onClick", () => Props.Set("text", "Clicked " + ++_clicks + " times"));
-                        props.Set("text", Props.Get("text"));
-                    }
-                );
-                ctx._<MenuButton>(
-                    props: props =>
-                    {
-                        props.Set("text", "Count: " + provider.GetCount());
-                    }
-                );
-                ctx._<MenuButton>(
-                    props: props =>
-                    {
-                        props.Set<Action>("onClick", HandleOptions);
-                        props.Set("text", "Options");
-                    }
-                );
-                ctx._<MenuButton>(
-                    props: props =>
-                    {
-                        props.Set<Action>("onClick", HandleQuit);
-                        props.Set("text", "Exit");
-                    }
-                );
-            });
+                {
+                    ctx._<MenuButton>(
+                        props: new IProp[]
+                        {
+                            new EventProp("onClick", () => Props.Set("text", $"Clicked {++_clicks} times")),
+                            new Prop("text", Props.Get("text"))
+                        }
+                    );
+                    ctx._<MenuButton>(
+                        props: new Prop("text", $"Count: {provider.GetCount()}")
+                    );
+                    ctx._<MenuButton>(
+                        props: new IProp[]
+                        {
+                            new EventProp("onClick", HandleOptions),
+                            new Prop("text", "Options")
+                        }
+                    );
+                    ctx._<MenuButton>(
+                        props: new IProp[]
+                        {
+                            new EventProp("onClick", HandleQuit),
+                            new Prop("text", "Exit")
+                        }
+                    );
+                }
+            );
         }
     }
 }

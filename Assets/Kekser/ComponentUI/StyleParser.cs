@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Kekser.ComponentUI.PropSystem;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Kekser.ComponentUI
@@ -49,12 +50,12 @@ namespace Kekser.ComponentUI
         
         public void Parse(Props props)
         {
-            /*GetSize(style.Width, out float width, out SizeType widthType);
-            GetSize(style.Height, out float height, out SizeType heightType);
-            GetSize(style.Top, out float top, out SizeType topType);
-            GetSize(style.Left, out float left, out SizeType leftType);
-            GetSize(style.Right, out float right, out SizeType rightType);
-            GetSize(style.Bottom, out float bottom, out SizeType bottomType);*/
+            GetSize(props.Get("width", "auto"), out float width, out SizeType widthType);
+            GetSize(props.Get("height", "auto"), out float height, out SizeType heightType);
+            GetSize(props.Get("Top", "auto"), out float top, out SizeType topType);
+            GetSize(props.Get("Right", "auto"), out float right, out SizeType rightType);
+            GetSize(props.Get("Bottom", "auto"), out float bottom, out SizeType bottomType);
+            GetSize(props.Get("Left", "auto"), out float left, out SizeType leftType);
             
             // TODO: Apply styles to RectTransform
             
