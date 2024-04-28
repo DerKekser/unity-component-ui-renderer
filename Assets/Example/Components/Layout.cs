@@ -2,6 +2,7 @@
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.PropSystem;
+using UnityEngine;
 
 namespace Example.Components
 {
@@ -11,6 +12,20 @@ namespace Example.Components
         {
             ctx._<Box>(render: ctx =>
             {
+                ctx._<Panel>(
+                    props: new IProp[]
+                    {
+                        new Prop("width", "500px"),
+                        new Prop("height", "500px"),
+                        new Prop("maxWidth", "90%"),
+                        new Prop("maxHeight", "90%"),
+                        new Prop("top", "50%"),
+                        new Prop("left", "50%"),
+                        new Prop("translateX", "-50%"),
+                        new Prop("translateY", "-50%"),
+                        new Prop("color", Color.red),
+                    }
+                );
                 ctx._<Box>(
                     props: new IProp[]
                     {
