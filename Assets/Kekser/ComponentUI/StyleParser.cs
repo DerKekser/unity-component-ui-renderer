@@ -72,63 +72,67 @@ namespace Kekser.ComponentUI
             if (parent == null)
                 return;
             
-            if (widthType == SizeType.Auto && leftType == SizeType.Auto && rightType == SizeType.Auto)
+            if (parent.GetComponent<LayoutGroup>() != null)
                 return;
-            
-            //convert percent to pixels
-            if (widthType == SizeType.Percent)
-                width = parent.rect.width * width / 100;
-            if (leftType == SizeType.Percent)
-                left = parent.rect.width * left / 100;
-            if (rightType == SizeType.Percent)
-                right = parent.rect.width * right / 100;
 
-            //convert auto to pixels
-            if (widthType == SizeType.Auto)
-                width = parent.rect.width;
-            if (leftType == SizeType.Auto)
-                left = 0;
-            if (rightType == SizeType.Auto)
-                right = 0;
+            if (widthType != SizeType.Auto || leftType != SizeType.Auto || rightType != SizeType.Auto)
+            {
+                //convert percent to pixels
+                if (widthType == SizeType.Percent)
+                    width = parent.rect.width * width / 100;
+                if (leftType == SizeType.Percent)
+                    left = parent.rect.width * left / 100;
+                if (rightType == SizeType.Percent)
+                    right = parent.rect.width * right / 100;
 
-            //ignore width if left and right are set
-            if (rightType != SizeType.Auto && leftType != SizeType.Auto)
-                width = parent.rect.width - left - right;
-            
-            //anchor right if right is set else anchor left
-            if (rightType != SizeType.Auto)
-                _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, right, width);
-            else
-                _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, left, width);
-            
-            
-            //convert percent to pixels
-            if (heightType == SizeType.Percent)
-                height = parent.rect.height * height / 100;
-            if (topType == SizeType.Percent)
-                top = parent.rect.height * top / 100;
-            if (bottomType == SizeType.Percent)
-                bottom = parent.rect.height * bottom / 100;
+                //convert auto to pixels
+                if (widthType == SizeType.Auto)
+                    width = parent.rect.width;
+                if (leftType == SizeType.Auto)
+                    left = 0;
+                if (rightType == SizeType.Auto)
+                    right = 0;
 
-            //convert auto to pixels
-            if (heightType == SizeType.Auto)
-                height = parent.rect.height;
-            if (topType == SizeType.Auto)
-                top = 0;
-            if (bottomType == SizeType.Auto)
-                bottom = 0;
+                //ignore width if left and right are set
+                if (rightType != SizeType.Auto && leftType != SizeType.Auto)
+                    width = parent.rect.width - left - right;
 
-            //ignore width if left and right are set
-            if (bottomType != SizeType.Auto && topType != SizeType.Auto)
-                height = parent.rect.height - top - bottom;
-            
-            //anchor right if right is set else anchor left
-            if (bottomType != SizeType.Auto)
-                _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, bottom, height);
-            else
-                _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, top, height);
-            
-            
+                //anchor right if right is set else anchor left
+                if (rightType != SizeType.Auto)
+                    _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, right, width);
+                else
+                    _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, left, width);
+            }
+
+            if (heightType != SizeType.Auto || topType != SizeType.Auto || bottomType != SizeType.Auto)
+            {
+                //convert percent to pixels
+                if (heightType == SizeType.Percent)
+                    height = parent.rect.height * height / 100;
+                if (topType == SizeType.Percent)
+                    top = parent.rect.height * top / 100;
+                if (bottomType == SizeType.Percent)
+                    bottom = parent.rect.height * bottom / 100;
+
+                //convert auto to pixels
+                if (heightType == SizeType.Auto)
+                    height = parent.rect.height;
+                if (topType == SizeType.Auto)
+                    top = 0;
+                if (bottomType == SizeType.Auto)
+                    bottom = 0;
+
+                //ignore width if left and right are set
+                if (bottomType != SizeType.Auto && topType != SizeType.Auto)
+                    height = parent.rect.height - top - bottom;
+
+                //anchor right if right is set else anchor left
+                if (bottomType != SizeType.Auto)
+                    _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, bottom, height);
+                else
+                    _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, top, height);
+            }
+
             LayoutRebuilder.MarkLayoutForRebuild(_rectTransform.parent as RectTransform);
         }
         
