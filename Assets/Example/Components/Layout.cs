@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
+using Kekser.ComponentUI.PropSystem;
 
 namespace Example.Components
 {
@@ -8,14 +9,21 @@ namespace Example.Components
     {
         public override void OnRender(Context ctx, Action<Context> children)
         {
-            ctx._<VerticalLayout>(render: ctx =>
+            ctx._<Box>(render: ctx =>
             {
-                ctx._<Box>();
-                ctx._<HorizontalLayout>(render: ctx =>
-                {
-                    ctx._<Box>();
-                    children?.Invoke(ctx);
-                });
+                ctx._<Box>(
+                    props: new IProp[]
+                    {
+                        new Prop("top", "20%"),
+                        new Prop("left", "40%"),
+                        new Prop("bottom", "5%"),
+                        new Prop("right", "5%"),
+                    },
+                    render: ctx =>
+                    {
+                        children?.Invoke(ctx);
+                    }
+                );
             });
         }
     }

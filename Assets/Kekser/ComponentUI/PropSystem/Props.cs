@@ -42,10 +42,7 @@ namespace Kekser.ComponentUI.PropSystem
         
         public void Set(string prop, object p)
         {
-            if (TryGetValue(prop, out object current) && current.Equals(p))
-                return;
-            _props[prop] = p;
-            _isDirty = true;
+            Set<object>(prop, p);
         }
         
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
