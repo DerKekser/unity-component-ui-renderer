@@ -44,6 +44,12 @@ namespace Kekser.ComponentUI
                 type = SizeType.Percent;
                 return float.TryParse(value.Substring(0, value.Length - 1), out size);
             }
+            
+            if (float.TryParse(value, out size))
+            {
+                type = SizeType.Pixel;
+                return true;
+            }
 
             return false;
         }
