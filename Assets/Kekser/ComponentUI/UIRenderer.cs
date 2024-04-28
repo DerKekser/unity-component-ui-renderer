@@ -21,9 +21,9 @@ namespace Kekser.ComponentUI
 
         public void Update()
         {
+            _context.Traverse();
             _context.Props.Set("screenWidth", Screen.width);
             _context.Props.Set("screenHeight", Screen.height);
-            _context.Traverse();
         }
         
         private static bool _log = false;
