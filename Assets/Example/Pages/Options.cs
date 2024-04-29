@@ -19,13 +19,13 @@ namespace Example.Pages
                 props: new Prop("spacing", 10),
                 render: ctx =>
                 {
-                    for (int i = 0; i < 10; i++)
+                    ctx.Each(new int[5], (x, i) => 
                     {
                         ctx._<StyledButton>(
                             key: i.ToString(),
                             props: new Prop("text", $"Option {i}")
                         );
-                    }
+                    });
                     ctx._<StyledButton>(
                         props: new IProp[]
                         {
