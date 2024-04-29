@@ -12,7 +12,6 @@ namespace Kekser.ComponentUI
         private Context _parent;
         private ContextHolder _contextHolder;
         private List<Context> _usedContexts;
-        private NodeIndexHolder _nodeIndexHolder;
         private Props _props;
         
         private Transform _mainNode;
@@ -33,7 +32,6 @@ namespace Kekser.ComponentUI
             _contextHolder = new ContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<Context>();
-            _nodeIndexHolder = new NodeIndexHolder();
             _props = new Props();
         }
         
@@ -44,7 +42,6 @@ namespace Kekser.ComponentUI
             _contextHolder = new ContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<Context>();
-            _nodeIndexHolder = new NodeIndexHolder();
             _props = new Props();
         }
         
@@ -70,12 +67,13 @@ namespace Kekser.ComponentUI
                     context.Remove();
                     _contextHolder.Remove(context);
                 }
+                
+                return;
             }
             
             foreach (Context child in _contextHolder.GetContexts())
             {
                 child.Traverse();
-                _nodeIndexHolder.UpdateNode(child);
             }
         }
         
@@ -96,14 +94,12 @@ namespace Kekser.ComponentUI
             if (context._uiFragment != null)
             {
                 context._contextHolder.Reset();
-                _nodeIndexHolder.SetIndex(context, _contextHolder.Index - 1);
                 return context;
             }
             
             context._uiFragment = Activator.CreateInstance<TComponent>();
             context._uiFragment.SetContext(context);
             context._uiFragment.Mount(_uiFragment?.Node ? _uiFragment?.Node : _mainNode);
-            _nodeIndexHolder.SetIndex(context, _contextHolder.Index - 1);
             return context;
         }
         
@@ -121,7 +117,7 @@ namespace Kekser.ComponentUI
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             Context child = Child<TComponent>(hash);
-            _nodeIndexHolder.UpdateNode(child);
+            child._uiFragment.Node.SetAsLastSibling();
             child.SetRender(render);
             foreach (IProp prop in props)
             {

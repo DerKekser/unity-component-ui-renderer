@@ -6,12 +6,9 @@ namespace Kekser.ComponentUI
     public class ContextHolder
     {
         private Dictionary<int, List<Context>> _contexts;
-        private int _index;
         private Dictionary<int, int> _subIndexes;
         
         private Context _context;
-        
-        public int Index => _index;
         
         public ContextHolder(Context context)
         {
@@ -24,7 +21,6 @@ namespace Kekser.ComponentUI
 
         public void Reset()
         {
-            _index = 0;
             _subIndexes.Clear();
         }
         
@@ -52,7 +48,6 @@ namespace Kekser.ComponentUI
             
             Context context = contexts[subIndex];
             
-            _index++;
             _subIndexes[index] = subIndex + 1;
             
             return context;
