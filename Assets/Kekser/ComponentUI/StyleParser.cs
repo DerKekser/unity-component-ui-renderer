@@ -81,10 +81,10 @@ namespace Kekser.ComponentUI
             if (parent == null)
                 return;
             
-            if (parent.GetComponent<LayoutGroup>() != null)
-                return;
+            bool ignoreWidth = parent.TryGetComponent(out HorizontalOrVerticalLayoutGroup lg) && lg.childControlWidth;
+            bool ignoreHeight = parent.TryGetComponent(out lg) && lg.childControlHeight;
 
-            if (widthType != SizeType.Auto || leftType != SizeType.Auto || rightType != SizeType.Auto)
+            if ((widthType != SizeType.Auto || leftType != SizeType.Auto || rightType != SizeType.Auto) && !ignoreWidth)
             {
                 //convert percent to pixels
                 if (widthType == SizeType.Percent)
@@ -128,7 +128,7 @@ namespace Kekser.ComponentUI
                     _rectTransform.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, left + translateX, width);
             }
 
-            if (heightType != SizeType.Auto || topType != SizeType.Auto || bottomType != SizeType.Auto)
+            if ((heightType != SizeType.Auto || topType != SizeType.Auto || bottomType != SizeType.Auto) && !ignoreHeight)
             {
                 //convert percent to pixels
                 if (heightType == SizeType.Percent)
