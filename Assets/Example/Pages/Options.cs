@@ -19,19 +19,14 @@ namespace Example.Pages
                 props: new Prop("spacing", 10),
                 render: ctx =>
                 {
-                    ctx._<MenuButton>(
-                        props: new Prop("text", "Option 1")
-                    );
-                    ctx._<MenuButton>(
-                        props: new Prop("text", "Option 2")
-                    );
-                    ctx._<MenuButton>(
-                        props: new Prop("text", "Option 3")
-                    );
-                    ctx._<MenuButton>(
-                        props: new Prop("text", "Option 4")
-                    );
-                    ctx._<MenuButton>(
+                    for (int i = 0; i < 10; i++)
+                    {
+                        ctx._<StyledButton>(
+                            key: i.ToString(),
+                            props: new Prop("text", $"Option {i}")
+                        );
+                    }
+                    ctx._<StyledButton>(
                         props: new IProp[]
                         {
                             new EventProp("onClick", HandleBack),

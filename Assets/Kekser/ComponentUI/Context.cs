@@ -96,15 +96,24 @@ namespace Kekser.ComponentUI
             if (context._uiFragment != null)
             {
                 context._contextHolder.Reset();
-                _nodeIndexHolder.SetIndex(context, _contextHolder.Index);
+                _nodeIndexHolder.SetIndex(context, _contextHolder.Index - 1);
                 return context;
             }
             
             context._uiFragment = Activator.CreateInstance<TComponent>();
             context._uiFragment.SetContext(context);
             context._uiFragment.Mount(_uiFragment?.Node ? _uiFragment?.Node : _mainNode);
-            _nodeIndexHolder.SetIndex(context, _contextHolder.Index);
+            _nodeIndexHolder.SetIndex(context, _contextHolder.Index - 1);
             return context;
+        }
+        
+        public void Each<T>(IEnumerable<T> props, Action<T, int> callback)
+        {
+            int i = 0;
+            foreach (T prop in props)
+            {
+                callback?.Invoke(prop, i++);
+            }
         }
         
         public TComponent _<TComponent>(string key = null, Action<Context> render = null, [CallerLineNumber] int callerLine = 0, params IProp[] props) where TComponent : UIFragment

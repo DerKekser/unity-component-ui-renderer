@@ -34,11 +34,11 @@ namespace Example
         {
             ctx._<Layout>(render: ctx => 
             {
-                ctx._<CountingProvider>(render: ctx =>
+                ctx._<TodoProvider>(render: ctx =>
                 {
                     if (Props.Get<Pages>("page") == Pages.Menu)
                     {
-                        ctx._<Menu>(
+                        ctx._<Todos>(
                             props: new EventProp("onOptions", HandleOptions)
                         );
                     }

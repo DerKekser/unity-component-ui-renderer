@@ -7,20 +7,12 @@ using UnityEngine;
 
 namespace Example.Components
 {
-    public class MenuButton: UIComponent
+    public class StyledButton: UIComponent
     {
-        private void HandleClick()
-        {
-            CountingProvider provider = GetProvider<CountingProvider>();
-            provider.Increment();
-            
-            Props.Get<Action>("onClick")?.Invoke();
-        }
-        
         public override void OnRender(Context ctx, Action<Context> children)
         {
             ctx._<Button>(
-                props: new EventProp("onClick", HandleClick),
+                props: new EventProp("onClick", Props.Get<Action>("onClick")),
                 render: ctx => ctx._<Text>(
                     props: new IProp[]
                     {
