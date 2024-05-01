@@ -14,21 +14,26 @@ namespace Example.Components
         {
             ResourceProvider provider = GetProvider<ResourceProvider>();
             
-            ctx._<Button>(
-                props:new IProp[]
+            ctx._<Panel>(
+                props: new IProp[]
                 {
                     new Prop("sprite", provider.GetResource<Sprite>("Resources/unity_builtin_extra/UISprite")),
                     new Prop("spriteType", UnityEngine.UI.Image.Type.Tiled),
-                    new EventProp("onClick", Props.Get<Action>("onClick")),
                 },
-                render: ctx => ctx._<Text>(
-                    props: new IProp[]
-                    {
-                        new Prop("text", Props.Get("text")),
-                        new Prop("fontSize", 24),
-                        new Prop("color", Color.red)
-                    }
-                )
+                render: ctx =>
+                {
+                    ctx._<Button>(
+                        props: new EventProp("onClick", Props.Get<Action>("onClick")),
+                        render: ctx => ctx._<Text>(
+                            props: new IProp[]
+                            {
+                                new Prop("text", Props.Get("text")),
+                                new Prop("fontSize", 24),
+                                new Prop("color", Color.red)
+                            }
+                        )
+                    );
+                }
             );
         }
     }

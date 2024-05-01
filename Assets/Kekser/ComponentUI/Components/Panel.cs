@@ -16,6 +16,7 @@ namespace Kekser.ComponentUI.Components
         {
             _image.color = Props.Get("color", Color.white);
             _image.sprite = Props.Get<Sprite>("sprite", null);
+            _image.type = Props.Get("spriteType", UnityEngine.UI.Image.Type.Simple);
             
             children?.Invoke(ctx);
         }
