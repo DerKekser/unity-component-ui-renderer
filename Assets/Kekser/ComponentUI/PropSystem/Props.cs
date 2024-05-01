@@ -45,6 +45,16 @@ namespace Kekser.ComponentUI.PropSystem
             Set<object>(prop, p);
         }
         
+        public bool Has(string prop)
+        {
+            return ContainsKey(prop);
+        }
+        
+        public bool Is<T>(string prop)
+        {
+            return TryGetValue(prop, out object p) && p is T;
+        }
+        
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {
             return _props.GetEnumerator();

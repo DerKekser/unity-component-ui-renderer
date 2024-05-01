@@ -1,19 +1,20 @@
 ﻿using System;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Kekser.ComponentUI
 {
     public abstract class UIFragment
     {
-        protected RectTransform _node;
+        protected VisualElement _node;
         protected Context _ctx;
         
-        public RectTransform Node => _node;
+        public VisualElement Node => _node;
         public Props Props => _ctx?.Props ?? new Props();
         
-        public virtual void Mount(Transform parent)
+        public virtual void Mount(VisualElement parent)
         {
             UIRenderer.Log("Mounting " + GetType().Name);
             OnMount();

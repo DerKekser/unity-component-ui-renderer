@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Kekser.ComponentUI
 {
@@ -14,7 +15,7 @@ namespace Kekser.ComponentUI
         private List<Context> _usedContexts;
         private Props _props;
         
-        private Transform _mainNode;
+        private VisualElement _mainNode;
         private UIFragment _uiFragment;
         
         private Action<Context> _render;
@@ -26,7 +27,7 @@ namespace Kekser.ComponentUI
         public bool NeedsRerender => Props.IsDirty;
         
         // TODO: make abstract create separate context classes for different node types
-        public Context(Transform mainNode)
+        public Context(VisualElement mainNode)
         {
             _mainNode = mainNode;
             _contextHolder = new ContextHolder(this);
@@ -99,7 +100,7 @@ namespace Kekser.ComponentUI
             
             context._uiFragment = Activator.CreateInstance<TComponent>();
             context._uiFragment.SetContext(context);
-            context._uiFragment.Mount(_uiFragment?.Node ? _uiFragment?.Node : _mainNode);
+            context._uiFragment.Mount(_uiFragment?.Node ?? _mainNode);
             return context;
         }
         
@@ -117,8 +118,7 @@ namespace Kekser.ComponentUI
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             Context child = Child<TComponent>(hash);
-            if (child._uiFragment.Node != null)
-                child._uiFragment.Node.SetAsLastSibling();
+            child._uiFragment.Node?.BringToFront();
             child.SetRender(render);
             foreach (IProp prop in props)
             {

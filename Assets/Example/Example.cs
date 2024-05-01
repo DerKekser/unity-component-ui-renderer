@@ -2,13 +2,14 @@
 using Kekser.ComponentUI.Extension.ResourceManagement;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Example
 {
     public class Example : MonoBehaviour
     {
-        [SerializeField]
-        private Canvas _canvas;
+        [SerializeField] 
+        private UIDocument _uiDocument;
         [SerializeField]
         private ResourceDatabase _resourceDatabase;
         
@@ -20,7 +21,7 @@ namespace Example
             _renderer.Render(ctx => ctx._<ResourceProvider>(
                 props: new Prop("resources", _resourceDatabase), 
                 render: ctx => ctx._<App>()
-            ), _canvas);
+            ), _uiDocument);
         }
         
         private void Update()

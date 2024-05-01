@@ -1,25 +1,30 @@
 ﻿using System;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Kekser.ComponentUI
 {
-    public abstract class UIComponent: UIFragment
+    public abstract class UIComponent : UIComponent<VisualElement>
     {
-        private StyleParser _styleParser;
+        
+    }
+    
+    public abstract class UIComponent<TElement>: UIFragment where TElement: VisualElement, new()
+    {
+        public new TElement Node => _node as TElement;
 
-        public override void Mount(Transform parent)
+        public override void Mount(VisualElement parent)
         {
-            _node.SetParent(parent);
-            _node.localScale = Vector3.one;
+            parent?.Add((TElement)_node);
             base.Mount(parent);
         }
         
         public override void Unmount()
         {
-            _node.SetParent(null);
+            _node?.parent?.Remove(_node);
             base.Unmount();
-            Object.Destroy(_node.gameObject);
         }
 
         public override void Render(Action<Context> children)
@@ -30,14 +35,24 @@ namespace Kekser.ComponentUI
 
         public void ApplyStyle()
         {
-            _styleParser.Parse(Props);
+            PropertyInfo[] styleProperties = typeof(IStyle).GetProperties();
+            foreach (PropertyInfo styleProperty in styleProperties) {
+                if (!Props.Has(styleProperty.Name)) continue;
+                try
+                {
+                    typeof(IStyle).GetProperty(styleProperty.Name)?.SetValue(Node.style, Props.Get(styleProperty.Name));
+                }
+                catch (Exception e)
+                {
+                    UIRenderer.Log($"Failed to set style property {styleProperty.Name} on {Node.GetType().Name} with value {Props.Get(styleProperty.Name)}");
+                }
+            }
         }
 
         public override void SetContext(Context ctx)
         {
             base.SetContext(ctx);
-            _node = new GameObject(GetType().Name, typeof(RectTransform)).transform as RectTransform;
-            _styleParser = new StyleParser(_node);
+            _node = Activator.CreateInstance<TElement>();
         }
     }
 }

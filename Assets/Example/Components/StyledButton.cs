@@ -5,6 +5,9 @@ using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.Extension.ResourceManagement;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Box = Kekser.ComponentUI.Components.Box;
+using Button = Kekser.ComponentUI.Components.Button;
 
 namespace Example.Components
 {
@@ -14,26 +17,20 @@ namespace Example.Components
         {
             ResourceProvider provider = GetProvider<ResourceProvider>();
             
-            ctx._<Panel>(
+            ctx._<Button>(
                 props: new IProp[]
                 {
-                    new Prop("sprite", provider.GetResource<Sprite>("Resources/unity_builtin_extra/UISprite")),
-                    new Prop("spriteType", UnityEngine.UI.Image.Type.Tiled),
+                    new EventProp("onClick", Props.Get<Action>("onClick")),
+                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Resources/unity_builtin_extra/UISprite"))),
                 },
-                render: ctx =>
-                {
-                    ctx._<Button>(
-                        props: new EventProp("onClick", Props.Get<Action>("onClick")),
-                        render: ctx => ctx._<Text>(
-                            props: new IProp[]
-                            {
-                                new Prop("text", Props.Get("text")),
-                                new Prop("fontSize", 24),
-                                new Prop("color", Color.red)
-                            }
-                        )
-                    );
-                }
+                render: ctx => ctx._<Text>(
+                    props: new IProp[]
+                    {
+                        new Prop("text", Props.Get("text")),
+                        new Prop("fontSize", new StyleLength(24)),
+                        new Prop("color", new StyleColor(Color.red)),
+                    }
+                )
             );
         }
     }

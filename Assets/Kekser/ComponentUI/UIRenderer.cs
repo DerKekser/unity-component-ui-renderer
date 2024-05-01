@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Kekser.ComponentUI
 {
@@ -13,9 +14,9 @@ namespace Kekser.ComponentUI
             set => _log = value;
         }
         
-        public void Render(Action<Context> render, Canvas canvas)
+        public void Render(Action<Context> render, UIDocument uiDocument)
         {
-            _context = new Context(canvas.transform);
+            _context = new Context(uiDocument.rootVisualElement);
             _context.SetRender(render);
         }
 

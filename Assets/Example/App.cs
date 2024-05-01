@@ -4,6 +4,7 @@ using Example.Pages;
 using Example.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.PropSystem;
+using UnityEngine.UIElements;
 
 namespace Example
 {

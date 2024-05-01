@@ -15,7 +15,7 @@ namespace Example.Pages
         
         public override void OnRender(Context ctx, Action<Context> children)
         {
-            ctx._<VerticalLayout>(
+            ctx._<Box>(
                 props: new IProp[]
                 {
                     new Prop("childControlHeight", false),

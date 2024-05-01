@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Example/Reset.uss?fileID=7433441132597879392&amp;guid=d3b2620b856e6a64aa734b80d1956dd9&amp;type=3#Reset" />
+</ui:UXML>

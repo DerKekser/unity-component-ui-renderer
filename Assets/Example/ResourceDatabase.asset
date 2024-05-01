@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _resources:
   - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea, type: 3}
   _resourcePaths:
   - Resources/unity_builtin_extra/UISprite
+  - Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x

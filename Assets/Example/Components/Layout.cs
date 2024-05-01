@@ -1,9 +1,10 @@
 ﻿using System;
 using Kekser.ComponentUI;
-using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.Extension.ResourceManagement;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Box = Kekser.ComponentUI.Components.Box;
 
 namespace Example.Components
 {
@@ -15,19 +16,18 @@ namespace Example.Components
             
             ctx._<Box>(render: ctx =>
             {
-                ctx._<Panel>(
+                ctx._<Box>(
                     props: new IProp[]
                     {
-                        new Prop("width", "500px"),
-                        new Prop("height", "500px"),
-                        new Prop("maxWidth", "90%"),
-                        new Prop("maxHeight", "90%"),
-                        new Prop("top", "50%"),
-                        new Prop("left", "50%"),
-                        new Prop("translateX", "-50%"),
-                        new Prop("translateY", "-50%"),
-                        new Prop("color", new Color(1f ,1f ,1f , 0.5f)),
-                        new Prop("sprite", provider.GetResource<Sprite>("Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x")),
+                        new Prop("position", new StyleEnum<Position>(Position.Absolute)),
+                        new Prop("width", new StyleLength(500)),
+                        new Prop("height", new StyleLength(500)),
+                        new Prop("maxWidth", new StyleLength(Length.Percent(90))),
+                        new Prop("maxHeight", new StyleLength(Length.Percent(90))),
+                        new Prop("top", new StyleLength(Length.Percent(50))),
+                        new Prop("left", new StyleLength(Length.Percent(50))),
+                        new Prop("translate", new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0))),
+                        new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x"))),
                     }
                 );
                 ctx._<Box>(
