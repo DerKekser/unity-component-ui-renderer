@@ -41,55 +41,74 @@ namespace Example.Pages
         {
             TodoProvider provider = GetProvider<TodoProvider>();
             
-            ctx._<VerticalLayout>(
-                props: new Prop("spacing", 10),
+            ctx._<ScrollArea>(
+                props: new IProp[]
+                {
+                    new Prop("horizontal", false),
+                    new Prop("vertical", true),
+                },
                 render: ctx =>
                 {
-                    ctx.Each(provider.GetTodos(), (todo, i) =>
-                    {
-                        ctx._<Box>(
-                            key: i.ToString(),
-                            render: ctx =>
+                    ctx._<VerticalLayout>(
+                        props: new IProp[]
+                        {
+                            new Prop("childControlHeight", false),
+                            new Prop("childForceExpandHeight", false),
+                            new Prop("spacing", 10),
+                        },
+                        render: ctx =>
+                        {
+                            ctx.Each(provider.GetTodos(), (todo, i) =>
                             {
-                                ctx._<Text>(
-                                    props: new IProp[]
+                                ctx._<Box>(
+                                    key: i.ToString(),
+                                    props: new Prop("height", "50px"),
+                                    render: ctx =>
                                     {
-                                        new Prop("text", todo),
-                                        new Prop("left", "0px"),
-                                        new Prop("right", "10%"),
+                                        ctx._<Text>(
+                                            props: new IProp[]
+                                            {
+                                                new Prop("text", todo),
+                                                new Prop("left", "0px"),
+                                                new Prop("right", "10%"),
+                                            }
+                                        );
+                                        ctx._<StyledButton>(
+                                            props: new IProp[]
+                                            {
+                                                new EventProp("onClick", () => HandleRemove(i)),
+                                                new Prop("text", "X"),
+                                                new Prop("right", "0px"),
+                                                new Prop("width", "10%"),
+                                            }
+                                        );
                                     }
                                 );
-                                ctx._<StyledButton>(
-                                    props: new IProp[]
-                                    {
-                                        new EventProp("onClick", () => HandleRemove(i)),
-                                        new Prop("text", "X"),
-                                        new Prop("right", "0px"),
-                                        new Prop("width", "10%"),
-                                    }
-                                );
-                            }
-                        );
-                    });
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleAdd),
-                            new Prop("text", "Add todo")
-                        }
-                    );
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleOptions),
-                            new Prop("text", "Options")
-                        }
-                    );
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleQuit),
-                            new Prop("text", "Exit")
+                            });
+                            ctx._<StyledButton>(
+                                props: new IProp[]
+                                {
+                                    new EventProp("onClick", HandleAdd),
+                                    new Prop("text", "Add todo"),
+                                    new Prop("height", "50px"),
+                                }
+                            );
+                            ctx._<StyledButton>(
+                                props: new IProp[]
+                                {
+                                    new EventProp("onClick", HandleOptions),
+                                    new Prop("text", "Options"),
+                                    new Prop("height", "50px"),
+                                }
+                            );
+                            ctx._<StyledButton>(
+                                props: new IProp[]
+                                {
+                                    new EventProp("onClick", HandleQuit),
+                                    new Prop("text", "Exit"),
+                                    new Prop("height", "50px"),
+                                }
+                            );
                         }
                     );
                 }

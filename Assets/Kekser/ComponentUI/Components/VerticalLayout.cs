@@ -5,10 +5,12 @@ namespace Kekser.ComponentUI.Components
     public sealed class VerticalLayout: UIComponent
     {
         private UnityEngine.UI.VerticalLayoutGroup _layoutGroup;
+        private UnityEngine.UI.ContentSizeFitter _contentSizeFitter;
 
         public override void OnMount()
         {
             _layoutGroup = Node.gameObject.AddComponent<UnityEngine.UI.VerticalLayoutGroup>();
+            _contentSizeFitter = Node.gameObject.AddComponent<UnityEngine.UI.ContentSizeFitter>();
         }
 
         public override void OnRender(Context ctx, Action<Context> children)
@@ -21,6 +23,9 @@ namespace Kekser.ComponentUI.Components
             _layoutGroup.padding = Props.Get("padding", new UnityEngine.RectOffset(0, 0, 0, 0));
             _layoutGroup.childAlignment = Props.Get("childAlignment", UnityEngine.TextAnchor.UpperLeft);
             
+            _contentSizeFitter.horizontalFit = Props.Get("childControlWidth", true) ? UnityEngine.UI.ContentSizeFitter.FitMode.Unconstrained : UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
+            _contentSizeFitter.verticalFit = Props.Get("childControlHeight", true) ? UnityEngine.UI.ContentSizeFitter.FitMode.Unconstrained : UnityEngine.UI.ContentSizeFitter.FitMode.PreferredSize;
+
             children?.Invoke(ctx);
         }
     }

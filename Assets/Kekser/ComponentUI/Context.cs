@@ -117,7 +117,8 @@ namespace Kekser.ComponentUI
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             Context child = Child<TComponent>(hash);
-            child._uiFragment.Node.SetAsLastSibling();
+            if (child._uiFragment.Node != null)
+                child._uiFragment.Node.SetAsLastSibling();
             child.SetRender(render);
             foreach (IProp prop in props)
             {

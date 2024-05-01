@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
+using Kekser.ComponentUI.Extension.ResourceManagement;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Example.Components
     {
         public override void OnRender(Context ctx, Action<Context> children)
         {
+            ResourceProvider provider = GetProvider<ResourceProvider>();
+            
             ctx._<Box>(render: ctx =>
             {
                 ctx._<Panel>(
@@ -23,7 +26,8 @@ namespace Example.Components
                         new Prop("left", "50%"),
                         new Prop("translateX", "-50%"),
                         new Prop("translateY", "-50%"),
-                        new Prop("color", Color.red),
+                        new Prop("color", new Color(1f ,1f ,1f , 0.5f)),
+                        new Prop("sprite", provider.GetResource<Sprite>("Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x")),
                     }
                 );
                 ctx._<Box>(

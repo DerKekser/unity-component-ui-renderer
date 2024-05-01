@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvas: {fileID: 1038714987}
+  _resourceDatabase: {fileID: 11400000, guid: f87459a271d6c9f44b29919e2249f9a0, type: 2}
 --- !u!4 &1195754581
 Transform:
   m_ObjectHideFlags: 0
