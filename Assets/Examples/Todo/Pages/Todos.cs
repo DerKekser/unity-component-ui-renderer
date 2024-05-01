@@ -53,6 +53,7 @@ namespace Examples.Todo.Pages
                             props: new IProp[]
                             {
                                 new Prop("height", new StyleLength(50)),
+                                new Prop("flexShrink", new StyleFloat(0f)),
                                 new Prop("flexDirection", new StyleEnum<FlexDirection>(FlexDirection.Row)),
                                 new Prop("justifyContent", new StyleEnum<Justify>(Justify.SpaceBetween)),
                             },
@@ -78,13 +79,20 @@ namespace Examples.Todo.Pages
                     });
                 }
             );
-            ctx._<Input>();
+            ctx._<Input>(
+                props: new IProp[]
+                {
+                    new Prop("height", new StyleLength(50)),
+                    new Prop("flexShrink", new StyleFloat(0f)),
+                }
+            );
             ctx._<StyledButton>(
                 props: new IProp[]
                 {
                     new EventProp("onClick", HandleAdd),
                     new Prop("text", "Add todo"),
-                    new Prop("height", new StyleLength(50))
+                    new Prop("height", new StyleLength(50)),
+                    new Prop("flexShrink", new StyleFloat(0f)),
                 }
             );
             ctx._<StyledButton>(
@@ -92,7 +100,8 @@ namespace Examples.Todo.Pages
                 {
                     new EventProp("onClick", HandleOptions),
                     new Prop("text", "Options"),
-                    new Prop("height", new StyleLength(50))
+                    new Prop("height", new StyleLength(50)),
+                    new Prop("flexShrink", new StyleFloat(0f)),
                 }
             );
             ctx._<StyledButton>(
@@ -100,7 +109,8 @@ namespace Examples.Todo.Pages
                 {
                     new EventProp("onClick", HandleQuit),
                     new Prop("text", "Exit"),
-                    new Prop("height", new StyleLength(50))
+                    new Prop("height", new StyleLength(50)),
+                    new Prop("flexShrink", new StyleFloat(0f)),
                 }
             );
         }

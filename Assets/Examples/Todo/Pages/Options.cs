@@ -3,6 +3,7 @@ using Examples.Todo.Components;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.PropSystem;
+using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages
 {
@@ -24,7 +25,8 @@ namespace Examples.Todo.Pages
                             key: i.ToString(),
                             props: new IProp[]
                             {
-                                new Prop("height", "50px"),
+                                new Prop("height", new StyleLength(50)),
+                                new Prop("flexShrink", new StyleFloat(0f)),
                                 new Prop("text", $"Option {i}")
                             }
                         );
@@ -34,7 +36,8 @@ namespace Examples.Todo.Pages
             ctx._<StyledButton>(
                 props: new IProp[]
                 {
-                    new Prop("height", "50px"),
+                    new Prop("height", new StyleLength(50)),
+                    new Prop("flexShrink", new StyleFloat(0f)),
                     new EventProp("onClick", HandleBack),
                     new Prop("text", "Back")
                 }
