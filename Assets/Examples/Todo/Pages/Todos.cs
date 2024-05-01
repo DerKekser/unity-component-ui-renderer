@@ -43,13 +43,7 @@ namespace Examples.Todo.Pages
         {
             TodoProvider provider = GetProvider<TodoProvider>();
             
-            ctx._<Box>(
-                props: new IProp[]
-                {
-                    new Prop("childControlHeight", false),
-                    new Prop("childForceExpandHeight", false),
-                    new Prop("spacing", 10),
-                },
+            ctx._<ScrollArea>(
                 render: ctx =>
                 {
                     ctx.Each(provider.GetTodos(), (todo, i) =>
@@ -82,30 +76,31 @@ namespace Examples.Todo.Pages
                             }
                         );
                     });
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleAdd),
-                            new Prop("text", "Add todo"),
-                            new Prop("height", new StyleLength(50))
-                        }
-                    );
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleOptions),
-                            new Prop("text", "Options"),
-                            new Prop("height", new StyleLength(50))
-                        }
-                    );
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new EventProp("onClick", HandleQuit),
-                            new Prop("text", "Exit"),
-                            new Prop("height", new StyleLength(50))
-                        }
-                    );
+                }
+            );
+            ctx._<Input>();
+            ctx._<StyledButton>(
+                props: new IProp[]
+                {
+                    new EventProp("onClick", HandleAdd),
+                    new Prop("text", "Add todo"),
+                    new Prop("height", new StyleLength(50))
+                }
+            );
+            ctx._<StyledButton>(
+                props: new IProp[]
+                {
+                    new EventProp("onClick", HandleOptions),
+                    new Prop("text", "Options"),
+                    new Prop("height", new StyleLength(50))
+                }
+            );
+            ctx._<StyledButton>(
+                props: new IProp[]
+                {
+                    new EventProp("onClick", HandleQuit),
+                    new Prop("text", "Exit"),
+                    new Prop("height", new StyleLength(50))
                 }
             );
         }

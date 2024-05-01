@@ -17,7 +17,7 @@ namespace Kekser.ComponentUI
 
         public override void Mount(VisualElement parent)
         {
-            parent?.Add((TElement)_node);
+            parent?.Add(_node);
             base.Mount(parent);
         }
         

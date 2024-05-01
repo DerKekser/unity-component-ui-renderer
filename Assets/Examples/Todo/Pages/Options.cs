@@ -15,13 +15,7 @@ namespace Examples.Todo.Pages
         
         public override void OnRender(Context ctx, Action<Context> children)
         {
-            ctx._<Box>(
-                props: new IProp[]
-                {
-                    new Prop("childControlHeight", false),
-                    new Prop("childForceExpandHeight", false),
-                    new Prop("spacing", 10),
-                },
+            ctx._<ScrollArea>(
                 render: ctx =>
                 {
                     ctx.Each(new int[15], (x, i) => 
@@ -35,14 +29,14 @@ namespace Examples.Todo.Pages
                             }
                         );
                     });
-                    ctx._<StyledButton>(
-                        props: new IProp[]
-                        {
-                            new Prop("height", "50px"),
-                            new EventProp("onClick", HandleBack),
-                            new Prop("text", "Back")
-                        }
-                    );
+                }
+            );
+            ctx._<StyledButton>(
+                props: new IProp[]
+                {
+                    new Prop("height", "50px"),
+                    new EventProp("onClick", HandleBack),
+                    new Prop("text", "Back")
                 }
             );
         }
