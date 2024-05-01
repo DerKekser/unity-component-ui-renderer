@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using Kekser.ComponentUI.PropSystem;
+using UnityEngine.UI;
 
 namespace Kekser.ComponentUI.Components
 {
@@ -69,7 +70,12 @@ namespace Kekser.ComponentUI.Components
             _scrollRect.viewport = ctx._<Viewport>(
                 render: ctx =>
                 {
-                    _scrollRect.content = ctx._<Content>(
+                    _scrollRect.content = ctx._<VerticalLayout>(
+                        props: new IProp[]
+                        {
+                            new Prop("childControlHeight", false),
+                            new Prop("childForceExpandHeight", false),
+                        },
                         render: ctx =>
                         {
                             children?.Invoke(ctx);
