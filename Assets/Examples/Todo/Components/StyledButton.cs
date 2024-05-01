@@ -1,15 +1,13 @@
 ﻿using System;
-using Example.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.Extension.ResourceManagement;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentUI.Components.Box;
 using Button = Kekser.ComponentUI.Components.Button;
 
-namespace Example.Components
+namespace Examples.Todo.Components
 {
     public class StyledButton: UIComponent
     {

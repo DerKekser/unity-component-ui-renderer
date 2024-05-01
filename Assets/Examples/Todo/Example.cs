@@ -4,7 +4,7 @@ using Kekser.ComponentUI.PropSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Example
+namespace Examples.Todo
 {
     public class Example : MonoBehaviour
     {

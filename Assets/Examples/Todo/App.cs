@@ -1,12 +1,12 @@
 ﻿using System;
-using Example.Components;
-using Example.Pages;
-using Example.Providers;
+using Examples.Todo.Components;
+using Examples.Todo.Pages;
+using Examples.Todo.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine.UIElements;
 
-namespace Example
+namespace Examples.Todo
 {
     public class App: UIComponent
     {

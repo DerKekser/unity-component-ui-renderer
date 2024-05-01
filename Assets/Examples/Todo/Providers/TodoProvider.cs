@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Kekser.ComponentUI;
-using UnityEngine;
 
-namespace Example.Providers
+namespace Examples.Todo.Providers
 {
     public class TodoProvider: UIProvider
     {

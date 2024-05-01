@@ -1,13 +1,13 @@
 ﻿using System;
-using Example.Components;
-using Example.Providers;
+using Examples.Todo.Components;
+using Examples.Todo.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.PropSystem;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentUI.Components.Box;
 
-namespace Example.Pages
+namespace Examples.Todo.Pages
 {
     public class Todos: UIComponent
     {
@@ -56,15 +56,19 @@ namespace Example.Pages
                     {
                         ctx._<Box>(
                             key: i.ToString(),
-                            props: new Prop("height", new StyleLength(50)),
+                            props: new IProp[]
+                            {
+                                new Prop("height", new StyleLength(50)),
+                                new Prop("flexDirection", new StyleEnum<FlexDirection>(FlexDirection.Row)),
+                                new Prop("justifyContent", new StyleEnum<Justify>(Justify.SpaceBetween)),
+                            },
                             render: ctx =>
                             {
                                 ctx._<Text>(
                                     props: new IProp[]
                                     {
                                         new Prop("text", todo),
-                                        new Prop("left", "0px"),
-                                        new Prop("right", "10%"),
+                                        new Prop("flexGrow", new StyleFloat(1)),
                                     }
                                 );
                                 ctx._<StyledButton>(
@@ -72,8 +76,7 @@ namespace Example.Pages
                                     {
                                         new EventProp("onClick", () => HandleRemove(i)),
                                         new Prop("text", "X"),
-                                        new Prop("right", "0px"),
-                                        new Prop("width", "10%"),
+                                        new Prop("width", new StyleLength(50)),
                                     }
                                 );
                             }

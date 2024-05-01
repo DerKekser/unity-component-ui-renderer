@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentUI.Components.Box;
 
-namespace Example.Components
+namespace Examples.Todo.Components
 {
     public class Layout: UIComponent
     {

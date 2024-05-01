@@ -1,10 +1,10 @@
 ﻿using System;
-using Example.Components;
+using Examples.Todo.Components;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.PropSystem;
 
-namespace Example.Pages
+namespace Examples.Todo.Pages
 {
     public class Options: UIComponent
     {
