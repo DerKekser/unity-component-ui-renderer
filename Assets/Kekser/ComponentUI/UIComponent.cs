@@ -53,6 +53,7 @@ namespace Kekser.ComponentUI
         {
             base.SetContext(ctx);
             _node = Activator.CreateInstance<TElement>();
+            _node.AddToClassList(GetType().Name);
         }
     }
 }

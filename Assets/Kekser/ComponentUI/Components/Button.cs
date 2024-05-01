@@ -1,6 +1,4 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Kekser.ComponentUI.Components
 {

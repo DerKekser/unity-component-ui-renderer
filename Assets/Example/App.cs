@@ -33,24 +33,27 @@ namespace Example
 
         public override void OnRender(Context ctx, Action<Context> children)
         {
-            ctx._<Layout>(render: ctx => 
-            {
-                ctx._<TodoProvider>(render: ctx =>
+            ctx._<Layout>(
+                props: new Prop("height", new StyleLength(Length.Percent(100))),
+                render: ctx => 
                 {
-                    if (Props.Get<Pages>("page") == Pages.Menu)
+                    ctx._<TodoProvider>(render: ctx =>
                     {
-                        ctx._<Todos>(
-                            props: new EventProp("onOptions", HandleOptions)
-                        );
-                    }
-                    else
-                    {
-                        ctx._<Options>(
-                            props: new EventProp("onBack", HandleMenu)
-                        );
-                    }
-                });
-            });
+                        if (Props.Get<Pages>("page") == Pages.Menu)
+                        {
+                            ctx._<Todos>(
+                                props: new EventProp("onOptions", HandleOptions)
+                            );
+                        }
+                        else
+                        {
+                            ctx._<Options>(
+                                props: new EventProp("onBack", HandleMenu)
+                            );
+                        }
+                    });
+                }
+            );
         }
     }
 }

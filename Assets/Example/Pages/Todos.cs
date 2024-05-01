@@ -4,6 +4,8 @@ using Example.Providers;
 using Kekser.ComponentUI;
 using Kekser.ComponentUI.Components;
 using Kekser.ComponentUI.PropSystem;
+using UnityEngine.UIElements;
+using Box = Kekser.ComponentUI.Components.Box;
 
 namespace Example.Pages
 {
@@ -54,7 +56,7 @@ namespace Example.Pages
                     {
                         ctx._<Box>(
                             key: i.ToString(),
-                            props: new Prop("height", "50px"),
+                            props: new Prop("height", new StyleLength(50)),
                             render: ctx =>
                             {
                                 ctx._<Text>(
@@ -82,7 +84,7 @@ namespace Example.Pages
                         {
                             new EventProp("onClick", HandleAdd),
                             new Prop("text", "Add todo"),
-                            new Prop("height", "50px"),
+                            new Prop("height", new StyleLength(50))
                         }
                     );
                     ctx._<StyledButton>(
@@ -90,7 +92,7 @@ namespace Example.Pages
                         {
                             new EventProp("onClick", HandleOptions),
                             new Prop("text", "Options"),
-                            new Prop("height", "50px"),
+                            new Prop("height", new StyleLength(50))
                         }
                     );
                     ctx._<StyledButton>(
@@ -98,7 +100,7 @@ namespace Example.Pages
                         {
                             new EventProp("onClick", HandleQuit),
                             new Prop("text", "Exit"),
-                            new Prop("height", "50px"),
+                            new Prop("height", new StyleLength(50))
                         }
                     );
                 }

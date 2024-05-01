@@ -20,7 +20,7 @@ namespace Example
             _renderer = new UIRenderer();
             _renderer.Render(ctx => ctx._<ResourceProvider>(
                 props: new Prop("resources", _resourceDatabase), 
-                render: ctx => ctx._<App>()
+                render: ctx => ctx._<App>(props: new Prop("height", new StyleLength(Length.Percent(100))))
             ), _uiDocument);
         }
         
