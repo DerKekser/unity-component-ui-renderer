@@ -22,7 +22,7 @@ namespace Examples.Todo.Components
                     new EventProp("onClick", Props.Get<Action>("onClick")),
                     new Prop("width", new StyleLength(Length.Percent(100))),
                     new Prop("height", new StyleLength(Length.Percent(100))),
-                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Resources/unity_builtin_extra/UISprite"))),
+                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/blueSheet/blue_button11.png"))),
                 },
                 render: ctx => ctx._<Text>(
                     props: new IProp[]
@@ -31,7 +31,7 @@ namespace Examples.Todo.Components
                         new Prop("width", new StyleLength(Length.Percent(100))),
                         new Prop("height", new StyleLength(Length.Percent(100))),
                         new Prop("fontSize", new StyleLength(24)),
-                        new Prop("color", new StyleColor(Color.red)),
+                        new Prop("color", new StyleColor(Color.white)),
                     }
                 )
             );

@@ -26,9 +26,10 @@ namespace Examples.Todo.Pages
                             key: i.ToString(),
                             props: new IProp[]
                             {
+                                new Prop("marginBottom", new StyleLength(i == 14 ? 0 : 5)),
                                 new Prop("height", new StyleLength(50)),
                                 new Prop("flexShrink", new StyleFloat(0f)),
-                                new Prop("text", $"Option {i}")
+                                new Prop("text", $"Option {i}"),
                             }
                         );
                     });
@@ -37,6 +38,7 @@ namespace Examples.Todo.Pages
             ctx._<StyledButton>(
                 props: new IProp[]
                 {
+                    new Prop("marginTop", new StyleLength(5)),
                     new Prop("height", new StyleLength(50)),
                     new Prop("flexShrink", new StyleFloat(0f)),
                     new EventProp("onClick", HandleBack),
