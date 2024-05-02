@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement
+namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
 {
     [CreateAssetMenu(fileName = "new ResourceDatabase", menuName = "Kekser/ComponentUI/ResourceDatabase")]
     public sealed class ResourceDatabase : ScriptableObject
