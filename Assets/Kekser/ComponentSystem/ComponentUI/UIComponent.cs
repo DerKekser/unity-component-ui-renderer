@@ -12,17 +12,18 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public abstract class UIComponent<TElement>: UIFragment where TElement: VisualElement, new()
     {
-        public new TElement Node => _node as TElement;
+        public new TElement FragmentRoot => _fragmentRoot as TElement;
+        public new TElement FragmentNode => _fragmentNode as TElement;
 
         public override void Mount(VisualElement parent)
         {
-            parent?.Add(_node);
+            parent?.Add(_fragmentRoot);
             base.Mount(parent);
         }
         
         public override void Unmount()
         {
-            _node?.parent?.Remove(_node);
+            _fragmentRoot?.parent?.Remove(_fragmentRoot);
             base.Unmount();
         }
 
@@ -39,11 +40,11 @@ namespace Kekser.ComponentSystem.ComponentUI
                 if (!Props.Has(styleProperty.Name)) continue;
                 try
                 {
-                    typeof(IStyle).GetProperty(styleProperty.Name)?.SetValue(Node.style, Props.Get(styleProperty.Name));
+                    styleProperty.SetValue(FragmentRoot.style, Props.Get(styleProperty.Name));
                 }
                 catch (Exception e)
                 {
-                    UIRenderer.Log($"Failed to set style property {styleProperty.Name} on {Node.GetType().Name} with value {Props.Get(styleProperty.Name)}");
+                    UIRenderer.Log($"Failed to set style property {styleProperty.Name} on {FragmentRoot.GetType().Name} with value {Props.Get(styleProperty.Name)}");
                 }
             }
         }
@@ -51,8 +52,9 @@ namespace Kekser.ComponentSystem.ComponentUI
         public override void SetContext(BaseContext<VisualElement> ctx)
         {
             base.SetContext(ctx);
-            _node = Activator.CreateInstance<TElement>();
-            _node.AddToClassList(GetType().Name);
+            _fragmentRoot = Activator.CreateInstance<TElement>();
+            _fragmentRoot.AddToClassList(GetType().Name);
+            _fragmentNode = _fragmentRoot;
         }
     }
 }
