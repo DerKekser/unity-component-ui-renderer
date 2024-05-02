@@ -8,7 +8,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
-            Node.text = Props.Get("text", "");
+            FragmentNode.text = Props.Get("text", "");
         }
     }
 }

@@ -100,7 +100,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
-            context._fragment.Mount(_fragment?.Node ?? _mainNode);
+            context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
             return context;
         }
         
@@ -118,7 +118,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             BaseContext<TNode> child = Child<TComponent>(hash);
-            SetNodeAsLastSibling(child._fragment.Node);
+            SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
             foreach (IProp prop in props)
             {

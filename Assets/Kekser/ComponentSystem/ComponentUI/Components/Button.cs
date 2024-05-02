@@ -14,13 +14,13 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnMount()
         {
-            Node.clickable.clicked += Click;
-            Node.text = "";
+            FragmentNode.clickable.clicked += Click;
+            FragmentNode.text = "";
         }
         
         public override void OnUnmount()
         {
-            Node.clickable.clicked -= Click;
+            FragmentNode.clickable.clicked -= Click;
         }
         
         public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)

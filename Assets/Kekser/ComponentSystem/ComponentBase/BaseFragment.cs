@@ -5,10 +5,12 @@ namespace Kekser.ComponentSystem.ComponentBase
 {
     public abstract class BaseFragment<TNode> where TNode: class, new()
     {
-        protected TNode _node;
+        protected TNode _fragmentRoot;
+        protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
         
-        public TNode Node => _node;
+        public TNode FragmentRoot => _fragmentRoot;
+        public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
         public Props Props => _ctx?.Props ?? new Props();
         
         public virtual void Mount(TNode parent)
@@ -32,7 +34,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         public virtual void SetContext(BaseContext<TNode> ctx)
         {
             _ctx = ctx;
-            _node = _ctx?.Parent?.Fragment?.Node;
+            _fragmentRoot = _ctx?.Parent?.Fragment?.FragmentRoot;
+            _fragmentNode = _ctx?.Parent?.Fragment?.FragmentNode;
         }
         
         public TProvider GetProvider<TProvider>() where TProvider : BaseProvider<TNode>
