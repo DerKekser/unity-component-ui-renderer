@@ -2,8 +2,9 @@
 using Examples.Todo.Components;
 using Examples.Todo.Pages;
 using Examples.Todo.Providers;
-using Kekser.ComponentUI;
-using Kekser.ComponentUI.PropSystem;
+using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo
@@ -31,7 +32,7 @@ namespace Examples.Todo
             Props.Set("page", Pages.Menu);
         }
 
-        public override void OnRender(Context ctx, Action<Context> children)
+        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
             ctx._<Layout>(
                 props: new Prop("height", new StyleLength(Length.Percent(100))),

@@ -1,8 +1,9 @@
 ﻿using System;
 using Examples.Todo.Components;
-using Kekser.ComponentUI;
-using Kekser.ComponentUI.Components;
-using Kekser.ComponentUI.PropSystem;
+using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages
@@ -14,7 +15,7 @@ namespace Examples.Todo.Pages
             Props.Get<Action>("onBack")?.Invoke();
         }
         
-        public override void OnRender(Context ctx, Action<Context> children)
+        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
             ctx._<ScrollArea>(
                 render: ctx =>

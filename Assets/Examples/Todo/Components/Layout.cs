@@ -1,16 +1,17 @@
 ﻿using System;
-using Kekser.ComponentUI;
-using Kekser.ComponentUI.Extension.ResourceManagement;
-using Kekser.ComponentUI.PropSystem;
+using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentUI.Components.Box;
+using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Components
 {
     public class Layout: UIComponent
     {
-        public override void OnRender(Context ctx, Action<Context> children)
+        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
             ResourceProvider provider = GetProvider<ResourceProvider>();
             

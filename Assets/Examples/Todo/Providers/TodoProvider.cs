@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Kekser.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {

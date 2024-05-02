@@ -1,17 +1,18 @@
 ﻿using System;
-using Kekser.ComponentUI;
-using Kekser.ComponentUI.Components;
-using Kekser.ComponentUI.Extension.ResourceManagement;
-using Kekser.ComponentUI.PropSystem;
+using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Components;
+using Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Button = Kekser.ComponentUI.Components.Button;
+using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
 
 namespace Examples.Todo.Components
 {
     public class StyledButton: UIComponent
     {
-        public override void OnRender(Context ctx, Action<Context> children)
+        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
             ResourceProvider provider = GetProvider<ResourceProvider>();
             
