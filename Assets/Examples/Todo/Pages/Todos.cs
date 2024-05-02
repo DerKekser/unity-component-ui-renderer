@@ -1,11 +1,12 @@
 ﻿using System;
 using Examples.Todo.Components;
 using Examples.Todo.Providers;
-using Kekser.ComponentUI;
-using Kekser.ComponentUI.Components;
-using Kekser.ComponentUI.PropSystem;
+using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentUI.Components.Box;
+using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Pages
 {
@@ -39,7 +40,7 @@ namespace Examples.Todo.Pages
             provider.Add($"New todo {provider.GetCount() + 1}");
         }
         
-        public override void OnRender(Context ctx, Action<Context> children)
+        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
             TodoProvider provider = GetProvider<TodoProvider>();
             
