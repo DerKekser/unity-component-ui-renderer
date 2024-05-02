@@ -31,6 +31,7 @@ namespace Examples.Todo.Components
                     new Prop("left", new StyleLength(Length.Percent(50))),
                     new Prop("translate", new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0))),
                     new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_panel.png"))),
+                    new Prop("unityFont", new StyleFont(provider.GetResource<Font>("Kenny UI/Font/kenvector_future"))),
                 },
                 render: ctx => children?.Invoke(ctx)
             );
