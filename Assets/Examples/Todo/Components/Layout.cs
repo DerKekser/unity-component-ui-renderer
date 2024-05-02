@@ -1,8 +1,8 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
-using Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
@@ -13,7 +13,7 @@ namespace Examples.Todo.Components
     {
         public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
         {
-            ResourceProvider provider = GetProvider<ResourceProvider>();
+            ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
             ctx._<Box>(
                 props: new IProp[]

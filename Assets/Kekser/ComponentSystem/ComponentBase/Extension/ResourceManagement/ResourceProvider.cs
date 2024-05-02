@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Kekser.ComponentSystem.ComponentBase;
-using UnityEngine.UIElements;
+using Kekser.ComponentSystem.ComponentUI;
 using Object = UnityEngine.Object;
 
-namespace Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement
+namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
 {
-    public sealed class ResourceProvider: UIProvider
+    public sealed class ResourceProvider<T>: BaseProvider<T> where T: class, new()
     {
         private Dictionary<string, Object> _resources = new Dictionary<string, Object>();
         
@@ -26,7 +25,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Extension.ResourceManagement
             return _resources[key] as T;
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<T> ctx, Action<BaseContext<T>> children)
         {
             UpdateResources(Props.Get<ResourceDatabase>("resources"));
             
