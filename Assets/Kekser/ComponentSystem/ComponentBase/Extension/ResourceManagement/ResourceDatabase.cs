@@ -9,7 +9,7 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
     public sealed class ResourceDatabase : ScriptableObject
     {
         [SerializeField]
-        private Object[] _resources;
+        private List<Object> _resources;
         
         [HideInInspector]
         [SerializeField]
@@ -18,7 +18,7 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
         public Dictionary<string, Object> GetResources()
         {
             Dictionary<string, Object> resources = new Dictionary<string, Object>();
-            for (int i = 0; i < _resources.Length; i++)
+            for (int i = 0; i < _resources.Count; i++)
             {
                 if (_resources[i] == null)
                     continue;
@@ -28,12 +28,28 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
 
             return resources;
         }
+        
+        public void AddResource(Object resource)
+        {
+            _resources.Add(resource);
+            UpdatePaths();
+        }
+        
+        public void RemoveResource(Object resource)
+        {
+            int index = _resources.IndexOf(resource);
+            if (index == -1)
+                return;
+            
+            _resources.RemoveAt(index);
+            UpdatePaths();
+        }
 
-        private void OnValidate()
+        private void UpdatePaths()
         {
 #if UNITY_EDITOR
-            _resourcePaths = new string[_resources.Length];
-            for (int i = 0; i < _resources.Length; i++)
+            _resourcePaths = new string[_resources.Count];
+            for (int i = 0; i < _resources.Count; i++)
             {
                 if (_resources[i] == null)
                     continue;
@@ -48,10 +64,13 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
                 if (!path.EndsWith(_resources[i].name))
                     path += "/" + _resources[i].name;
                 _resourcePaths[i] = path;
-                
-                Debug.Log($"ResourceDatabase: Added resource '{_resources[i].name}' at path '{path}'");
             }
 #endif
+        }
+
+        private void OnValidate()
+        {
+            UpdatePaths();
         }
     }
 }
