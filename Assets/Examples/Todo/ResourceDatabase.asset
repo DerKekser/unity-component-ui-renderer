@@ -13,8 +13,56 @@ MonoBehaviour:
   m_Name: ResourceDatabase
   m_EditorClassIdentifier: 
   _resources:
-  - {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 21300000, guid: be340a165cb9c8d4cb50f1deeb51d4ea, type: 3}
+  - {fileID: 7344171009905078346, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 4407615298912659125, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -8579141585047830663, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 1064096351177103804, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -1880964660881794156, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -690606466023680430, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -9113036846611099526, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -1079764704049017581, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 2273862516554000364, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 6794513968505892719, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -3303199041754713762, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -2135702716234782943, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -3769988040058840050, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 7285192305131594788, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -4590443009793632628, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 3552386328965880685, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -571734535538798343, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -7938629432754144731, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -956581802588695278, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -4282427696474775024, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 2994987114903804698, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -2849257791659735815, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 4553364362862187114, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 1140000117448135117, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: -9067302685625973426, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
+  - {fileID: 7009732036104962723, guid: d1023af4809dfc74ea55d04ae9bfe123, type: 3}
   _resourcePaths:
-  - Resources/unity_builtin_extra/UISprite
-  - Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x
+  - Kenny UI/Spritesheet/blueSheet/blue_boxCheckmark.png
+  - Kenny UI/Spritesheet/blueSheet/blue_boxCross.png
+  - Kenny UI/Spritesheet/blueSheet/blue_boxTick.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button00.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button01.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button02.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button03.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button04.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button05.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button06.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button07.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button08.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button09.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button10.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button11.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button12.png
+  - Kenny UI/Spritesheet/blueSheet/blue_button13.png
+  - Kenny UI/Spritesheet/blueSheet/blue_checkmark.png
+  - Kenny UI/Spritesheet/blueSheet/blue_circle.png
+  - Kenny UI/Spritesheet/blueSheet/blue_cross.png
+  - Kenny UI/Spritesheet/blueSheet/blue_panel.png
+  - Kenny UI/Spritesheet/blueSheet/blue_sliderDown.png
+  - Kenny UI/Spritesheet/blueSheet/blue_sliderLeft.png
+  - Kenny UI/Spritesheet/blueSheet/blue_sliderRight.png
+  - Kenny UI/Spritesheet/blueSheet/blue_sliderUp.png
+  - Kenny UI/Spritesheet/blueSheet/blue_tick.png

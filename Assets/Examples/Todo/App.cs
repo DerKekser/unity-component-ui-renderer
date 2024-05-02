@@ -43,13 +43,21 @@ namespace Examples.Todo
                         if (Props.Get<Pages>("page") == Pages.Menu)
                         {
                             ctx._<Todos>(
-                                props: new EventProp("onOptions", HandleOptions)
+                                props: new IProp[]
+                                {
+                                    new EventProp("onOptions", HandleOptions),
+                                    new Prop("flexGrow", new StyleFloat(1f))
+                                }
                             );
                         }
                         else
                         {
                             ctx._<Options>(
-                                props: new EventProp("onBack", HandleMenu)
+                                props: new IProp[]
+                                {
+                                    new EventProp("onBack", HandleMenu),
+                                    new Prop("flexGrow", new StyleFloat(1f))
+                                }
                             );
                         }
                     });

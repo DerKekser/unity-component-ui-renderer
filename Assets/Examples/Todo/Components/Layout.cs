@@ -21,22 +21,16 @@ namespace Examples.Todo.Components
                     new Prop("position", new StyleEnum<Position>(Position.Absolute)),
                     new Prop("width", new StyleLength(500)),
                     new Prop("height", new StyleLength(500)),
+                    new Prop("paddingBottom", new StyleLength(20)),
+                    new Prop("paddingLeft", new StyleLength(20)),
+                    new Prop("paddingRight", new StyleLength(20)),
+                    new Prop("paddingTop", new StyleLength(20)),
                     new Prop("maxWidth", new StyleLength(Length.Percent(90))),
                     new Prop("maxHeight", new StyleLength(Length.Percent(90))),
                     new Prop("top", new StyleLength(Length.Percent(50))),
                     new Prop("left", new StyleLength(Length.Percent(50))),
                     new Prop("translate", new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0))),
-                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/stepok@2x"))),
-                }
-            );
-            ctx._<Box>(
-                props: new IProp[]
-                {
-                    new Prop("position", new StyleEnum<Position>(Position.Absolute)),
-                    new Prop("top", new StyleLength(Length.Percent(20))),
-                    new Prop("left", new StyleLength(Length.Percent(40))),
-                    new Prop("bottom", new StyleLength(Length.Percent(5))),
-                    new Prop("right", new StyleLength(Length.Percent(5))),
+                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_panel.png"))),
                 },
                 render: ctx => children?.Invoke(ctx)
             );
