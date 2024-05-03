@@ -18,9 +18,11 @@ namespace Examples.Todo
         private void Start()
         {
             _renderer = new UIRenderer();
-            _renderer.Render(ctx => ctx._<ResourceProvider<VisualElement>>(
-                props: new Prop("resources", _resourceDatabase), 
-                render: ctx => ctx._<App>()
+            _renderer.Render(ctx => ctx._<ResourceProvider<VisualElement>, ResourceProps>(
+                props: new () { resources = _resourceDatabase },
+                render: ctx => ctx._<App, StyleProps>(
+                    props: new () { style = new Style() { height = new StyleLength(Length.Percent(100)) } }    
+                )
             ), _uiDocument.rootVisualElement);
         }
         

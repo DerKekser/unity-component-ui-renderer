@@ -29,26 +29,32 @@ namespace Examples.Todo.Components
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            ctx._<StyledInput>(
-                props: new IProp[]
+            ctx._<StyledInput, StyledInputProps>(
+                props: new StyledInputProps()
                 {
-                    new EventProp<string>("onChange", HandleChange),
-                    new Prop("value", _inputValue),
-                    new Prop("height", new StyleLength(50)),
-                    new Prop("flexShrink", new StyleFloat(1f)),
-                    new Prop("flexGrow", new StyleFloat(1f))
+                    onChange = (Action<string>)HandleChange,
+                    value = _inputValue,
+                    style = new Style()
+{
+                        flexGrow = new StyleFloat(1f),
+                        flexShrink = new StyleFloat(1f),
+                        height = new StyleLength(50)
+                    }
                 }
             );
-            ctx._<StyledButton>(
-                props: new IProp[]
+            ctx._<StyledButton, StyledButtonProps>(
+                props: new StyledButtonProps()
                 {
-                    new EventProp("onClick", HandleAdd),
-                    new Prop("text", "Add"),
-                    new Prop("marginLeft", new StyleLength(5)),
-                    new Prop("height", new StyleLength(50)),
-                    new Prop("width", new StyleLength(100)),
-                    new Prop("flexShrink", new StyleFloat(0f)),
-                    new Prop("flexGrow", new StyleFloat(0f))
+                    onClick = (Action)HandleAdd,
+                    text = "Add",
+                    style = new Style()
+                    {
+                        marginLeft = new StyleLength(5),
+                        height = new StyleLength(50),
+                        width = new StyleLength(100),
+                        flexShrink = new StyleFloat(0f),
+                        flexGrow = new StyleFloat(0f)
+                    }
                 }
             );
         }

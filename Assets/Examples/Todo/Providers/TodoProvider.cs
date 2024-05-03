@@ -6,7 +6,12 @@ namespace Examples.Todo.Providers
 {
     public class TodoProvider: UIProvider
     {
-        public override IProp[] DefaultProps => new IProp[]
+        public override void OnMount()
+        {
+            Props.Set("todos", new List<string>() { "Buy milk", "Feed the cat", "Do the laundry" });
+        }
+
+        /*public override IProp[] DefaultProps => new IProp[]
         {
             new Prop("todos", new List<string>()
             {
@@ -14,7 +19,7 @@ namespace Examples.Todo.Providers
                 "Feed the cat",
                 "Do the laundry"
             })
-        };
+        };*/
 
         public void Add(string todo)
         {

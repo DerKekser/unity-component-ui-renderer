@@ -2,12 +2,19 @@
 using Examples.Todo.Components;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages
 {
+    public struct OptionsProps
+    {
+        public ObligatoryValue<Action> onBack { get; set; }
+        public OptionalValue<Style> style { get; set; }
+    }
+    
     public class Options: UIComponent
     {
         private void HandleBack()
@@ -22,27 +29,33 @@ namespace Examples.Todo.Pages
                 {
                     ctx.Each(new int[15], (x, i) => 
                     {
-                        ctx._<StyledButton>(
+                        ctx._<StyledButton, StyledButtonProps>(
                             key: i.ToString(),
-                            props: new IProp[]
+                            props: new StyledButtonProps()
                             {
-                                new Prop("marginBottom", new StyleLength(i == 14 ? 0 : 5)),
-                                new Prop("height", new StyleLength(50)),
-                                new Prop("flexShrink", new StyleFloat(0f)),
-                                new Prop("text", $"Option {i}"),
+                                style = new Style()
+                                {
+                                    marginBottom = new StyleLength(i == 14 ? 0 : 5),
+                                    height = new StyleLength(50),
+                                    flexShrink = new StyleFloat(0f)
+                                },
+                                text = $"Option {i}"
                             }
                         );
                     });
                 }
             );
-            ctx._<StyledButton>(
-                props: new IProp[]
+            ctx._<StyledButton, StyledButtonProps>(
+                props: new StyledButtonProps()
                 {
-                    new Prop("marginTop", new StyleLength(5)),
-                    new Prop("height", new StyleLength(50)),
-                    new Prop("flexShrink", new StyleFloat(0f)),
-                    new EventProp("onClick", HandleBack),
-                    new Prop("text", "Back")
+                    style = new Style()
+                    {
+                        marginTop = new StyleLength(5),
+                        height = new StyleLength(50),
+                        flexShrink = new StyleFloat(0f)
+                    },
+                    onClick = (Action)HandleBack,
+                    text = "Back"
                 }
             );
         }

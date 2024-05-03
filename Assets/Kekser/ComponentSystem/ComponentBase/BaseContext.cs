@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
@@ -105,8 +107,10 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
-            foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
-                prop.AddToProps(context.Props);
+            
+            /*foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
+                prop.AddToProps(context.Props);*/
+            
             context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
             return context;
         }
@@ -120,16 +124,55 @@ namespace Kekser.ComponentSystem.ComponentBase
             }
         }
         
-        public TComponent _<TComponent>(string key = null, Action<BaseContext<TNode>> render = null, [CallerLineNumber] int callerLine = 0, params IProp[] props) where TComponent : BaseFragment<TNode>
+        public TComponent _<TComponent, TProps>(
+            TProps props,
+            string key = null, 
+            Action<BaseContext<TNode>> render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : BaseFragment<TNode> where TProps : struct
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             BaseContext<TNode> child = Child<TComponent>(hash);
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
-            foreach (IProp prop in props)
-                prop.AddToProps(child.Props);
+
+            PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
+            foreach (PropertyInfo propertyInfo in propertyInfos)
+            {
+                switch (propertyInfo.GetValue(props))
+                {
+                    case IPropValue propValue:
+                        if (propValue.IsOptional && !propValue.IsSet)
+                            continue;
+                        if (!propValue.IsOptional && !propValue.IsSet)
+                            throw new Exception("Required prop not set");
+                        child.Props.Set(propertyInfo.Name, propValue.RawValue);
+                        break;
+                    default:
+                        child.Props.Set(propertyInfo.Name, propertyInfo.GetValue(props));
+                        break;
+                }
+            }
             
+            child.Props.IsDirty = true;
+            child.Traverse();
+            
+            return (TComponent) child._fragment;
+        }
+        
+        public TComponent _<TComponent>(
+            string key = null, 
+            Action<BaseContext<TNode>> render = null, 
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : BaseFragment<TNode>
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+
+            BaseContext<TNode> child = Child<TComponent>(hash);
+            SetNodeAsLastSibling(child._fragment.FragmentRoot);
+            child.SetRender(render);
+
             child.Props.IsDirty = true;
             child.Traverse();
             
