@@ -28,7 +28,7 @@ namespace Examples.Todo.Pages
             Props.Get<Action>("onOptions")?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ctx._<TodoList>(
                 props: new Prop("flexGrow", new StyleFloat(1f))

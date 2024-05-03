@@ -13,6 +13,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
         public Props Props => _ctx?.Props ?? new Props();
         
+        public virtual IProp[] DefaultProps => null;
+        
         public virtual void Mount(TNode parent)
         {
             BaseRenderer<TNode>.Log("Mounting " + GetType().Name);
@@ -25,10 +27,10 @@ namespace Kekser.ComponentSystem.ComponentBase
             OnUnmount();
         }
 
-        public virtual void Render(Action<BaseContext<TNode>> children)
+        public virtual void Render()
         {
             BaseRenderer<TNode>.Log("Rendering " + GetType().Name);
-            OnRender(_ctx, children);
+            OnRender(_ctx);
         }
         
         public virtual void SetContext(BaseContext<TNode> ctx)
@@ -54,8 +56,13 @@ namespace Kekser.ComponentSystem.ComponentBase
             throw new Exception($"Provider {typeof(TProvider).Name} not found");
         }
 
+        protected void Children(BaseContext<TNode> ctx)
+        {
+            _ctx.Render(ctx);
+        }
+
         public virtual void OnMount() {}
         public virtual void OnUnmount() {}
-        public virtual void OnRender(BaseContext<TNode> ctx, Action<BaseContext<TNode>> children) {}
+        public virtual void OnRender(BaseContext<TNode> ctx) {}
     }
 }

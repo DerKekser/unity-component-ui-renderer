@@ -25,11 +25,11 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
             return _resources[key] as T;
         }
         
-        public override void OnRender(BaseContext<T> ctx, Action<BaseContext<T>> children)
+        public override void OnRender(BaseContext<T> ctx)
         {
             UpdateResources(Props.Get<ResourceDatabase>("resources"));
             
-            children?.Invoke(ctx);
+            Children(ctx);
         }
     }
 }

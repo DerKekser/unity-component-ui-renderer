@@ -18,7 +18,7 @@ namespace Examples.Todo.Components
             Props.Get<Action>("onRemove")?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             string todo = Props.Get<string>("todo");
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
@@ -38,7 +38,11 @@ namespace Examples.Todo.Components
                         props: new IProp[]
                         {
                             new Prop("text", todo),
+                            new Prop("fontSize", new StyleLength(20)),
+                            new Prop("flexShrink", new StyleFloat(1)),
                             new Prop("flexGrow", new StyleFloat(1)),
+                            new Prop("overflow", new StyleEnum<Overflow>(Overflow.Hidden)),
+                            new Prop("textOverflow", new StyleEnum<TextOverflow>(TextOverflow.Ellipsis)),
                         }
                     );
                     ctx._<Button>(

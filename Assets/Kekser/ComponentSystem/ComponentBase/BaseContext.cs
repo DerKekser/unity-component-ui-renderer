@@ -59,9 +59,9 @@ namespace Kekser.ComponentSystem.ComponentBase
                 Props.IsDirty = false;
                 _usedContexts.Clear();
                 if (_fragment != null)
-                    _fragment.Render(_render);
+                    _fragment.Render();
                 else
-                    _render?.Invoke(this);
+                    Render(this);
 
                 foreach (BaseContext<TNode> context in _contextHolder.GetContexts().Except(_usedContexts).ToArray())
                 {
@@ -76,6 +76,11 @@ namespace Kekser.ComponentSystem.ComponentBase
             {
                 child.Traverse();
             }
+        }
+
+        public void Render(BaseContext<TNode> ctx)
+        {
+            _render?.Invoke(ctx);
         }
         
         private void Remove()
@@ -100,6 +105,8 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
+            foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
+                prop.AddToProps(context.Props);
             context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
             return context;
         }
@@ -121,9 +128,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
             foreach (IProp prop in props)
-            {
                 prop.AddToProps(child.Props);
-            }
             
             child.Props.IsDirty = true;
             child.Traverse();

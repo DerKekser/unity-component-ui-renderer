@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {
     public class TodoProvider: UIProvider
     {
-        public override void OnMount()
+        public override IProp[] DefaultProps => new IProp[]
         {
-            Props.Set("todos", new List<string>()
+            new Prop("todos", new List<string>()
             {
                 "Buy milk",
                 "Feed the cat",
                 "Do the laundry"
-            });
-        }
+            })
+        };
 
         public void Add(string todo)
         {

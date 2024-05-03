@@ -12,7 +12,7 @@ namespace Examples.Todo.Components
 {
     public class StyledButton: UIComponent
     {
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
