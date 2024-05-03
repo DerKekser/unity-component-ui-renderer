@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
 {
-    public abstract class UIProvider: BaseProvider<VisualElement>
+    public abstract class UIPortal: BasePortal<VisualElement>
     {
         
     }
