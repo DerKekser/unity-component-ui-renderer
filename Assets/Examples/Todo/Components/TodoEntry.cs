@@ -38,6 +38,7 @@ namespace Examples.Todo.Components
                         props: new IProp[]
                         {
                             new Prop("text", todo),
+                            new Prop("fontSize", new StyleLength(20)),
                             new Prop("flexGrow", new StyleFloat(1)),
                         }
                     );

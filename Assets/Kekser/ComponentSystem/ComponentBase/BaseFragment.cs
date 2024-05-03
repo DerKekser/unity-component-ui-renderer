@@ -13,6 +13,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
         public Props Props => _ctx?.Props ?? new Props();
         
+        public virtual IProp[] DefaultProps => null;
+        
         public virtual void Mount(TNode parent)
         {
             BaseRenderer<TNode>.Log("Mounting " + GetType().Name);

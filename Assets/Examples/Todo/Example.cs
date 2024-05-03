@@ -20,7 +20,7 @@ namespace Examples.Todo
             _renderer = new UIRenderer();
             _renderer.Render(ctx => ctx._<ResourceProvider<VisualElement>>(
                 props: new Prop("resources", _resourceDatabase), 
-                render: ctx => ctx._<App>(props: new Prop("height", new StyleLength(Length.Percent(100))))
+                render: ctx => ctx._<App>()
             ), _uiDocument.rootVisualElement);
         }
         

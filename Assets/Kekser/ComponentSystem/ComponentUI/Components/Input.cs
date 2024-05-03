@@ -1,4 +1,5 @@
 ﻿using System;
+using Kekser.ComponentSystem.ComponentBase;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -19,6 +20,12 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public override void OnUnmount()
         {
             FragmentNode.UnregisterValueChangedCallback(Change);
+        }
+
+        public override void OnRender(BaseContext<VisualElement> ctx)
+        {
+            if (Props.Has("value"))
+                FragmentNode.value = Props.Get<string>("value");
         }
     }
 }

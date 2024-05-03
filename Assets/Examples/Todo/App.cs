@@ -27,10 +27,11 @@ namespace Examples.Todo
             Props.Set("page", Pages.Options);
         }
 
-        public override void OnMount()
+        public override IProp[] DefaultProps => new IProp[]
         {
-            Props.Set("page", Pages.Menu);
-        }
+            new Prop("height", new StyleLength(Length.Percent(100))),
+            new Prop("page", Pages.Menu),
+        };
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
