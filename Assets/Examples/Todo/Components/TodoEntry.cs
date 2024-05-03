@@ -39,7 +39,10 @@ namespace Examples.Todo.Components
                         {
                             new Prop("text", todo),
                             new Prop("fontSize", new StyleLength(20)),
+                            new Prop("flexShrink", new StyleFloat(1)),
                             new Prop("flexGrow", new StyleFloat(1)),
+                            new Prop("overflow", new StyleEnum<Overflow>(Overflow.Hidden)),
+                            new Prop("textOverflow", new StyleEnum<TextOverflow>(TextOverflow.Ellipsis)),
                         }
                     );
                     ctx._<Button>(

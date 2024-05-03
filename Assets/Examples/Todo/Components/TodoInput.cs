@@ -35,7 +35,7 @@ namespace Examples.Todo.Components
                     new EventProp<string>("onChange", HandleChange),
                     new Prop("value", _inputValue),
                     new Prop("height", new StyleLength(50)),
-                    new Prop("flexShrink", new StyleFloat(0f)),
+                    new Prop("flexShrink", new StyleFloat(1f)),
                     new Prop("flexGrow", new StyleFloat(1f))
                 }
             );
