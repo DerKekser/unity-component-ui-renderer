@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class ScrollArea: UIComponent<ScrollView>
+    public sealed class ScrollArea: UIComponent<ScrollView>
     {
         public override void Mount(VisualElement parent)
         {

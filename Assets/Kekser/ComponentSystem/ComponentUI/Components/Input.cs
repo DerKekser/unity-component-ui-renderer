@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class Input: UIComponent<TextField>
+    public sealed class Input: UIComponent<TextField>
     {
         private void Change(ChangeEvent<string> eChangeEvent)
         {
