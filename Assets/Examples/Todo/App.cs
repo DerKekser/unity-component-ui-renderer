@@ -32,7 +32,7 @@ namespace Examples.Todo
             Props.Set("page", Pages.Menu);
         }
 
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ctx._<Layout>(
                 props: new Prop("height", new StyleLength(Length.Percent(100))),

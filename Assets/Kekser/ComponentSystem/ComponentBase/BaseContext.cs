@@ -59,9 +59,9 @@ namespace Kekser.ComponentSystem.ComponentBase
                 Props.IsDirty = false;
                 _usedContexts.Clear();
                 if (_fragment != null)
-                    _fragment.Render(_render);
+                    _fragment.Render();
                 else
-                    _render?.Invoke(this);
+                    Render(this);
 
                 foreach (BaseContext<TNode> context in _contextHolder.GetContexts().Except(_usedContexts).ToArray())
                 {
@@ -76,6 +76,11 @@ namespace Kekser.ComponentSystem.ComponentBase
             {
                 child.Traverse();
             }
+        }
+
+        public void Render(BaseContext<TNode> ctx)
+        {
+            _render?.Invoke(ctx);
         }
         
         private void Remove()

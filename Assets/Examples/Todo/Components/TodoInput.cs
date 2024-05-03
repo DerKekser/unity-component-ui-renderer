@@ -23,7 +23,7 @@ namespace Examples.Todo.Components
             provider.Add(_inputValue);
         }
 
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ctx._<Input>(
                 props: new IProp[]

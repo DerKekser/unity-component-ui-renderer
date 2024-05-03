@@ -12,9 +12,9 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
             _fragmentNode = FragmentRoot.contentContainer;
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            children?.Invoke(ctx);
+            Children(ctx);
         }
     }
 }

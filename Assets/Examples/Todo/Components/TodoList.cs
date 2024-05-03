@@ -17,7 +17,7 @@ namespace Examples.Todo.Components
             provider.Remove(index);
         }
 
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();

@@ -15,7 +15,7 @@ namespace Examples.Todo.Pages
             Props.Get<Action>("onBack")?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ctx._<ScrollArea>(
                 render: ctx =>

@@ -27,10 +27,10 @@ namespace Kekser.ComponentSystem.ComponentUI
             base.Unmount();
         }
 
-        public override void Render(Action<BaseContext<VisualElement>> children)
+        public override void Render()
         {
             ApplyStyle();
-            base.Render(children);
+            base.Render();
         }
 
         public void ApplyStyle()

@@ -11,7 +11,7 @@ namespace Examples.Todo.Components
 {
     public class Layout: UIComponent
     {
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
@@ -33,7 +33,7 @@ namespace Examples.Todo.Components
                     new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_panel.png"))),
                     new Prop("unityFont", new StyleFont(provider.GetResource<Font>("Kenny UI/Font/kenvector_future"))),
                 },
-                render: ctx => children?.Invoke(ctx)
+                render: Children
             );
         }
     }

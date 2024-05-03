@@ -18,7 +18,7 @@ namespace Examples.Todo.Components
             Props.Get<Action>("onRemove")?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx, Action<BaseContext<VisualElement>> children)
+        public override void OnRender(BaseContext<VisualElement> ctx)
         {
             string todo = Props.Get<string>("todo");
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
