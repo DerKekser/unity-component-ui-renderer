@@ -93,7 +93,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         public override void SetContext(BaseContext<VisualElement> ctx)
         {
             base.SetContext(ctx);
-            _fragmentRoot = Activator.CreateInstance<TElement>();
+            _fragmentRoot = new TElement();
             _fragmentRoot.AddToClassList(GetType().Name);
             _fragmentNode = _fragmentRoot;
         }
