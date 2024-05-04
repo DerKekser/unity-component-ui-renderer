@@ -26,8 +26,8 @@ namespace Examples.Todo.Components
             ctx._<Input, InputProps>(
                 props: new InputProps()
                 {
-                    onChange = Props.Get<StyledInputProps>().onChange,
-                    value = Props.Get<StyledInputProps>().value,
+                    onChange = OwnProps.onChange,
+                    value = OwnProps.value,
                     style = new Style()
                     {
                         width = new StyleLength(Length.Percent(100)),

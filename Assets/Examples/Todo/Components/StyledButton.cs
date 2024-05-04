@@ -27,7 +27,7 @@ namespace Examples.Todo.Components
             ctx._<Button, ButtonProps>(
                 props: new ButtonProps()
                 {
-                    onClick = Props.Get<StyledButtonProps>().onClick,
+                    onClick = OwnProps.onClick,
                     style = new Style()
                     {
                         width = new StyleLength(Length.Percent(100)),
@@ -38,7 +38,7 @@ namespace Examples.Todo.Components
                 render: ctx => ctx._<Text, TextProps>(
                     props: new TextProps()
                     {
-                        text = Props.Get<StyledButtonProps>().text,
+                        text = OwnProps.text,
                         style = new Style()
                         {
                             width = new StyleLength(Length.Percent(100)),

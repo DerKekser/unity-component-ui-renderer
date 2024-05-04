@@ -53,7 +53,7 @@ namespace Examples.Todo
                 {
                     ctx._<TodoProvider>(render: ctx =>
                     {
-                        if (Props.Get<AppProps>().page == Pages.Menu)
+                        if (OwnProps.page == Pages.Menu)
                         {
                             ctx._<Todos, TodoProps>(
                                 props: new TodoProps()

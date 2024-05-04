@@ -3,7 +3,21 @@ using UnityEngine;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public abstract class BaseRenderer<TNode> where TNode: class, new()
+    public class RenderFragment<TNode, TProps> : BaseFragment<TNode, TProps> where TNode : class, new() where TProps : struct
+    {
+        public RenderFragment(TNode node)
+        {
+            _fragmentRoot = node;
+            _fragmentNode = node;
+        }
+            
+        public override void OnRender(BaseContext<TNode> ctx)
+        {
+            Children(ctx);
+        }
+    }
+
+    public abstract class BaseRenderer<TNode> where TNode : class, new()
     {
         private BaseContext<TNode> _context;
         

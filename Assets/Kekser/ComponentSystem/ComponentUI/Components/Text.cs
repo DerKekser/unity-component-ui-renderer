@@ -15,8 +15,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            TextProps props = Props.Get<TextProps>();
-            FragmentNode.text = Props.Get<TextProps>().text;
+            FragmentNode.text = OwnProps.text;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Examples.Todo.Pages
         
         private void HandleOptions()
         {
-            Action e = Props.Get<TodoProps>().onOptions;
+            Action e = OwnProps.onOptions;
             e?.Invoke();
         }
         

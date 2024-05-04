@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using UnityEngine;
 
 namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
 {
@@ -8,10 +9,7 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
         private TProps _props;
         private bool _isDirty = true;
         
-        public TProps Get()
-        {
-            return _props;
-        }
+        public TProps Props => _props;
         
         public void Set(Func<TProps, TProps> setter)
         {
@@ -32,9 +30,12 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
                         if (!propValue.IsOptional && !propValue.IsSet)
                             throw new Exception("Required prop not set");
                         IPropValue propValue1 = (IPropValue) propertyInfo.GetValue(_props);
-                        if (propValue1.RawValue == propValue.RawValue)
+                        if (propValue1.Equals(propValue))
                             continue;
-                        propertyInfo.SetValue(_props, propValue);
+                        propValue1.TakeValue(propValue);
+                        object tmp = _props; // We need to create a new object to update the property value because structs are immutable
+                        propertyInfo.SetValue(tmp, propValue1);
+                        _props = (TProps) tmp;
                         _isDirty = true;
                         break;
                     default:
@@ -46,12 +47,12 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
                 }
             }
         }
-
-        public void Set<TProps1>(Func<TProps1, TProps1> setter) where TProps1 : struct
+        
+        public void Set<TProps1>(TProps1 props) where TProps1 : struct
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
-            Set(setter(Get<TProps1>()));
+            Set((TProps) (object) props);
         }
 
         public TProps1 Get<TProps1>() where TProps1 : struct
@@ -59,13 +60,6 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
             return (TProps1) (object) _props;
-        }
-
-        public void Set<TProps1>(TProps1 props) where TProps1 : struct
-        {
-            if (typeof(TProps1) != typeof(TProps))
-                throw new Exception("Invalid type");
-            Set((TProps) (object) props);
         }
 
         public bool IsDirty 

@@ -16,7 +16,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Change(ChangeEvent<string> eChangeEvent)
         {
-            Action<string> e = Props.Get<InputProps>().onChange;
+            Action<string> e = OwnProps.onChange;
             e?.Invoke(eChangeEvent.newValue);
         }
         
@@ -32,9 +32,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            InputProps props = Props.Get<InputProps>();
-            if (props.value.IsSet)
-                FragmentNode.value = props.value;
+            if (OwnProps.value.IsSet)
+                FragmentNode.value = OwnProps.value;
         }
     }
 }

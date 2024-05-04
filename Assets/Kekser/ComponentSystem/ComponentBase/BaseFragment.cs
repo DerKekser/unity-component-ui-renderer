@@ -13,10 +13,13 @@ namespace Kekser.ComponentSystem.ComponentBase
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
+        protected PropList<TProps> _props = new PropList<TProps>();
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        public IPropList Props => _ctx?.PropList;
+        public IPropList Props => _props;
+        
+        public TProps OwnProps => _props.Props;
         
         //public virtual IProp[] DefaultProps => null;
         

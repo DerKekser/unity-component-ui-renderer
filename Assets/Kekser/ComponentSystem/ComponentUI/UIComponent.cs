@@ -41,6 +41,30 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         public void ApplyStyle()
         {
+            PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
+            
+            foreach (PropertyInfo propertyInfo in propertyInfos)
+            {
+                switch (propertyInfo.GetValue(OwnProps))
+                {
+                    case OptionalValue<Style> optionalValue:
+                        if (!optionalValue.IsSet)
+                            continue;
+                        ApplyStyle(optionalValue);
+                        break;
+                    case ObligatoryValue<Style> obligatoryValue:
+                        if (!obligatoryValue.IsSet)
+                            throw new Exception("Required prop not set");
+                        ApplyStyle(obligatoryValue);
+                        break;
+                    case Style style:
+                        ApplyStyle(style);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
             /*try
             {
                 if (!Props.Has("style")) return;
@@ -88,6 +112,30 @@ namespace Kekser.ComponentSystem.ComponentUI
             {
                 UIRenderer.Log($"Failed to apply style on {FragmentRoot.GetType().Name}");
             }*/
+        }
+        
+        public void ApplyStyle(Style style)
+        {
+            PropertyInfo[] styleProperties = typeof(Style).GetProperties();
+            foreach (PropertyInfo styleProperty in styleProperties)
+            {
+                PropertyInfo propertyInfo = typeof(IStyle).GetProperty(styleProperty.Name);
+                if (propertyInfo == null) continue;
+
+                switch (styleProperty.GetValue(style))
+                {
+                    case IPropValue propValue:
+                        if (propValue.IsOptional && !propValue.IsSet)
+                            continue;
+                        if (!propValue.IsOptional && !propValue.IsSet)
+                            throw new Exception("Required prop not set");
+                        propertyInfo.SetValue(FragmentRoot.style, propValue.ToObject());
+                        break;
+                    default:
+                        propertyInfo.SetValue(FragmentRoot.style, styleProperty.GetValue(style));
+                        break;
+                }
+            }
         }
 
         public override void SetContext(BaseContext<VisualElement> ctx)

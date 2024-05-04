@@ -19,7 +19,7 @@ namespace Examples.Todo.Pages
     {
         private void HandleBack()
         {
-            Action e = Props.Get<OptionsProps>().onBack;
+            Action e = OwnProps.onBack;
             e?.Invoke();
         }
         
