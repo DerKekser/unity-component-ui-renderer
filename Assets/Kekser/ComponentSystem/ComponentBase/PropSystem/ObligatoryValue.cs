@@ -1,4 +1,4 @@
-﻿namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
+﻿namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
     public struct ObligatoryValue<T>: IPropValue
     {

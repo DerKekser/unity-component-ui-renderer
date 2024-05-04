@@ -1,4 +1,4 @@
-﻿using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {

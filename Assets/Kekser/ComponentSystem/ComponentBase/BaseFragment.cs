@@ -1,6 +1,5 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {

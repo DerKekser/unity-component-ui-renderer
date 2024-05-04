@@ -1,5 +1,5 @@
 ﻿using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 

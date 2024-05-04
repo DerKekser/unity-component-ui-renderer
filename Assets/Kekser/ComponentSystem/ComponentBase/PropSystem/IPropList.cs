@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
+﻿namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
     public interface IPropList
     {

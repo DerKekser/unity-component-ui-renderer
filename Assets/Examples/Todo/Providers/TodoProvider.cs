@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers

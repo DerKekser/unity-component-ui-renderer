@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
-using Kekser.ComponentSystem.ComponentUI;
+﻿using System.Collections.Generic;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Object = UnityEngine.Object;
 
 namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement

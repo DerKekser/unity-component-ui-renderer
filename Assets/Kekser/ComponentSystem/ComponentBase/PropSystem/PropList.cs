@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using UnityEngine;
 
-namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
+namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
     public class PropList<TProps>: IPropList where TProps: struct
     {

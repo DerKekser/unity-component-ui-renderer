@@ -3,7 +3,7 @@ using Examples.Todo.Components;
 using Examples.Todo.Pages;
 using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using UnityEngine.UIElements;
 

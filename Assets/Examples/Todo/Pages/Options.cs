@@ -1,7 +1,7 @@
 ﻿using System;
 using Examples.Todo.Components;
 using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
