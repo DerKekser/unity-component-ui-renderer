@@ -1,9 +1,10 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public abstract class BaseFragment<TNode> where TNode: class, new()
+    public abstract class BaseFragment<TNode> : IFragment<TNode> where TNode : class, new()
     {
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
@@ -11,7 +12,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        public Props Props => _ctx?.Props ?? new Props();
+        public IPropList Props => _ctx.PropList;
         
         //public virtual IProp[] DefaultProps => null;
         

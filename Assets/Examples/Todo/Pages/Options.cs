@@ -19,7 +19,8 @@ namespace Examples.Todo.Pages
     {
         private void HandleBack()
         {
-            Props.Get<Action>("onBack")?.Invoke();
+            Action e = Props.Get<OptionsProps>().onBack;
+            e?.Invoke();
         }
         
         public override void OnRender(BaseContext<VisualElement> ctx)

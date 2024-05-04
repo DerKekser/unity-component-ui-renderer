@@ -15,7 +15,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Click()
         {
-            Action e = Props.Get<Action>("onClick");
+            Action e = Props.Get<ButtonProps>().onClick;
             e?.Invoke();
         }
         

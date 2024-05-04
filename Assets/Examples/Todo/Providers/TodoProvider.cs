@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {
+    public struct TodoProviderProps
+    {
+        public OptionalValue<List<string>> todos { get; set; }
+    }
+    
     public class TodoProvider: UIProvider
     {
         public override void OnMount()
         {
-            Props.Set("todos", new List<string>() { "Buy milk", "Feed the cat", "Do the laundry" });
+            Props.Set(new TodoProviderProps() { todos = new List<string>() { "Buy milk", "Feed the cat", "Do the laundry" } });
         }
 
         /*public override IProp[] DefaultProps => new IProp[]
@@ -23,36 +29,48 @@ namespace Examples.Todo.Providers
 
         public void Add(string todo)
         {
-            List<string> todos = new List<string>(Props.Get("todos", new List<string>()));
-            todos.Add(todo);
-            Props.Set("todos", todos);
+            Props.Set<TodoProviderProps>(props =>
+            {
+                List<string> todos = props.todos.IsSet ? new List<string>(props.todos.Value) : new List<string>();
+                todos.Add(todo);
+                props.todos = todos;
+                return props;
+            });
         }
         
         public void Remove(int index)
         {
-            List<string> todos = new List<string>(Props.Get("todos", new List<string>()));
-            todos.RemoveAt(index);
-            Props.Set("todos", todos);
+            Props.Set<TodoProviderProps>(props =>
+            {
+                List<string> todos = props.todos.IsSet ? new List<string>(props.todos.Value) : new List<string>();
+                todos.RemoveAt(index);
+                props.todos = todos;
+                return props;
+            });
         }
         
         public string Get(int index)
         {
-            return Props.Get("todos", new List<string>())[index];
+            return Props.Get<TodoProviderProps>().todos.Value[index];
         }
         
         public void Clear()
         {
-            Props.Set("todos", new List<string>());
+            Props.Set<TodoProviderProps>(props =>
+            {
+                props.todos = new List<string>();
+                return props;
+            });
         }
         
         public List<string> GetTodos()
         {
-            return Props.Get("todos", new List<string>());
+            return Props.Get<TodoProviderProps>().todos.Value;
         }
         
         public int GetCount()
         {
-            return Props.Get("todos", new List<string>()).Count;
+            return Props.Get<TodoProviderProps>().todos.Value.Count;
         }
     }
 }

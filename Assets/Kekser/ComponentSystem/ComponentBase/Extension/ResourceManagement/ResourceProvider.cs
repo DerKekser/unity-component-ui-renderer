@@ -33,7 +33,7 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
         
         public override void OnRender(BaseContext<T> ctx)
         {
-            UpdateResources(Props.Get<ResourceDatabase>("resources"));
+            UpdateResources(Props.Get<ResourceProps>().resources);
             
             Children(ctx);
         }

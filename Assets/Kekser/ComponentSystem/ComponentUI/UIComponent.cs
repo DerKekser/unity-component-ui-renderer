@@ -36,7 +36,7 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         public void ApplyStyle()
         {
-            try
+            /*try
             {
                 if (!Props.Has("style")) return;
                 object rawStyle = Props.Get("style");
@@ -82,37 +82,6 @@ namespace Kekser.ComponentSystem.ComponentUI
             catch (Exception e)
             {
                 UIRenderer.Log($"Failed to apply style on {FragmentRoot.GetType().Name}");
-            }
-
-            /*PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
-            foreach (PropertyInfo propertyInfo in propertyInfos)
-            {
-                switch (propertyInfo.GetValue(props))
-                {
-                    case IPropValue propValue:
-                        if (propValue.IsOptional && !propValue.IsSet)
-                            continue;
-                        if (!propValue.IsOptional && !propValue.IsSet)
-                            throw new Exception("Required prop not set");
-                        child.Props.Set(propertyInfo.Name, propValue.RawValue);
-                        break;
-                    default:
-                        child.Props.Set(propertyInfo.Name, propertyInfo.GetValue(props));
-                        break;
-                }
-            }*/
-            
-            /*PropertyInfo[] styleProperties = typeof(IStyle).GetProperties();
-            foreach (PropertyInfo styleProperty in styleProperties) {
-                if (!Props.Has(styleProperty.Name)) continue;
-                try
-                {
-                    styleProperty.SetValue(FragmentRoot.style, Props.Get(styleProperty.Name));
-                }
-                catch (Exception e)
-                {
-                    UIRenderer.Log($"Failed to set style property {styleProperty.Name} on {FragmentRoot.GetType().Name} with value {Props.Get(styleProperty.Name)}");
-                }
             }*/
         }
 

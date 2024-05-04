@@ -13,18 +13,18 @@ namespace Kekser.ComponentSystem.ComponentBase
         private BaseContext<TNode> _parent;
         private BaseContextHolder<TNode> _contextHolder;
         private List<BaseContext<TNode>> _usedContexts;
-        private Props _props;
+        private IPropList _propList;
         
         private TNode _mainNode;
-        private BaseFragment<TNode> _fragment;
+        private IFragment<TNode> _fragment;
         
         private Action<BaseContext<TNode>> _render;
 
         public BaseContext<TNode> Parent => _parent;
-        public BaseFragment<TNode> Fragment => _fragment;
-        public Props Props => _props ??= new Props();
+        public IFragment<TNode> Fragment => _fragment;
+        public IPropList PropList => _propList;
 
-        public bool NeedsRerender => Props.IsDirty;
+        public bool NeedsRerender => PropList.IsDirty;
         
         // TODO: make abstract create separate context classes for different node types
         public BaseContext(TNode mainNode)
@@ -33,7 +33,6 @@ namespace Kekser.ComponentSystem.ComponentBase
             _contextHolder = CreateContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<BaseContext<TNode>>();
-            _props = new Props();
         }
         
         public BaseContext(BaseContext<TNode> parent)
@@ -43,7 +42,6 @@ namespace Kekser.ComponentSystem.ComponentBase
             _contextHolder = CreateContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<BaseContext<TNode>>();
-            _props = new Props();
         }
         
         protected abstract BaseContextHolder<TNode> CreateContextHolder(BaseContext<TNode> context);
@@ -58,7 +56,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             _contextHolder.Reset();
             if (NeedsRerender)
             {
-                Props.IsDirty = false;
+                PropList.IsDirty = false;
                 _usedContexts.Clear();
                 if (_fragment != null)
                     _fragment.Render();
@@ -92,6 +90,29 @@ namespace Kekser.ComponentSystem.ComponentBase
                 child.Remove();
             }
             _fragment.Unmount();
+        }
+        
+        private BaseContext<TNode> Child<TComponent, TProps>(int? key) where TComponent : BaseFragment<TNode> where TProps : struct
+        {
+            BaseContext<TNode> context = _contextHolder.Get(key);
+            _usedContexts.Add(context);
+
+            if (context._fragment != null)
+            {
+                context._contextHolder.Reset();
+                return context;
+            }
+
+            context._propList = new PropList<TProps>();
+            
+            context._fragment = Activator.CreateInstance<TComponent>();
+            context._fragment.SetContext(context);
+            
+            /*foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
+                prop.AddToProps(context.Props);*/
+            
+            context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
+            return context;
         }
 
         private BaseContext<TNode> Child<TComponent>(int? key) where TComponent : BaseFragment<TNode>
@@ -133,29 +154,14 @@ namespace Kekser.ComponentSystem.ComponentBase
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
-            BaseContext<TNode> child = Child<TComponent>(hash);
+            BaseContext<TNode> child = Child<TComponent, TProps>(hash);
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
-
-            PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
-            foreach (PropertyInfo propertyInfo in propertyInfos)
-            {
-                switch (propertyInfo.GetValue(props))
-                {
-                    case IPropValue propValue:
-                        if (propValue.IsOptional && !propValue.IsSet)
-                            continue;
-                        if (!propValue.IsOptional && !propValue.IsSet)
-                            throw new Exception("Required prop not set");
-                        child.Props.Set(propertyInfo.Name, propValue.RawValue);
-                        break;
-                    default:
-                        child.Props.Set(propertyInfo.Name, propertyInfo.GetValue(props));
-                        break;
-                }
-            }
             
-            child.Props.IsDirty = true;
+            PropList<TProps> propList = (PropList<TProps>) child.PropList;
+            propList.Set(props);
+            
+            child.PropList.IsDirty = true;
             child.Traverse();
             
             return (TComponent) child._fragment;
@@ -173,7 +179,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
 
-            child.Props.IsDirty = true;
+            child.PropList.IsDirty = true;
             child.Traverse();
             
             return (TComponent) child._fragment;

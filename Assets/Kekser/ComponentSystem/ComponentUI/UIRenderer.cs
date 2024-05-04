@@ -13,8 +13,8 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         protected override void Tick(BaseContext<VisualElement> ctx)
         {
-            ctx.Props.Set("screenWidth", Screen.width);
-            ctx.Props.Set("screenHeight", Screen.height);
+            /*ctx.PropList.Set("screenWidth", Screen.width);
+            ctx.PropList.Set("screenHeight", Screen.height);*/
         }
     }
 }

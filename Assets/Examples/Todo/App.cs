@@ -10,9 +10,15 @@ using UnityEngine.UIElements;
 
 namespace Examples.Todo
 {
+    public struct AppProps
+    {
+        public OptionalValue<App.Pages> page { get; set; }
+        public OptionalValue<Style> style { get; set; }
+    }
+    
     public class App: UIComponent
     {
-        private enum Pages
+        public enum Pages
         {
             Menu,
             Options
@@ -20,17 +26,17 @@ namespace Examples.Todo
         
         private void HandleMenu()
         {
-            Props.Set("page", Pages.Menu);
+            Props.Set(new AppProps() { page = Pages.Menu });
         }
         
         private void HandleOptions()
         {
-            Props.Set("page", Pages.Options);
+            Props.Set(new AppProps() { page = Pages.Options });
         }
 
         public override void OnMount()
         {
-            Props.Set("page", Pages.Menu);
+            Props.Set(new AppProps() { page = Pages.Menu });
         }
 
         /*public override IProp[] DefaultProps => new IProp[]
@@ -47,7 +53,7 @@ namespace Examples.Todo
                 {
                     ctx._<TodoProvider>(render: ctx =>
                     {
-                        if (Props.Get<Pages>("page") == Pages.Menu)
+                        if (Props.Get<AppProps>().page == Pages.Menu)
                         {
                             ctx._<Todos, TodoProps>(
                                 props: new TodoProps()

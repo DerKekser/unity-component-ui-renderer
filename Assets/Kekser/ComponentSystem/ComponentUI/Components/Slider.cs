@@ -16,7 +16,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Change(ChangeEvent<float> eChangeEvent)
         {
-            Action<float> e = Props.Get<Action<float>>("onChange");
+            Action<float> e = Props.Get<SliderProps>().onChange;
             e?.Invoke(eChangeEvent.newValue);
         }
         
@@ -32,8 +32,9 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            if (Props.Has("value"))
-                FragmentNode.value = Props.Get<float>("value");
+            SliderProps props = Props.Get<SliderProps>();
+            if (props.value.IsSet)
+                FragmentNode.value = props.value;
         }
     }
 }

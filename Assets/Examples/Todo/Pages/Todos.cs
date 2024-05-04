@@ -33,7 +33,8 @@ namespace Examples.Todo.Pages
         
         private void HandleOptions()
         {
-            Props.Get<Action>("onOptions")?.Invoke();
+            Action e = Props.Get<TodoProps>().onOptions;
+            e?.Invoke();
         }
         
         public override void OnRender(BaseContext<VisualElement> ctx)

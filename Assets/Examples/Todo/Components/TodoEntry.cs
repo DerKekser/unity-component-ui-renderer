@@ -23,12 +23,13 @@ namespace Examples.Todo.Components
     {
         private void HandleRemove()
         {
-            Props.Get<Action>("onRemove")?.Invoke();
+            Action e = Props.Get<TodoEntryProps>().onRemove;
+            e?.Invoke();
         }
         
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            string todo = Props.Get<string>("todo");
+            string todo = Props.Get<TodoEntryProps>().todo;
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
             
             ctx._<Box, StyleProps>(
