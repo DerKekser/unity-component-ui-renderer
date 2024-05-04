@@ -12,7 +12,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public sealed class Input: UIComponent<TextField>
+    public sealed class Input: UIComponent<TextField, InputProps>
     {
         private void Change(ChangeEvent<string> eChangeEvent)
         {

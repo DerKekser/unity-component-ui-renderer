@@ -11,7 +11,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public sealed class Text: UIComponent<Label>
+    public sealed class Text: UIComponent<Label, TextProps>
     {
         public override void OnRender(BaseContext<VisualElement> ctx)
         {

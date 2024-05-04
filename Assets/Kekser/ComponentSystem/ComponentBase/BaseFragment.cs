@@ -4,7 +4,11 @@ using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public abstract class BaseFragment<TNode> : IFragment<TNode> where TNode : class, new()
+    public struct NoProps {}
+    
+    public abstract class BaseFragment<TNode> : BaseFragment<TNode, NoProps> where TNode : class, new() {}
+    
+    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode> where TNode : class, new() where TProps : struct
     {
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
@@ -12,7 +16,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        public IPropList Props => _ctx.PropList;
+        public IPropList Props => _ctx?.PropList;
         
         //public virtual IProp[] DefaultProps => null;
         
@@ -41,7 +45,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             _fragmentNode = _ctx?.Parent?.Fragment?.FragmentNode;
         }
         
-        public TProvider GetProvider<TProvider>() where TProvider : BaseProvider<TNode>
+        public TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>
         {
             if (this is TProvider provider)
             {

@@ -12,7 +12,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public class Slider: UIComponent<UnityEngine.UIElements.Slider>
+    public class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>
     {
         private void Change(ChangeEvent<float> eChangeEvent)
         {

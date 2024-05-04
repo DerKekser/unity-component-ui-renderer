@@ -1,8 +1,9 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
+using Kekser.ComponentSystem.ComponentUI;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public class BasePortal<TNode>: BaseFragment<TNode> where TNode: class, new()
+    public class BasePortal<TNode>: BaseFragment<TNode, BasePortal<TNode>.PortalProps> where TNode: class, new()
     {
         public struct PortalProps
         {

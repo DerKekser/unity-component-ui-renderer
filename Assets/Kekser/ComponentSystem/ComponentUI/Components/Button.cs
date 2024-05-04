@@ -11,7 +11,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public sealed class Button : UIComponent<UnityEngine.UIElements.Button>
+    public sealed class Button : UIComponent<UnityEngine.UIElements.Button, ButtonProps>
     {
         private void Click()
         {

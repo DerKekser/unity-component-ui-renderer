@@ -16,7 +16,7 @@ namespace Examples.Todo
         public OptionalValue<Style> style { get; set; }
     }
     
-    public class App: UIComponent
+    public class App: UIComponent<AppProps>
     {
         public enum Pages
         {

@@ -92,7 +92,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             _fragment.Unmount();
         }
         
-        private BaseContext<TNode> Child<TComponent, TProps>(int? key) where TComponent : BaseFragment<TNode> where TProps : struct
+        private BaseContext<TNode> Child<TComponent, TProps>(int? key) where TComponent : IFragment<TNode> where TProps : struct
         {
             BaseContext<TNode> context = _contextHolder.Get(key);
             _usedContexts.Add(context);
@@ -115,7 +115,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             return context;
         }
 
-        private BaseContext<TNode> Child<TComponent>(int? key) where TComponent : BaseFragment<TNode>
+        private BaseContext<TNode> Child<TComponent>(int? key) where TComponent : IFragment<TNode>
         {
             BaseContext<TNode> context = _contextHolder.Get(key);
             _usedContexts.Add(context);
@@ -150,7 +150,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             string key = null, 
             Action<BaseContext<TNode>> render = null,
             [CallerLineNumber] int callerLine = 0
-        ) where TComponent : BaseFragment<TNode> where TProps : struct
+        ) where TComponent : IFragment<TNode> where TProps : struct
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
@@ -171,7 +171,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             string key = null, 
             Action<BaseContext<TNode>> render = null, 
             [CallerLineNumber] int callerLine = 0
-        ) where TComponent : BaseFragment<TNode>
+        ) where TComponent : IFragment<TNode>
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 

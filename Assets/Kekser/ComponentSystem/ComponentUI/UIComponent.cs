@@ -6,12 +6,17 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
 {
-    public abstract class UIComponent : UIComponent<VisualElement>
+    public abstract class UIComponent : UIComponent<StyleProps>
     {
         
     }
     
-    public abstract class UIComponent<TElement>: UIFragment where TElement: VisualElement, new()
+    public abstract class UIComponent<TProps> : UIComponent<VisualElement, TProps> where TProps : struct
+    {
+        
+    }
+    
+    public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : struct
     {
         public new TElement FragmentRoot => _fragmentRoot as TElement;
         public new TElement FragmentNode => _fragmentNode as TElement;

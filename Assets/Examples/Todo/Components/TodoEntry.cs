@@ -19,7 +19,7 @@ namespace Examples.Todo.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public class TodoEntry: UIComponent
+    public class TodoEntry: UIComponent<TodoEntryProps>
     {
         private void HandleRemove()
         {

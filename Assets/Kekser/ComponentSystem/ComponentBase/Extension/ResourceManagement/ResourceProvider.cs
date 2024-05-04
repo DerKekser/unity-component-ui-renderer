@@ -11,7 +11,7 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
         public ObligatoryValue<ResourceDatabase> resources { get; set; }
     }
     
-    public sealed class ResourceProvider<T>: BaseProvider<T> where T: class, new()
+    public sealed class ResourceProvider<T>: BaseProvider<T, ResourceProps> where T: class, new()
     {
         private Dictionary<string, Object> _resources = new Dictionary<string, Object>();
         

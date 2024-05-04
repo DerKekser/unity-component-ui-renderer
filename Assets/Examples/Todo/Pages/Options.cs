@@ -15,7 +15,7 @@ namespace Examples.Todo.Pages
         public OptionalValue<Style> style { get; set; }
     }
     
-    public class Options: UIComponent
+    public class Options: UIComponent<OptionsProps>
     {
         private void HandleBack()
         {

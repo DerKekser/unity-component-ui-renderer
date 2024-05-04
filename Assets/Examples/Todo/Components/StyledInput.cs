@@ -17,7 +17,7 @@ namespace Examples.Todo.Components
         public OptionalValue<Style> style { get; set; }
     }
     
-    public class StyledInput: UIComponent
+    public class StyledInput: UIComponent<StyledInputProps>
     {
         public override void OnRender(BaseContext<VisualElement> ctx)
         {

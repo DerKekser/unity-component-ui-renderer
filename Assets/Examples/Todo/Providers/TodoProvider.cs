@@ -10,7 +10,7 @@ namespace Examples.Todo.Providers
         public OptionalValue<List<string>> todos { get; set; }
     }
     
-    public class TodoProvider: UIProvider
+    public class TodoProvider: UIProvider<TodoProviderProps>
     {
         public override void OnMount()
         {
