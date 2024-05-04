@@ -76,7 +76,8 @@ namespace Kekser.ComponentSystem.ComponentUI
             {
                 if (!IStyleProperties.TryGetValue(styleProperty.Name, out PropertyInfo propertyInfo))
                     continue;
-                switch (styleProperty.GetValue(style))
+                object styleValue = styleProperty.GetValue(style);
+                switch (styleValue)
                 {
                     case IPropValue propValue:
                         if (!propValue.IsSet)
@@ -84,7 +85,7 @@ namespace Kekser.ComponentSystem.ComponentUI
                         propertyInfo.SetValue(FragmentRoot.style, propValue.ToObject());
                         break;
                     default:
-                        propertyInfo.SetValue(FragmentRoot.style, styleProperty.GetValue(style));
+                        propertyInfo.SetValue(FragmentRoot.style, styleValue);
                         break;
                 }
             }
