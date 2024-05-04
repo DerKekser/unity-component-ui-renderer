@@ -21,7 +21,7 @@ namespace Kekser.ComponentSystem.ComponentUI
     public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : struct
     {
         private static readonly PropertyInfo[] StyleProperties = typeof(Style).GetProperties();
-        private static readonly PropertyInfo[] PropProperties = typeof(TProps).GetProperties();
+        private static readonly PropertyInfo StylePropProperty = typeof(TProps).GetProperty("style");
         private static readonly Dictionary<string, PropertyInfo> IStyleProperties = typeof(IStyle).GetProperties().ToDictionary(x => x.Name);
 
         public new TElement FragmentRoot => _fragmentRoot as TElement;
@@ -47,26 +47,22 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public void ApplyStyle()
         {
-            foreach (PropertyInfo propertyInfo in PropProperties)
+            switch (StylePropProperty.GetValue(OwnProps))
             {
-                switch (propertyInfo.GetValue(OwnProps))
-                {
-                    case OptionalValue<Style> optionalValue:
-                        if (!optionalValue.IsSet)
-                            continue;
+                case OptionalValue<Style> optionalValue:
+                    if (optionalValue.IsSet)
                         ApplyStyle(optionalValue);
-                        break;
-                    case ObligatoryValue<Style> obligatoryValue:
-                        if (!obligatoryValue.IsSet)
-                            throw new Exception("Required prop not set");
-                        ApplyStyle(obligatoryValue);
-                        break;
-                    case Style style:
-                        ApplyStyle(style);
-                        break;
-                    default:
-                        break;
-                }
+                    break;
+                case ObligatoryValue<Style> obligatoryValue:
+                    if (!obligatoryValue.IsSet)
+                        throw new Exception("Required prop not set");
+                    ApplyStyle(obligatoryValue);
+                    break;
+                case Style style:
+                    ApplyStyle(style);
+                    break;
+                default:
+                    break;
             }
         }
         
