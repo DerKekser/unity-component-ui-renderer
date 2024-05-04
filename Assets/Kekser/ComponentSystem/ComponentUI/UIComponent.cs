@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
@@ -18,6 +20,10 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : struct
     {
+        private static readonly PropertyInfo[] StyleProperties = typeof(Style).GetProperties();
+        private static readonly PropertyInfo[] PropProperties = typeof(TProps).GetProperties();
+        private static readonly Dictionary<string, PropertyInfo> IStyleProperties = typeof(IStyle).GetProperties().ToDictionary(x => x.Name);
+
         public new TElement FragmentRoot => _fragmentRoot as TElement;
         public new TElement FragmentNode => _fragmentNode as TElement;
 
@@ -38,12 +44,10 @@ namespace Kekser.ComponentSystem.ComponentUI
             ApplyStyle();
             base.Render();
         }
-
+        
         public void ApplyStyle()
         {
-            PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
-            
-            foreach (PropertyInfo propertyInfo in propertyInfos)
+            foreach (PropertyInfo propertyInfo in PropProperties)
             {
                 switch (propertyInfo.GetValue(OwnProps))
                 {
@@ -68,12 +72,10 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public void ApplyStyle(Style style)
         {
-            PropertyInfo[] styleProperties = typeof(Style).GetProperties();
-            foreach (PropertyInfo styleProperty in styleProperties)
+            foreach (PropertyInfo styleProperty in StyleProperties)
             {
-                PropertyInfo propertyInfo = typeof(IStyle).GetProperty(styleProperty.Name);
-                if (propertyInfo == null) continue;
-
+                if (!IStyleProperties.TryGetValue(styleProperty.Name, out PropertyInfo propertyInfo))
+                    continue;
                 switch (styleProperty.GetValue(style))
                 {
                     case IPropValue propValue:

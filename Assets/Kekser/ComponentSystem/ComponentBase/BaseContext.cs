@@ -103,9 +103,6 @@ namespace Kekser.ComponentSystem.ComponentBase
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
             
-            /*foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
-                prop.AddToProps(context.Props);*/
-            
             context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
             return context;
         }

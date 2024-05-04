@@ -5,6 +5,8 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
     public class PropList<TProps>: IPropList where TProps: struct
     {
+        private static readonly PropertyInfo[] PropProperties = typeof(TProps).GetProperties();
+
         private TProps _props;
         private bool _isDirty = true;
         
@@ -12,8 +14,7 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
         
         public void Set(TProps props)
         {
-            PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
-            foreach (PropertyInfo propertyInfo in propertyInfos)
+            foreach (PropertyInfo propertyInfo in PropProperties)
             {
                 switch (propertyInfo.GetValue(props))
                 {
