@@ -20,9 +20,14 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : struct
     {
-        private static readonly PropertyInfo[] StyleProperties = typeof(Style).GetProperties();
-        private static readonly PropertyInfo StylePropProperty = typeof(TProps).GetProperty("style");
-        private static readonly Dictionary<string, PropertyInfo> IStyleProperties = typeof(IStyle).GetProperties().ToDictionary(x => x.Name);
+        private static readonly PropertyInfo StylePropProperty = 
+            typeof(TProps)
+                .GetProperty("style");
+        private static readonly List<(PropertyInfo, PropertyInfo)> StylePropMap = 
+            typeof(Style)
+                .GetProperties()
+                .Select(x => (x, typeof(IStyle).GetProperty(x.Name)))
+                .ToList();
 
         public new TElement FragmentRoot => _fragmentRoot as TElement;
         public new TElement FragmentNode => _fragmentNode as TElement;
@@ -68,20 +73,18 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public void ApplyStyle(Style style)
         {
-            foreach (PropertyInfo styleProperty in StyleProperties)
+            foreach ((PropertyInfo styleProperty, PropertyInfo iStyleProperty) in StylePropMap)
             {
-                if (!IStyleProperties.TryGetValue(styleProperty.Name, out PropertyInfo propertyInfo))
-                    continue;
                 object styleValue = styleProperty.GetValue(style);
                 switch (styleValue)
                 {
                     case IPropValue propValue:
                         if (!propValue.IsSet)
                             continue;
-                        propertyInfo.SetValue(FragmentRoot.style, propValue.ToObject());
+                        iStyleProperty.SetValue(FragmentRoot.style, propValue.ToObject());
                         break;
                     default:
-                        propertyInfo.SetValue(FragmentRoot.style, styleValue);
+                        iStyleProperty.SetValue(FragmentRoot.style, styleValue);
                         break;
                 }
             }
