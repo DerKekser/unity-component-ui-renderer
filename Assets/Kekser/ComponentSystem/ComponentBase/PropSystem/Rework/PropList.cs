@@ -11,12 +11,6 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
         
         public TProps Props => _props;
         
-        public void Set(Func<TProps, TProps> setter)
-        {
-            TProps props = setter(_props);
-            Set(props);
-        }
-        
         public void Set(TProps props)
         {
             PropertyInfo[] propertyInfos = typeof(TProps).GetProperties();
@@ -25,10 +19,8 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem.Rework
                 switch (propertyInfo.GetValue(props))
                 {
                     case IPropValue propValue:
-                        if (propValue.IsOptional && !propValue.IsSet)
+                        if (!propValue.IsSet)
                             continue;
-                        if (!propValue.IsOptional && !propValue.IsSet)
-                            throw new Exception("Required prop not set");
                         IPropValue propValue1 = (IPropValue) propertyInfo.GetValue(_props);
                         if (propValue1.Equals(propValue))
                             continue;

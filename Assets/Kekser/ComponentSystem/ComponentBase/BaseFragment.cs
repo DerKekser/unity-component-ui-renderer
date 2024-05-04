@@ -20,8 +20,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         public IPropList Props => _props;
         
         public TProps OwnProps => _props.Props;
-        
-        //public virtual IProp[] DefaultProps => null;
+        public virtual TProps DefaultProps { get; } = default;
         
         public virtual void Mount(TNode parent)
         {
@@ -46,6 +45,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             _ctx = ctx;
             _fragmentRoot = _ctx?.Parent?.Fragment?.FragmentRoot;
             _fragmentNode = _ctx?.Parent?.Fragment?.FragmentNode;
+            Props.Set(DefaultProps);
         }
         
         public TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>

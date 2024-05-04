@@ -3,7 +3,6 @@ using Examples.Todo.Components;
 using Examples.Todo.Pages;
 using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 using Kekser.ComponentSystem.ComponentUI;
 using UnityEngine.UIElements;
@@ -34,16 +33,11 @@ namespace Examples.Todo
             Props.Set(new AppProps() { page = Pages.Options });
         }
 
-        public override void OnMount()
+        public override AppProps DefaultProps { get; } = new AppProps()
         {
-            Props.Set(new AppProps() { page = Pages.Menu });
-        }
-
-        /*public override IProp[] DefaultProps => new IProp[]
-        {
-            new Prop("height", new StyleLength(Length.Percent(100))),
-            new Prop("page", Pages.Menu),
-        };*/
+            style = new Style() { height = new StyleLength(Length.Percent(100)) },
+            page = Pages.Menu
+        };
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {

@@ -26,7 +26,13 @@
         
         public object ToObject() => _value;
 
-        public static implicit operator T(ObligatoryValue<T> value) => value._value;
+        public static implicit operator T(ObligatoryValue<T> value)
+        {
+            if (!value._isSet)
+                throw new System.Exception("Value is not set");
+            return value._value;
+        }
+
         public static implicit operator ObligatoryValue<T>(T value) => new ObligatoryValue<T> { _value = value, _isSet = true };
     }
 }

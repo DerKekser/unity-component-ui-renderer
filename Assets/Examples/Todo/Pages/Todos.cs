@@ -1,14 +1,10 @@
 ﻿using System;
 using Examples.Todo.Components;
-using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentBase.PropSystem.Rework;
 using Kekser.ComponentSystem.ComponentUI;
-using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
-using Input = Kekser.ComponentSystem.ComponentUI.Components.Input;
 
 namespace Examples.Todo.Pages
 {
