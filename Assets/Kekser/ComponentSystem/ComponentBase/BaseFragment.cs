@@ -11,6 +11,8 @@ namespace Kekser.ComponentSystem.ComponentBase
     
     public abstract class BaseFragment<TNode, TProps> : IFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
     {
+        private List<BaseContext<TNode>> _contextStack = new List<BaseContext<TNode>>();
+        
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
@@ -73,7 +75,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         }
         
         //Component helpers
-        private List<BaseContext<TNode>> _contextStack = new List<BaseContext<TNode>>();
+        protected BaseContext<TNode> CurrentContext => _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
         
         protected TComponent _<TComponent, TComponentProps>(
             TComponentProps props,
@@ -83,9 +85,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         ) where TComponent : IFragment<TNode, TComponentProps> where TComponentProps : class, new()
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
-            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
             
-            return ctx.CreateComponent<TComponent, TComponentProps>(props, hash.ToString(), orgCtx =>
+            return CurrentContext.CreateComponent<TComponent, TComponentProps>(props, hash.ToString(), orgCtx =>
             {
                 _contextStack.Add(orgCtx);
                 render?.Invoke();
@@ -100,9 +101,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         ) where TComponent : IFragment<TNode>
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
-            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
 
-            return ctx.CreateComponent<TComponent>(hash.ToString(), orgCtx =>
+            return CurrentContext.CreateComponent<TComponent>(hash.ToString(), orgCtx =>
             {
                 _contextStack.Add(orgCtx);
                 render?.Invoke();
@@ -112,14 +112,12 @@ namespace Kekser.ComponentSystem.ComponentBase
 
         protected void Children()
         {
-            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
-            Children(ctx);
+            Children(CurrentContext);
         }
         
         protected void Each<T>(IEnumerable<T> props, Action<T, int> callback)
         {
-            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
-            ctx.Each(props, callback);
+            CurrentContext.Each(props, callback);
         }
 
         public virtual void OnMount() {}
