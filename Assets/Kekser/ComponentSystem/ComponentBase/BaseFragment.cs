@@ -75,17 +75,17 @@ namespace Kekser.ComponentSystem.ComponentBase
         //Component helpers
         private List<BaseContext<TNode>> _contextStack = new List<BaseContext<TNode>>();
         
-        protected TComponent _<TComponent, TProps>(
-            TProps props,
+        protected TComponent _<TComponent, TComponentProps>(
+            TComponentProps props,
             string key = null,
             Action render = null,
             [CallerLineNumber] int callerLine = 0
-        ) where TComponent : IFragment<TNode, TProps> where TProps : class, new()
+        ) where TComponent : IFragment<TNode, TComponentProps> where TComponentProps : class, new()
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
             BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
             
-            return ctx.CreateComponent<TComponent, TProps>(props, hash.ToString(), orgCtx =>
+            return ctx.CreateComponent<TComponent, TComponentProps>(props, hash.ToString(), orgCtx =>
             {
                 _contextStack.Add(orgCtx);
                 render?.Invoke();
