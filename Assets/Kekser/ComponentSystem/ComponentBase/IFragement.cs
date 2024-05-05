@@ -16,9 +16,10 @@ namespace Kekser.ComponentSystem.ComponentBase
         TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>;
     }
     
-    public interface IFragment<TNode, out TProps> : IFragment<TNode> where TNode: class, new() where TProps: class, new()
+    public interface IFragment<TNode, TProps> : IFragment<TNode> where TNode: class, new() where TProps: class, new()
     {
         TProps OwnProps { get; }
         TProps DefaultProps { get; }
+        new IPropList<TProps> Props { get; }
     }
 }

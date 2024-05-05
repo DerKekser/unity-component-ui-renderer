@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
-    public class PropList<TProps>: IPropList where TProps: class, new()
+    public class PropList<TProps>: IPropList<TProps> where TProps: class, new()
     {
         private static readonly PropertyInfo[] PropProperties = typeof(TProps).GetProperties();
 
@@ -37,19 +37,17 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
                 }
             }
         }
-        
-        public void Set<TProps1>(TProps1 props) where TProps1 : class
+
+        public TProps Get()
+        {
+            return _props;
+        }
+
+        public void Set<TProps1>(TProps1 props) where TProps1 : class, new()
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
             Set(props as TProps);
-        }
-
-        public TProps1 Get<TProps1>() where TProps1 : class
-        {
-            if (typeof(TProps1) != typeof(TProps))
-                throw new Exception("Invalid type");
-            return _props as TProps1;
         }
 
         public bool IsDirty 

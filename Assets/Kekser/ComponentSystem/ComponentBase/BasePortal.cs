@@ -11,9 +11,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public override void OnRender(BaseContext<TNode> ctx)
         {
-            PortalProps props = Props.Get<PortalProps>();
-            if (props.target.IsSet)
-                _fragmentNode = props.target;
+            if (OwnProps.target.IsSet)
+                _fragmentNode = OwnProps.target;
             else
                 _fragmentNode = _fragmentRoot;
             

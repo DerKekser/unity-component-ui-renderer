@@ -16,7 +16,9 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        public IPropList Props => _props;
+        IPropList IFragment<TNode>.Props => Props;
+
+        public IPropList<TProps> Props => _props;
         
         public TProps OwnProps => _props.Props;
         public virtual TProps DefaultProps { get; } = new TProps();
