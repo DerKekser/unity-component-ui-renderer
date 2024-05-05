@@ -1,5 +1,4 @@
 ﻿using System;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
@@ -19,11 +18,11 @@ namespace Examples.Todo.Components
     
     public class StyledButton: UIComponent<StyledButtonProps>
     {
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<Button, ButtonProps>(
+            _<Button, ButtonProps>(
                 props: new ButtonProps()
                 {
                     onClick = OwnProps.onClick,
@@ -34,7 +33,7 @@ namespace Examples.Todo.Components
                         backgroundImage = new StyleBackground(provider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--4590443009793632628@blue_button11.png")),
                     }
                 },
-                render: ctx => ctx._<Text, TextProps>(
+                render: () => _<Text, TextProps>(
                     props: new TextProps()
                     {
                         text = OwnProps.text,

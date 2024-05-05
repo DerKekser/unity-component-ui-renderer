@@ -1,6 +1,5 @@
 ﻿using System;
 using Examples.Todo.Components;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
@@ -22,14 +21,14 @@ namespace Examples.Todo.Pages
             e?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
-            ctx._<ScrollArea>(
-                render: ctx =>
+            _<ScrollArea>(
+                render: () =>
                 {
-                    ctx.Each(new int[15], (x, i) => 
+                    Each(new int[15], (x, i) => 
                     {
-                        ctx._<StyledButton, StyledButtonProps>(
+                        _<StyledButton, StyledButtonProps>(
                             key: i.ToString(),
                             props: new StyledButtonProps()
                             {
@@ -45,7 +44,7 @@ namespace Examples.Todo.Pages
                     });
                 }
             );
-            ctx._<StyledButton, StyledButtonProps>(
+            _<StyledButton, StyledButtonProps>(
                 props: new StyledButtonProps()
                 {
                     style = new Style()

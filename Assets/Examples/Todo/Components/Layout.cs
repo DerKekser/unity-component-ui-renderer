@@ -1,5 +1,4 @@
-﻿using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
+﻿using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
@@ -10,11 +9,11 @@ namespace Examples.Todo.Components
 {
     public class Layout: UIComponent
     {
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<Box, StyleProps>(
+            _<Box, StyleProps>(
                 props: new StyleProps() { style = new Style()
                 {
                     position = new StyleEnum<Position>(Position.Absolute),

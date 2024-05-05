@@ -2,7 +2,6 @@
 using Examples.Todo.Components;
 using Examples.Todo.Pages;
 using Examples.Todo.Providers;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -39,17 +38,17 @@ namespace Examples.Todo
             page = Pages.Menu
         };
 
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
-            ctx._<Layout, StyleProps>(
+            _<Layout, StyleProps>(
                 props: new StyleProps() { style = new Style() { height = new StyleLength(Length.Percent(100)) } },
-                render: ctx => 
+                render: () => 
                 {
-                    ctx._<TodoProvider>(render: ctx =>
+                    _<TodoProvider>(render: () =>
                     {
                         if (OwnProps.page == Pages.Menu)
                         {
-                            ctx._<Todos, TodoProps>(
+                            _<Todos, TodoProps>(
                                 props: new TodoProps()
                                 {
                                     onOptions = (Action)HandleOptions,
@@ -59,7 +58,7 @@ namespace Examples.Todo
                         }
                         else
                         {
-                            ctx._<Options, OptionsProps>(
+                            _<Options, OptionsProps>(
                                 props: new OptionsProps()
                                 {
                                     onBack = (Action)HandleMenu,

@@ -1,6 +1,5 @@
 ﻿using System;
 using Examples.Todo.Components;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -34,12 +33,12 @@ namespace Examples.Todo.Pages
             e?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
-            ctx._<TodoList, StyleProps>(
+            _<TodoList, StyleProps>(
                 props: new StyleProps() { style = new Style() { flexGrow = new StyleFloat(1f) } }
             );
-            ctx._<TodoInput, StyleProps>(
+            _<TodoInput, StyleProps>(
                 props: new StyleProps() { style = new Style()
                 {
                     flexShrink = new StyleFloat(0f),
@@ -47,16 +46,16 @@ namespace Examples.Todo.Pages
                     marginTop = new StyleLength(5)
                 }}
             );
-            ctx._<Box, StyleProps>(
+            _<Box, StyleProps>(
                 props: new StyleProps() { style = new Style()
                 {
                     flexShrink = new StyleFloat(0f),
                     flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row),
                     marginTop = new StyleLength(5)
                 }},
-                render: ctx =>
+                render: () =>
                 {
-                    ctx._<StyledButton, StyledButtonProps>(
+                    _<StyledButton, StyledButtonProps>(
                         props: new StyledButtonProps()
                         {
                             onClick = (Action)HandleOptions,
@@ -69,7 +68,7 @@ namespace Examples.Todo.Pages
                             }
                         }
                     );
-                    ctx._<StyledButton, StyledButtonProps>(
+                    _<StyledButton, StyledButtonProps>(
                         props: new StyledButtonProps()
                         {
                             onClick = (Action)HandleQuit,

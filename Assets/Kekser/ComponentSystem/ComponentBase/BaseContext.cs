@@ -118,7 +118,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             }
         }
         
-        public TComponent _<TComponent, TProps>(
+        public TComponent CreateComponent<TComponent, TProps>(
             TProps props,
             string key = null, 
             Action<BaseContext<TNode>> render = null,
@@ -140,7 +140,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             return component;
         }
         
-        public TComponent _<TComponent>(
+        public TComponent CreateComponent<TComponent>(
             string key = null, 
             Action<BaseContext<TNode>> render = null, 
             [CallerLineNumber] int callerLine = 0

@@ -11,9 +11,9 @@ namespace Kekser.ComponentSystem.ComponentBase
             _fragmentNode = node;
         }
             
-        public override void OnRender(BaseContext<TNode> ctx)
+        public override void OnRender()
         {
-            Children(ctx);
+            Children();
         }
     }
 

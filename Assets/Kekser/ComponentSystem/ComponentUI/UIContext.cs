@@ -23,7 +23,5 @@ namespace Kekser.ComponentSystem.ComponentUI
         {
             node?.BringToFront();
         }
-
-        public Text _(string text) => _<Text, TextProps>(props: new TextProps() {text = text});
     }
 }

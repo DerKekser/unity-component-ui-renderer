@@ -1,6 +1,5 @@
 ﻿using System;
 using Examples.Todo.Providers;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentUI;
 using UnityEngine.UIElements;
 
@@ -25,9 +24,9 @@ namespace Examples.Todo.Components
             _inputValue = "";
         }
 
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
-            ctx._<StyledInput, StyledInputProps>(
+            _<StyledInput, StyledInputProps>(
                 props: new StyledInputProps()
                 {
                     onChange = (Action<string>)HandleChange,
@@ -40,7 +39,7 @@ namespace Examples.Todo.Components
                     }
                 }
             );
-            ctx._<StyledButton, StyledButtonProps>(
+            _<StyledButton, StyledButtonProps>(
                 props: new StyledButtonProps()
                 {
                     onClick = (Action)HandleAdd,

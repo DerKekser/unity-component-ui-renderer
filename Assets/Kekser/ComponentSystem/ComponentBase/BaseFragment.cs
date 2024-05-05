@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
@@ -38,7 +40,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         public virtual void Render()
         {
             BaseRenderer<TNode>.Log(() => "Rendering " + GetType().Name);
-            OnRender(_ctx);
+            OnRender();
         }
         
         public virtual void SetContext(BaseContext<TNode> ctx)
@@ -69,9 +71,59 @@ namespace Kekser.ComponentSystem.ComponentBase
         {
             _ctx.Render(ctx);
         }
+        
+        //Component helpers
+        private List<BaseContext<TNode>> _contextStack = new List<BaseContext<TNode>>();
+        
+        protected TComponent _<TComponent, TProps>(
+            TProps props,
+            string key = null,
+            Action render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode, TProps> where TProps : class, new()
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
+            
+            return ctx.CreateComponent<TComponent, TProps>(props, hash.ToString(), orgCtx =>
+            {
+                _contextStack.Add(orgCtx);
+                render?.Invoke();
+                _contextStack.RemoveAt(_contextStack.Count - 1);
+            });
+        }
+
+        protected TComponent _<TComponent>(
+            string key = null,
+            Action render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode>
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
+
+            return ctx.CreateComponent<TComponent>(hash.ToString(), orgCtx =>
+            {
+                _contextStack.Add(orgCtx);
+                render?.Invoke();
+                _contextStack.RemoveAt(_contextStack.Count - 1);
+            });
+        }
+
+        protected void Children()
+        {
+            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
+            Children(ctx);
+        }
+        
+        protected void Each<T>(IEnumerable<T> props, Action<T, int> callback)
+        {
+            BaseContext<TNode> ctx = _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
+            ctx.Each(props, callback);
+        }
 
         public virtual void OnMount() {}
         public virtual void OnUnmount() {}
-        public virtual void OnRender(BaseContext<TNode> ctx) {}
+        public virtual void OnRender() {}
     }
 }

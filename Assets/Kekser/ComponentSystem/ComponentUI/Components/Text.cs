@@ -1,5 +1,4 @@
-﻿using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentBase.PropSystem;
+﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
@@ -12,7 +11,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     
     public sealed class Text: UIComponent<Label, TextProps>
     {
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             FragmentNode.text = OwnProps.text;
         }

@@ -1,5 +1,4 @@
-﻿using Kekser.ComponentSystem.ComponentBase;
-using Kekser.ComponentSystem.ComponentUI.UIProps;
+﻿using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -12,9 +11,9 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
             _fragmentNode = FragmentRoot.contentContainer;
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
-            Children(ctx);
+            Children();
         }
     }
 }

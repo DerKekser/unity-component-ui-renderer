@@ -1,5 +1,4 @@
 ﻿using System;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
@@ -30,7 +29,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
             FragmentNode.UnregisterValueChangedCallback(Change);
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             if (OwnProps.value.IsSet)
                 FragmentNode.value = OwnProps.value;

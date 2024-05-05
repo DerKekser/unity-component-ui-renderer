@@ -1,6 +1,5 @@
 ﻿using System;
 using Examples.Todo.Providers;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -23,21 +22,21 @@ namespace Examples.Todo.Components
             provider.Remove(todo);
         }
 
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             
-            ctx._<ScrollArea, StyleProps>(
+            _<ScrollArea, StyleProps>(
                 props: new StyleProps() { style = new Style() 
                 {
                     height = new StyleLength(Length.Percent(100)),
                     width = new StyleLength(Length.Percent(100)),
                 }},
-                render: ctx =>
+                render: () =>
                 {
-                    ctx.Each(todoProvider.GetTodos(), (todo, i) =>
+                    Each(todoProvider.GetTodos(), (todo, i) =>
                     {
-                        ctx._<TodoEntry, TodoEntryProps>(
+                        _<TodoEntry, TodoEntryProps>(
                             key: i.ToString(),
                             props: new TodoEntryProps()
                             {
@@ -49,7 +48,7 @@ namespace Examples.Todo.Components
                     });
                     if (todoProvider.GetTodos().Count == 0)
                     {
-                        ctx._<Text, TextProps>(
+                        _<Text, TextProps>(
                             props: new TextProps()
                             {
                                 text = "No todos",

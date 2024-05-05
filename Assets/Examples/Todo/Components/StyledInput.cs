@@ -1,5 +1,4 @@
 ﻿using System;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
@@ -19,11 +18,11 @@ namespace Examples.Todo.Components
     
     public class StyledInput: UIComponent<StyledInputProps>
     {
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<Input, InputProps>(
+            _<Input, InputProps>(
                 props: new InputProps()
                 {
                     onChange = OwnProps.onChange,
