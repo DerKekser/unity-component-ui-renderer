@@ -15,4 +15,10 @@ namespace Kekser.ComponentSystem.ComponentBase
         void SetContext(BaseContext<TNode> ctx);
         TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>;
     }
+    
+    public interface IFragment<TNode, out TProps> : IFragment<TNode> where TNode: class, new() where TProps: class, new()
+    {
+        TProps OwnProps { get; }
+        TProps DefaultProps { get; }
+    }
 }

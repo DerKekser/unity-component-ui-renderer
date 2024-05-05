@@ -7,7 +7,7 @@ namespace Kekser.ComponentSystem.ComponentBase
     
     public abstract class BaseFragment<TNode> : BaseFragment<TNode, NoProps> where TNode : class, new() {}
     
-    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode> where TNode : class, new() where TProps : class, new()
+    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
     {
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;

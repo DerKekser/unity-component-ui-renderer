@@ -123,7 +123,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             string key = null, 
             Action<BaseContext<TNode>> render = null,
             [CallerLineNumber] int callerLine = 0
-        ) where TComponent : IFragment<TNode> where TProps : class
+        ) where TComponent : IFragment<TNode, TProps> where TProps : class, new()
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
