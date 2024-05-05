@@ -2,7 +2,6 @@
 {
     public interface IPropList
     {
-        public void Set<TProps>(TProps props) where TProps: class, new();
         public bool IsDirty { get; set; }
     }
     

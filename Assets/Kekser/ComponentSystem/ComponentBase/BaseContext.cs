@@ -131,12 +131,13 @@ namespace Kekser.ComponentSystem.ComponentBase
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
             
-            child._fragment.Props.Set(props);
+            TComponent component = (TComponent) child._fragment;
             
-            child._fragment.Props.IsDirty = true;
+            component.Props.Set(props);
+            component.Props.IsDirty = true;
             child.Traverse();
             
-            return (TComponent) child._fragment;
+            return component;
         }
         
         public TComponent _<TComponent>(

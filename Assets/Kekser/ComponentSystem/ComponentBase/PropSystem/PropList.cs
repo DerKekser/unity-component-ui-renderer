@@ -43,13 +43,6 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
             return _props;
         }
 
-        public void Set<TProps1>(TProps1 props) where TProps1 : class, new()
-        {
-            if (typeof(TProps1) != typeof(TProps))
-                throw new Exception("Invalid type");
-            Set(props as TProps);
-        }
-
         public bool IsDirty 
         {
             get => _isDirty;

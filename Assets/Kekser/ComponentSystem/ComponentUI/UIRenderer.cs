@@ -13,14 +13,17 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public sealed class UIRenderer: BaseRenderer<VisualElement>
     {
+        private RenderFragment<VisualElement, UIRendererProps> _fragment;
+        
         public override BaseContext<VisualElement> CreateContext(VisualElement rootNode)
         {
-            return new UIContext(new RenderFragment<VisualElement, UIRendererProps>(rootNode));
+            _fragment = new RenderFragment<VisualElement, UIRendererProps>(rootNode);
+            return new UIContext(_fragment);
         }
 
         protected override void Tick(BaseContext<VisualElement> ctx)
         {
-            ctx.Fragment.Props.Set(new UIRendererProps
+            _fragment.Props.Set(new UIRendererProps
             {
                 screenWidth = Screen.width,
                 screenHeight = Screen.height
