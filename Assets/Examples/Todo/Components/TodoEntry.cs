@@ -1,4 +1,5 @@
 ﻿using System;
+using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
@@ -13,12 +14,19 @@ namespace Examples.Todo.Components
 {
     public class TodoEntryProps: StyleProps
     {
-        public ObligatoryValue<string> todo { get; set; } = new();
+        public ObligatoryValue<TodoData> todo { get; set; } = new();
+        public ObligatoryValue<Action> onToggle { get; set; } = new();
         public ObligatoryValue<Action> onRemove { get; set; } = new();
     }
     
     public class TodoEntry: UIComponent<TodoEntryProps>
     {
+        private void HandleToggle()
+        {
+            Action e = OwnProps.onToggle;
+            e?.Invoke();
+        }
+        
         private void HandleRemove()
         {
             Action e = OwnProps.onRemove;
@@ -27,7 +35,7 @@ namespace Examples.Todo.Components
         
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            string todo = OwnProps.todo;
+            TodoData todo = OwnProps.todo;
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
             
             ctx._<Box, StyleProps>(
@@ -40,10 +48,39 @@ namespace Examples.Todo.Components
                 }},
                 render: ctx =>
                 {
+                    ctx._<Button, ButtonProps>(
+                        props: new ButtonProps()
+                        {
+                            onClick = (Action)HandleToggle,
+                            style = new Style()
+                            {
+                                width = new StyleLength(30),
+                                height = new StyleLength(30),
+                                marginRight = new StyleLength(5),
+                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31--3244089793890354390@grey_button13.png")),
+                            }
+                        },
+                        render: ctx =>
+                        {
+                            if (!todo.done) return;
+                            ctx._<Box, StyleProps>(
+                                props: new StyleProps() { style = new Style() 
+                                {
+                                    position = new StyleEnum<Position>(Position.Absolute),
+                                    width = new StyleLength(10),
+                                    height = new StyleLength(10),
+                                    top = new StyleLength(Length.Percent(50)),
+                                    left = new StyleLength(Length.Percent(50)),
+                                    translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
+                                    backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--7938629432754144731@blue_checkmark.png")),
+                                }}
+                            );
+                        }
+                    );
                     ctx._<Text, TextProps>(
                         props: new TextProps()
                         {
-                            text = todo,
+                            text = todo.text,
                             style = new Style()
                             {
                                 fontSize = new StyleLength(20),
@@ -62,6 +99,7 @@ namespace Examples.Todo.Components
                             {
                                 width = new StyleLength(30),
                                 height = new StyleLength(30),
+                                marginLeft = new StyleLength(5),
                                 backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123-7285192305131594788@blue_button10.png")),
                             }
                         },

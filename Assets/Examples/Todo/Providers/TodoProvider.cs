@@ -4,56 +4,70 @@ using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {
+    public class TodoData
+    {
+        public string text;
+        public bool done;
+    }
+    
     public class TodoProviderProps
     {
-        public OptionalValue<List<string>> todos { get; set; } = new();
+        public OptionalValue<List<TodoData>> todos { get; set; } = new();
     }
     
     public class TodoProvider: UIProvider<TodoProviderProps>
     {
         public override TodoProviderProps DefaultProps { get; } = new TodoProviderProps()
         {
-            todos = new List<string>()
+            todos = new List<TodoData>()
             {
-                "Buy milk",
-                "Feed the cat",
-                "Do the laundry"
+                new TodoData() { text = "Buy milk", done = false },
+                new TodoData() { text = "Feed the cat", done = false },
+                new TodoData() { text = "Do the laundry", done = false }
             }
         };
 
         public void Add(string todo)
         {
-            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
-            todos.Add(todo);
+            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            todos.Add(new TodoData() { text = todo, done = false });
             Props.Set(new TodoProviderProps() { todos = todos });
         }
         
-        public void Remove(int index)
+        public void Remove(TodoData todo)
         {
-            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
-            todos.RemoveAt(index);
+            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            todos.Remove(todo);
             Props.Set(new TodoProviderProps() { todos = todos });
         }
         
-        public string Get(int index)
+        public void Toggle(TodoData todo)
         {
-            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
+            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            int index = todos.FindIndex(t => t == todo);
+            todos[index].done = !todos[index].done;
+            Props.Set(new TodoProviderProps() { todos = todos });
+        }
+        
+        public TodoData Get(int index)
+        {
+            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
             return todos[index];
         }
         
         public void Clear()
         {
-            Props.Set(new TodoProviderProps() { todos = new List<string>() });
+            Props.Set(new TodoProviderProps() { todos = new List<TodoData>() });
         }
         
-        public List<string> GetTodos()
+        public List<TodoData> GetTodos()
         {
-            return OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
+            return OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
         }
         
         public int GetCount()
         {
-            return OwnProps.todos.IsSet ? ((List<string>)OwnProps.todos).Count : 0;
+            return OwnProps.todos.IsSet ? ((List<TodoData>)OwnProps.todos).Count : 0;
         }
     }
 }
