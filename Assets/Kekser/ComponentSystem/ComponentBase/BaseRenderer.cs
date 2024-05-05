@@ -45,11 +45,11 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         private static bool _log = false;
 
-        public static void Log(string message)
+        public static void Log(Func<string> message)
         {
             if (!_log)
                 return;
-            Debug.Log(message);
+            Debug.Log(message());
         }
     }
 }

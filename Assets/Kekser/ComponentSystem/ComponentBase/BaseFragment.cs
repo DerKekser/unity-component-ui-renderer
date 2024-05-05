@@ -23,19 +23,19 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public virtual void Mount(TNode parent)
         {
-            BaseRenderer<TNode>.Log("Mounting " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Mounting " + GetType().Name);
             OnMount();
         }
         
         public virtual void Unmount()
         {
-            BaseRenderer<TNode>.Log("Unmounting " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Unmounting " + GetType().Name);
             OnUnmount();
         }
 
         public virtual void Render()
         {
-            BaseRenderer<TNode>.Log("Rendering " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Rendering " + GetType().Name);
             OnRender(_ctx);
         }
         
