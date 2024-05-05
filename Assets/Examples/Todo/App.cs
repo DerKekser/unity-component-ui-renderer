@@ -9,10 +9,9 @@ using UnityEngine.UIElements;
 
 namespace Examples.Todo
 {
-    public struct AppProps
+    public class AppProps: StyleProps
     {
-        public OptionalValue<App.Pages> page { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<App.Pages> page { get; set; } = new();
     }
     
     public class App: UIComponent<AppProps>

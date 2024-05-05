@@ -13,12 +13,12 @@ namespace Kekser.ComponentSystem.ComponentUI
         
     }
     
-    public abstract class UIComponent<TProps> : UIComponent<VisualElement, TProps> where TProps : struct
+    public abstract class UIComponent<TProps> : UIComponent<VisualElement, TProps> where TProps : class, new()
     {
         
     }
     
-    public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : struct
+    public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : class, new()
     {
         private static readonly PropertyInfo StylePropProperty = 
             typeof(TProps)

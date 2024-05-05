@@ -4,10 +4,9 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public struct TextProps
+    public class TextProps: StyleProps
     {
-        public OptionalValue<string> text { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<string> text { get; set; } = new();
     }
     
     public sealed class Text: UIComponent<Label, TextProps>

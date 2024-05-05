@@ -1,6 +1,6 @@
 ﻿namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
-    public struct OptionalValue<T>: IPropValue
+    public class OptionalValue<T>: IPropValue
     {
         private T _value;
         private bool _isSet;

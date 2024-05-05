@@ -10,11 +10,10 @@ using Input = Kekser.ComponentSystem.ComponentUI.Components.Input;
 
 namespace Examples.Todo.Components
 {
-    public struct StyledInputProps
+    public class StyledInputProps: StyleProps
     {
-        public OptionalValue<string> value { get; set; }
-        public OptionalValue<Action<string>> onChange { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<string> value { get; set; } = new();
+        public OptionalValue<Action<string>> onChange { get; set; } = new();
     }
     
     public class StyledInput: UIComponent<StyledInputProps>

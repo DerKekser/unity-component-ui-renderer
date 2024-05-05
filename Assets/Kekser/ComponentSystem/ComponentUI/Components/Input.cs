@@ -5,11 +5,10 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public struct InputProps
+    public class InputProps: StyleProps
     {
-        public OptionalValue<string> value { get; set; }
-        public OptionalValue<Action<string>> onChange { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<string> value { get; set; } = new();
+        public OptionalValue<Action<string>> onChange { get; set; } = new();
     }
     
     public sealed class Input: UIComponent<TextField, InputProps>

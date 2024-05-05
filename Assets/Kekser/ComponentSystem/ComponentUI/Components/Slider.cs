@@ -5,11 +5,10 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public struct SliderProps
+    public class SliderProps: StyleProps
     {
-        public OptionalValue<float> value { get; set; }
-        public OptionalValue<Action<float>> onChange { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<float> value { get; set; } = new();
+        public OptionalValue<Action<float>> onChange { get; set; } = new();
     }
     
     public class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>

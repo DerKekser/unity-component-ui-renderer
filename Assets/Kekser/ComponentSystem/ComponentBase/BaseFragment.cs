@@ -3,11 +3,11 @@ using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public struct NoProps {}
+    public class NoProps {}
     
     public abstract class BaseFragment<TNode> : BaseFragment<TNode, NoProps> where TNode : class, new() {}
     
-    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode> where TNode : class, new() where TProps : struct
+    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode> where TNode : class, new() where TProps : class, new()
     {
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
@@ -19,7 +19,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         public IPropList Props => _props;
         
         public TProps OwnProps => _props.Props;
-        public virtual TProps DefaultProps { get; } = default;
+        public virtual TProps DefaultProps { get; } = new TProps();
         
         public virtual void Mount(TNode parent)
         {

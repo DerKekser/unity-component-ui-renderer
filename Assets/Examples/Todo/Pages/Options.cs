@@ -8,10 +8,9 @@ using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages
 {
-    public struct OptionsProps
+    public class OptionsProps: StyleProps
     {
-        public ObligatoryValue<Action> onBack { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public ObligatoryValue<Action> onBack { get; set; } = new();
     }
     
     public class Options: UIComponent<OptionsProps>

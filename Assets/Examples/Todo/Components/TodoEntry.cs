@@ -11,11 +11,10 @@ using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
 
 namespace Examples.Todo.Components
 {
-    public struct TodoEntryProps
+    public class TodoEntryProps: StyleProps
     {
-        public ObligatoryValue<string> todo { get; set; }
-        public ObligatoryValue<Action> onRemove { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public ObligatoryValue<string> todo { get; set; } = new();
+        public ObligatoryValue<Action> onRemove { get; set; } = new();
     }
     
     public class TodoEntry: UIComponent<TodoEntryProps>

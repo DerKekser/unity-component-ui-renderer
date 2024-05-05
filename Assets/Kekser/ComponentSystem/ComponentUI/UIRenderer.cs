@@ -5,10 +5,10 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
 {
-    public struct UIRendererProps
+    public class UIRendererProps
     {
-        public OptionalValue<int> screenWidth { get; set; }
-        public OptionalValue<int> screenHeight { get; set; }
+        public OptionalValue<int> screenWidth { get; set; } = new();
+        public OptionalValue<int> screenHeight { get; set; } = new();
     }
     
     public sealed class UIRenderer: BaseRenderer<VisualElement>

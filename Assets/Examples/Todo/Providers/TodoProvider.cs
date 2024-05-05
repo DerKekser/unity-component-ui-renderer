@@ -4,9 +4,9 @@ using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {
-    public struct TodoProviderProps
+    public class TodoProviderProps
     {
-        public OptionalValue<List<string>> todos { get; set; }
+        public OptionalValue<List<string>> todos { get; set; } = new();
     }
     
     public class TodoProvider: UIProvider<TodoProviderProps>

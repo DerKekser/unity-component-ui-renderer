@@ -5,10 +5,10 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public struct ButtonProps
+    public class ButtonProps: StyleProps
     {
-        public OptionalValue<Action> onClick { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<Action> onClick { get; set; } = new();
+        public OptionalValue<Style> style { get; set; } = new();
     }
     
     public sealed class Button : UIComponent<UnityEngine.UIElements.Button, ButtonProps>

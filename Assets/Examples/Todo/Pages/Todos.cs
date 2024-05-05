@@ -8,10 +8,9 @@ using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Pages
 {
-    public struct TodoProps
+    public class TodoProps: StyleProps
     {
-        public ObligatoryValue<Action> onOptions { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public ObligatoryValue<Action> onOptions { get; set; } = new();
     }
     
     public class Todos: UIComponent<TodoProps>

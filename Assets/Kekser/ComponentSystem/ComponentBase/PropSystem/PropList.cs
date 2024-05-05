@@ -3,11 +3,11 @@ using System.Reflection;
 
 namespace Kekser.ComponentSystem.ComponentBase.PropSystem
 {
-    public class PropList<TProps>: IPropList where TProps: struct
+    public class PropList<TProps>: IPropList where TProps: class, new()
     {
         private static readonly PropertyInfo[] PropProperties = typeof(TProps).GetProperties();
 
-        private TProps _props;
+        private TProps _props = new TProps();
         private bool _isDirty = true;
         
         public TProps Props => _props;
@@ -40,14 +40,14 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
             }
         }
         
-        public void Set<TProps1>(TProps1 props) where TProps1 : struct
+        public void Set<TProps1>(TProps1 props) where TProps1 : class
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
             Set((TProps) (object) props);
         }
 
-        public TProps1 Get<TProps1>() where TProps1 : struct
+        public TProps1 Get<TProps1>() where TProps1 : class
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");

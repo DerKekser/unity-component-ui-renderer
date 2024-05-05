@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public class RenderFragment<TNode, TProps> : BaseFragment<TNode, TProps> where TNode : class, new() where TProps : struct
+    public class RenderFragment<TNode, TProps> : BaseFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
     {
         public RenderFragment(TNode node)
         {

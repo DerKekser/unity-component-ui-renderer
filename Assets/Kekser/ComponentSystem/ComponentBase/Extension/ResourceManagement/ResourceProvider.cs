@@ -4,9 +4,9 @@ using Object = UnityEngine.Object;
 
 namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
 {
-    public struct ResourceProps
+    public class ResourceProps
     {
-        public ObligatoryValue<ResourceDatabase> resources { get; set; }
+        public ObligatoryValue<ResourceDatabase> resources { get; set; } = new();
     }
     
     public sealed class ResourceProvider<T>: BaseProvider<T, ResourceProps> where T: class, new()

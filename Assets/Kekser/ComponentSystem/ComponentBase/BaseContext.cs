@@ -114,7 +114,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             int i = 0;
             foreach (T prop in props)
             {
-                callback?.Invoke(prop, i++);
+                callback.Invoke(prop, i++);
             }
         }
         
@@ -123,7 +123,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             string key = null, 
             Action<BaseContext<TNode>> render = null,
             [CallerLineNumber] int callerLine = 0
-        ) where TComponent : IFragment<TNode> where TProps : struct
+        ) where TComponent : IFragment<TNode> where TProps : class
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 

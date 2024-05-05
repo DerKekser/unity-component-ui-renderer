@@ -10,11 +10,11 @@ using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
 
 namespace Examples.Todo.Components
 {
-    public struct StyledButtonProps
+    public class StyledButtonProps: StyleProps
     {
-        public OptionalValue<Action> onClick { get; set; }
-        public OptionalValue<string> text { get; set; }
-        public OptionalValue<Style> style { get; set; }
+        public OptionalValue<Action> onClick { get; set; } = new();
+        public OptionalValue<string> text { get; set; } = new();
+        public OptionalValue<Style> style { get; set; } = new();
     }
     
     public class StyledButton: UIComponent<StyledButtonProps>

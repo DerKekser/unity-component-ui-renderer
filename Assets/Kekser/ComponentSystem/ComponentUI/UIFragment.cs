@@ -8,7 +8,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         
     }   
     
-    public abstract class UIFragment<TProps> : BaseFragment<VisualElement, TProps> where TProps : struct
+    public abstract class UIFragment<TProps> : BaseFragment<VisualElement, TProps> where TProps : class, new()
     {
         
     }

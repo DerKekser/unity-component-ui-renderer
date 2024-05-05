@@ -4,7 +4,7 @@ namespace Kekser.ComponentSystem.ComponentBase
 {
     public class BasePortal<TNode>: BaseFragment<TNode, BasePortal<TNode>.PortalProps> where TNode: class, new()
     {
-        public struct PortalProps
+        public class PortalProps
         {
             public OptionalValue<TNode> target { get; set; }
         }
