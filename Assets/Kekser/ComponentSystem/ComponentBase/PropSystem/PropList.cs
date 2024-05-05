@@ -25,9 +25,7 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
                         if (propValue1.Equals(propValue))
                             continue;
                         propValue1.TakeValue(propValue);
-                        object tmp = _props; // We need to create a new object to update the property value because structs are immutable
-                        propertyInfo.SetValue(tmp, propValue1);
-                        _props = (TProps) tmp;
+                        propertyInfo.SetValue(_props, propValue1);
                         _isDirty = true;
                         break;
                     default:
@@ -44,14 +42,14 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
-            Set((TProps) (object) props);
+            Set(props as TProps);
         }
 
         public TProps1 Get<TProps1>() where TProps1 : class
         {
             if (typeof(TProps1) != typeof(TProps))
                 throw new Exception("Invalid type");
-            return (TProps1) (object) _props;
+            return _props as TProps1;
         }
 
         public bool IsDirty 
