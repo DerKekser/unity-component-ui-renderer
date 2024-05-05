@@ -28,8 +28,8 @@ namespace Examples.Todo.Components
                     top = new StyleLength(Length.Percent(50)),
                     left = new StyleLength(Length.Percent(50)),
                     translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                    backgroundImage = new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_panel.png")),
-                    unityFont = new StyleFont(provider.GetResource<Font>("Kenny UI/Font/kenvector_future")),
+                    backgroundImage = new StyleBackground(provider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31-8215518951599258611@grey_panel.png")),
+                    unityFont = new StyleFont(provider.GetResource<Font>("4c29cdb1468d6ba4e9a7ab64a88eb632-12800000@kenvector_future")),
                 }},
                 render: Children
             );

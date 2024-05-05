@@ -35,7 +35,7 @@ namespace Examples.Todo.Components
                         paddingRight = new StyleLength(10),
                         fontSize = new StyleLength(24),
                         color = new StyleColor(Color.black),
-                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_button13.png")),
+                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31--3244089793890354390@grey_button13.png")),
                     }
                 }
             );

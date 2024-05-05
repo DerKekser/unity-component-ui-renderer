@@ -62,7 +62,7 @@ namespace Examples.Todo.Components
                             {
                                 width = new StyleLength(30),
                                 height = new StyleLength(30),
-                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("Kenny UI/Spritesheet/blueSheet/blue_button10.png")),
+                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123-7285192305131594788@blue_button10.png")),
                             }
                         },
                         render: ctx => ctx._<Box, StyleProps>(
@@ -74,7 +74,7 @@ namespace Examples.Todo.Components
                                 top = new StyleLength(Length.Percent(50)),
                                 left = new StyleLength(Length.Percent(50)),
                                 translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("Kenny UI/Spritesheet/greySheet/grey_crossWhite.png")),
+                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31-8517964494106879923@grey_crossWhite.png")),
                             }}
                         )
                     );

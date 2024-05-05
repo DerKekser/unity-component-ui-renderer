@@ -31,7 +31,7 @@ namespace Examples.Todo.Components
                     {
                         width = new StyleLength(Length.Percent(100)),
                         height = new StyleLength(Length.Percent(100)),
-                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/blueSheet/blue_button11.png")),
+                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--4590443009793632628@blue_button11.png")),
                     }
                 },
                 render: ctx => ctx._<Text, TextProps>(
