@@ -9,14 +9,14 @@ namespace Kekser.ComponentSystem.ComponentBase
             public OptionalValue<TNode> target { get; set; }
         }
         
-        public override void OnRender(BaseContext<TNode> ctx)
+        public override void OnRender()
         {
             if (OwnProps.target.IsSet)
                 _fragmentNode = OwnProps.target;
             else
                 _fragmentNode = _fragmentRoot;
             
-            Children(ctx);
+            Children();
         }
     }
 }

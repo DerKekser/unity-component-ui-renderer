@@ -1,6 +1,5 @@
 ﻿using System;
 using Examples.Todo.Providers;
-using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
@@ -34,12 +33,12 @@ namespace Examples.Todo.Components
             e?.Invoke();
         }
         
-        public override void OnRender(BaseContext<VisualElement> ctx)
+        public override void OnRender()
         {
             TodoData todo = OwnProps.todo;
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<Box, StyleProps>(
+            _<Box, StyleProps>(
                 props: new StyleProps() { style = new Style() 
                 {
                     height = new StyleLength(50),
@@ -47,9 +46,9 @@ namespace Examples.Todo.Components
                     justifyContent = new StyleEnum<Justify>(Justify.SpaceBetween),
                     alignItems = new StyleEnum<Align>(Align.Center), 
                 }},
-                render: ctx =>
+                render: () =>
                 {
-                    ctx._<Button, ButtonProps>(
+                    _<Button, ButtonProps>(
                         props: new ButtonProps()
                         {
                             onClick = (Action)HandleToggle,
@@ -61,10 +60,10 @@ namespace Examples.Todo.Components
                                 backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31--3244089793890354390@grey_button13.png")),
                             }
                         },
-                        render: ctx =>
+                        render: () =>
                         {
                             if (!todo.done) return;
-                            ctx._<Box, StyleProps>(
+                            _<Box, StyleProps>(
                                 props: new StyleProps() { style = new Style() 
                                 {
                                     position = new StyleEnum<Position>(Position.Absolute),
@@ -78,7 +77,7 @@ namespace Examples.Todo.Components
                             );
                         }
                     );
-                    ctx._<Text, TextProps>(
+                    _<Text, TextProps>(
                         props: new TextProps()
                         {
                             text = todo.text,
@@ -92,7 +91,7 @@ namespace Examples.Todo.Components
                             }
                         }
                     );
-                    ctx._<Button, ButtonProps>(
+                    _<Button, ButtonProps>(
                         props: new ButtonProps()
                         {
                             onClick = (Action)HandleRemove,
@@ -104,7 +103,7 @@ namespace Examples.Todo.Components
                                 backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123-7285192305131594788@blue_button10.png")),
                             }
                         },
-                        render: ctx => ctx._<Box, StyleProps>(
+                        render: () => _<Box, StyleProps>(
                             props: new StyleProps() { style = new Style() 
                             {
                                 position = new StyleEnum<Position>(Position.Absolute),

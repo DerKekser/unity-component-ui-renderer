@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
@@ -9,6 +11,8 @@ namespace Kekser.ComponentSystem.ComponentBase
     
     public abstract class BaseFragment<TNode, TProps> : IFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
     {
+        private List<BaseContext<TNode>> _contextStack = new List<BaseContext<TNode>>();
+        
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
@@ -38,7 +42,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         public virtual void Render()
         {
             BaseRenderer<TNode>.Log(() => "Rendering " + GetType().Name);
-            OnRender(_ctx);
+            OnRender();
         }
         
         public virtual void SetContext(BaseContext<TNode> ctx)
@@ -69,9 +73,55 @@ namespace Kekser.ComponentSystem.ComponentBase
         {
             _ctx.Render(ctx);
         }
+        
+        //Component helpers
+        protected BaseContext<TNode> CurrentContext => _contextStack.Count > 0 ? _contextStack[^1] : _ctx;
+        
+        protected TComponent _<TComponent, TComponentProps>(
+            TComponentProps props,
+            string key = null,
+            Action render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode, TComponentProps> where TComponentProps : class, new()
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+            
+            return CurrentContext.CreateComponent<TComponent, TComponentProps>(props, hash.ToString(), orgCtx =>
+            {
+                _contextStack.Add(orgCtx);
+                render?.Invoke();
+                _contextStack.RemoveAt(_contextStack.Count - 1);
+            });
+        }
+
+        protected TComponent _<TComponent>(
+            string key = null,
+            Action render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode>
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+
+            return CurrentContext.CreateComponent<TComponent>(hash.ToString(), orgCtx =>
+            {
+                _contextStack.Add(orgCtx);
+                render?.Invoke();
+                _contextStack.RemoveAt(_contextStack.Count - 1);
+            });
+        }
+
+        protected void Children()
+        {
+            Children(CurrentContext);
+        }
+        
+        protected void Each<T>(IEnumerable<T> props, Action<T, int> callback)
+        {
+            CurrentContext.Each(props, callback);
+        }
 
         public virtual void OnMount() {}
         public virtual void OnUnmount() {}
-        public virtual void OnRender(BaseContext<TNode> ctx) {}
+        public virtual void OnRender() {}
     }
 }

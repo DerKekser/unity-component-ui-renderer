@@ -35,11 +35,11 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
             return _resources[key] as T;
         }
         
-        public override void OnRender(BaseContext<TNode> ctx)
+        public override void OnRender()
         {
             UpdateResources(OwnProps.resources);
             
-            Children(ctx);
+            Children();
         }
     }
 }
