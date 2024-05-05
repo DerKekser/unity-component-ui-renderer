@@ -5,7 +5,7 @@ namespace Kekser.ComponentSystem.ComponentUI
 {
     public class UIContext: BaseContext<VisualElement>
     {
-        public UIContext(VisualElement mainNode) : base(mainNode)
+        public UIContext(IFragment<VisualElement> fragment) : base(fragment)
         {
         }
 

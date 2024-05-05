@@ -10,28 +10,41 @@ using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
 
 namespace Examples.Todo.Components
 {
-    public class StyledButton: UIComponent
+    public class StyledButtonProps: StyleProps
+    {
+        public OptionalValue<Action> onClick { get; set; } = new();
+        public OptionalValue<string> text { get; set; } = new();
+        public OptionalValue<Style> style { get; set; } = new();
+    }
+    
+    public class StyledButton: UIComponent<StyledButtonProps>
     {
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
             ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<Button>(
-                props: new IProp[]
+            ctx._<Button, ButtonProps>(
+                props: new ButtonProps()
                 {
-                    new EventProp("onClick", Props.Get<Action>("onClick")),
-                    new Prop("width", new StyleLength(Length.Percent(100))),
-                    new Prop("height", new StyleLength(Length.Percent(100))),
-                    new Prop("backgroundImage", new StyleBackground(provider.GetResource<Sprite>("Kenny UI/Spritesheet/blueSheet/blue_button11.png"))),
-                },
-                render: ctx => ctx._<Text>(
-                    props: new IProp[]
+                    onClick = OwnProps.onClick,
+                    style = new Style()
                     {
-                        new Prop("text", Props.Get("text")),
-                        new Prop("width", new StyleLength(Length.Percent(100))),
-                        new Prop("height", new StyleLength(Length.Percent(100))),
-                        new Prop("fontSize", new StyleLength(24)),
-                        new Prop("color", new StyleColor(Color.white)),
+                        width = new StyleLength(Length.Percent(100)),
+                        height = new StyleLength(Length.Percent(100)),
+                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--4590443009793632628@blue_button11.png")),
+                    }
+                },
+                render: ctx => ctx._<Text, TextProps>(
+                    props: new TextProps()
+                    {
+                        text = OwnProps.text,
+                        style = new Style()
+                        {
+                            width = new StyleLength(Length.Percent(100)),
+                            height = new StyleLength(Length.Percent(100)),
+                            fontSize = new StyleLength(24),
+                            color = new StyleColor(Color.white),
+                        }
                     }
                 )
             );

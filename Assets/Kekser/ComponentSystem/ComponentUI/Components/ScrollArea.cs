@@ -1,10 +1,9 @@
-﻿using System;
-using Kekser.ComponentSystem.ComponentBase;
+﻿using Kekser.ComponentSystem.ComponentBase;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public sealed class ScrollArea: UIComponent<ScrollView>
+    public sealed class ScrollArea: UIComponent<ScrollView, StyleProps>
     {
         public override void Mount(VisualElement parent)
         {

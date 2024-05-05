@@ -8,11 +8,17 @@ using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages
 {
-    public class Options: UIComponent
+    public class OptionsProps: StyleProps
+    {
+        public ObligatoryValue<Action> onBack { get; set; } = new();
+    }
+    
+    public class Options: UIComponent<OptionsProps>
     {
         private void HandleBack()
         {
-            Props.Get<Action>("onBack")?.Invoke();
+            Action e = OwnProps.onBack;
+            e?.Invoke();
         }
         
         public override void OnRender(BaseContext<VisualElement> ctx)
@@ -22,27 +28,33 @@ namespace Examples.Todo.Pages
                 {
                     ctx.Each(new int[15], (x, i) => 
                     {
-                        ctx._<StyledButton>(
+                        ctx._<StyledButton, StyledButtonProps>(
                             key: i.ToString(),
-                            props: new IProp[]
+                            props: new StyledButtonProps()
                             {
-                                new Prop("marginBottom", new StyleLength(i == 14 ? 0 : 5)),
-                                new Prop("height", new StyleLength(50)),
-                                new Prop("flexShrink", new StyleFloat(0f)),
-                                new Prop("text", $"Option {i}"),
+                                style = new Style()
+                                {
+                                    marginBottom = new StyleLength(i == 14 ? 0 : 5),
+                                    height = new StyleLength(50),
+                                    flexShrink = new StyleFloat(0f)
+                                },
+                                text = $"Option {i}"
                             }
                         );
                     });
                 }
             );
-            ctx._<StyledButton>(
-                props: new IProp[]
+            ctx._<StyledButton, StyledButtonProps>(
+                props: new StyledButtonProps()
                 {
-                    new Prop("marginTop", new StyleLength(5)),
-                    new Prop("height", new StyleLength(50)),
-                    new Prop("flexShrink", new StyleFloat(0f)),
-                    new EventProp("onClick", HandleBack),
-                    new Prop("text", "Back")
+                    style = new Style()
+                    {
+                        marginTop = new StyleLength(5),
+                        height = new StyleLength(50),
+                        flexShrink = new StyleFloat(0f)
+                    },
+                    onClick = (Action)HandleBack,
+                    text = "Back"
                 }
             );
         }

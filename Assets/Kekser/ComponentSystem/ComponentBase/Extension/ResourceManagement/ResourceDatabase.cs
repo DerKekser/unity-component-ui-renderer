@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -54,16 +55,15 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
                 if (_resources[i] == null)
                     continue;
                 
-                string path = UnityEditor.AssetDatabase.GetAssetPath(_resources[i]);
-                //cleanup path: change folder delimiter to and remove the "Assets/" prefix and the file extension
-                path = path.Replace("\\", "/");
-                if (path.StartsWith("Assets/"))
-                    path = path.Substring("Assets/".Length);
-                if (path.Contains("."))
-                    path = path.Substring(0, path.LastIndexOf(".", StringComparison.Ordinal));
-                if (!path.EndsWith(_resources[i].name))
-                    path += "/" + _resources[i].name;
-                _resourcePaths[i] = path;
+                if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(_resources[i], out string guid, out long localId))
+                {
+                    _resourcePaths[i] = $"{guid}-{localId}";
+                }
+                else
+                {
+                    string path = UnityEditor.AssetDatabase.GetAssetPath(_resources[i]);
+                    _resourcePaths[i] = UnityEditor.AssetDatabase.AssetPathToGUID(path);
+                }
             }
 #endif
         }

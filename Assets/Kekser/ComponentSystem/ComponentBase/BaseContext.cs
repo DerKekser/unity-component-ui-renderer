@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
@@ -11,27 +10,26 @@ namespace Kekser.ComponentSystem.ComponentBase
         private BaseContext<TNode> _parent;
         private BaseContextHolder<TNode> _contextHolder;
         private List<BaseContext<TNode>> _usedContexts;
-        private Props _props;
         
         private TNode _mainNode;
-        private BaseFragment<TNode> _fragment;
+        private IFragment<TNode> _fragment;
         
         private Action<BaseContext<TNode>> _render;
 
         public BaseContext<TNode> Parent => _parent;
-        public BaseFragment<TNode> Fragment => _fragment;
-        public Props Props => _props ??= new Props();
+        public IFragment<TNode> Fragment => _fragment;
 
-        public bool NeedsRerender => Props.IsDirty;
+        public bool NeedsRerender => Fragment.Props.IsDirty;
         
         // TODO: make abstract create separate context classes for different node types
-        public BaseContext(TNode mainNode)
+        public BaseContext(IFragment<TNode> fragment)
         {
-            _mainNode = mainNode;
+            _fragment = fragment;
+            _mainNode = fragment.FragmentRoot;
+            _fragment.SetContext(this);
             _contextHolder = CreateContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<BaseContext<TNode>>();
-            _props = new Props();
         }
         
         public BaseContext(BaseContext<TNode> parent)
@@ -41,7 +39,6 @@ namespace Kekser.ComponentSystem.ComponentBase
             _contextHolder = CreateContextHolder(this);
             _contextHolder.Reset();
             _usedContexts = new List<BaseContext<TNode>>();
-            _props = new Props();
         }
         
         protected abstract BaseContextHolder<TNode> CreateContextHolder(BaseContext<TNode> context);
@@ -56,7 +53,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             _contextHolder.Reset();
             if (NeedsRerender)
             {
-                Props.IsDirty = false;
+                _fragment.Props.IsDirty = false;
                 _usedContexts.Clear();
                 if (_fragment != null)
                     _fragment.Render();
@@ -91,8 +88,8 @@ namespace Kekser.ComponentSystem.ComponentBase
             }
             _fragment.Unmount();
         }
-
-        private BaseContext<TNode> Child<TComponent>(int? key) where TComponent : BaseFragment<TNode>
+        
+        private BaseContext<TNode> Child<TComponent>(int? key) where TComponent : IFragment<TNode>
         {
             BaseContext<TNode> context = _contextHolder.Get(key);
             _usedContexts.Add(context);
@@ -105,32 +102,56 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
-            foreach (IProp prop in context._fragment.DefaultProps ?? Array.Empty<IProp>())
-                prop.AddToProps(context.Props);
+            
             context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
             return context;
         }
         
         public void Each<T>(IEnumerable<T> props, Action<T, int> callback)
         {
+            if (props == null || callback == null)
+                return;
             int i = 0;
             foreach (T prop in props)
             {
-                callback?.Invoke(prop, i++);
+                callback.Invoke(prop, i++);
             }
         }
         
-        public TComponent _<TComponent>(string key = null, Action<BaseContext<TNode>> render = null, [CallerLineNumber] int callerLine = 0, params IProp[] props) where TComponent : BaseFragment<TNode>
+        public TComponent _<TComponent, TProps>(
+            TProps props,
+            string key = null, 
+            Action<BaseContext<TNode>> render = null,
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode, TProps> where TProps : class, new()
         {
             int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
 
             BaseContext<TNode> child = Child<TComponent>(hash);
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
-            foreach (IProp prop in props)
-                prop.AddToProps(child.Props);
             
-            child.Props.IsDirty = true;
+            child._fragment.Props.Set(props);
+            
+            child._fragment.Props.IsDirty = true;
+            child.Traverse();
+            
+            return (TComponent) child._fragment;
+        }
+        
+        public TComponent _<TComponent>(
+            string key = null, 
+            Action<BaseContext<TNode>> render = null, 
+            [CallerLineNumber] int callerLine = 0
+        ) where TComponent : IFragment<TNode>
+        {
+            int? hash = key?.GetHashCode() ?? callerLine.GetHashCode();
+
+            BaseContext<TNode> child = Child<TComponent>(hash);
+            SetNodeAsLastSibling(child._fragment.FragmentRoot);
+            child.SetRender(render);
+
+            child._fragment.Props.IsDirty = true;
             child.Traverse();
             
             return (TComponent) child._fragment;

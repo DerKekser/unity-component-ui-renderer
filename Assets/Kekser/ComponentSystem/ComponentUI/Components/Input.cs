@@ -1,14 +1,21 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public sealed class Input: UIComponent<TextField>
+    public class InputProps: StyleProps
+    {
+        public OptionalValue<string> value { get; set; } = new();
+        public OptionalValue<Action<string>> onChange { get; set; } = new();
+    }
+    
+    public sealed class Input: UIComponent<TextField, InputProps>
     {
         private void Change(ChangeEvent<string> eChangeEvent)
         {
-            Action<string> e = Props.Get<Action<string>>("onChange");
+            Action<string> e = OwnProps.onChange;
             e?.Invoke(eChangeEvent.newValue);
         }
         
@@ -24,8 +31,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            if (Props.Has("value"))
-                FragmentNode.value = Props.Get<string>("value");
+            if (OwnProps.value.IsSet)
+                FragmentNode.value = OwnProps.value;
         }
     }
 }

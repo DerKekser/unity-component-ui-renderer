@@ -2,7 +2,6 @@
 using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
-using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
@@ -22,22 +21,22 @@ namespace Examples.Todo.Components
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
             
-            ctx._<ScrollArea>(
-                props: new IProp[]
+            ctx._<ScrollArea, StyleProps>(
+                props: new StyleProps() { style = new Style() 
                 {
-                    new Prop("height", new StyleLength(Length.Percent(100))),
-                    new Prop("width", new StyleLength(Length.Percent(100))),
-                },
+                    height = new StyleLength(Length.Percent(100)),
+                    width = new StyleLength(Length.Percent(100)),
+                }},
                 render: ctx =>
                 {
                     ctx.Each(todoProvider.GetTodos(), (todo, i) =>
                     {
-                        ctx._<TodoEntry>(
+                        ctx._<TodoEntry, TodoEntryProps>(
                             key: i.ToString(),
-                            props: new IProp[]
+                            props: new TodoEntryProps()
                             {
-                                new Prop("todo", todo),
-                                new Prop("onRemove", new Action(() => HandleRemove(i))),
+                                todo = todo,
+                                onRemove = new Action(() => HandleRemove(i)),
                             }
                         );
                     });

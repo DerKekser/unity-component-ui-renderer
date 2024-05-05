@@ -1,11 +1,19 @@
-﻿namespace Kekser.ComponentSystem.ComponentBase
+﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
+
+namespace Kekser.ComponentSystem.ComponentBase
 {
-    public class BasePortal<TNode>: BaseFragment<TNode> where TNode: class, new()
+    public class BasePortal<TNode>: BaseFragment<TNode, BasePortal<TNode>.PortalProps> where TNode: class, new()
     {
+        public class PortalProps
+        {
+            public OptionalValue<TNode> target { get; set; }
+        }
+        
         public override void OnRender(BaseContext<TNode> ctx)
         {
-            if (Props.Has("target"))
-                _fragmentNode = Props.Get<TNode>("target");
+            PortalProps props = Props.Get<PortalProps>();
+            if (props.target.IsSet)
+                _fragmentNode = props.target;
             else
                 _fragmentNode = _fragmentRoot;
             

@@ -3,7 +3,21 @@ using UnityEngine;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public abstract class BaseRenderer<TNode> where TNode: class, new()
+    public class RenderFragment<TNode, TProps> : BaseFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
+    {
+        public RenderFragment(TNode node)
+        {
+            _fragmentRoot = node;
+            _fragmentNode = node;
+        }
+            
+        public override void OnRender(BaseContext<TNode> ctx)
+        {
+            Children(ctx);
+        }
+    }
+
+    public abstract class BaseRenderer<TNode> where TNode : class, new()
     {
         private BaseContext<TNode> _context;
         
@@ -31,11 +45,11 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         private static bool _log = false;
 
-        public static void Log(string message)
+        public static void Log(Func<string> message)
         {
             if (!_log)
                 return;
-            Debug.Log(message);
+            Debug.Log(message());
         }
     }
 }

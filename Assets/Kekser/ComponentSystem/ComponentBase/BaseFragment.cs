@@ -3,33 +3,39 @@ using Kekser.ComponentSystem.ComponentBase.PropSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public abstract class BaseFragment<TNode> where TNode: class, new()
+    public class NoProps {}
+    
+    public abstract class BaseFragment<TNode> : BaseFragment<TNode, NoProps> where TNode : class, new() {}
+    
+    public abstract class BaseFragment<TNode, TProps> : IFragment<TNode, TProps> where TNode : class, new() where TProps : class, new()
     {
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
+        protected PropList<TProps> _props = new PropList<TProps>();
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        public Props Props => _ctx?.Props ?? new Props();
+        public IPropList Props => _props;
         
-        public virtual IProp[] DefaultProps => null;
+        public TProps OwnProps => _props.Props;
+        public virtual TProps DefaultProps { get; } = new TProps();
         
         public virtual void Mount(TNode parent)
         {
-            BaseRenderer<TNode>.Log("Mounting " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Mounting " + GetType().Name);
             OnMount();
         }
         
         public virtual void Unmount()
         {
-            BaseRenderer<TNode>.Log("Unmounting " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Unmounting " + GetType().Name);
             OnUnmount();
         }
 
         public virtual void Render()
         {
-            BaseRenderer<TNode>.Log("Rendering " + GetType().Name);
+            BaseRenderer<TNode>.Log(() => "Rendering " + GetType().Name);
             OnRender(_ctx);
         }
         
@@ -38,9 +44,10 @@ namespace Kekser.ComponentSystem.ComponentBase
             _ctx = ctx;
             _fragmentRoot = _ctx?.Parent?.Fragment?.FragmentRoot;
             _fragmentNode = _ctx?.Parent?.Fragment?.FragmentNode;
+            Props.Set(DefaultProps);
         }
         
-        public TProvider GetProvider<TProvider>() where TProvider : BaseProvider<TNode>
+        public TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>
         {
             if (this is TProvider provider)
             {

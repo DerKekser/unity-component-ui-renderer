@@ -1,14 +1,21 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class Slider: UIComponent<UnityEngine.UIElements.Slider>
+    public class SliderProps: StyleProps
+    {
+        public OptionalValue<float> value { get; set; } = new();
+        public OptionalValue<Action<float>> onChange { get; set; } = new();
+    }
+    
+    public class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>
     {
         private void Change(ChangeEvent<float> eChangeEvent)
         {
-            Action<float> e = Props.Get<Action<float>>("onChange");
+            Action<float> e = OwnProps.onChange;
             e?.Invoke(eChangeEvent.newValue);
         }
         
@@ -24,8 +31,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            if (Props.Has("value"))
-                FragmentNode.value = Props.Get<float>("value");
+            if (OwnProps.value.IsSet)
+                FragmentNode.value = OwnProps.value;
         }
     }
 }

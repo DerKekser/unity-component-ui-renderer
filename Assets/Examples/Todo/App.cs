@@ -9,9 +9,14 @@ using UnityEngine.UIElements;
 
 namespace Examples.Todo
 {
-    public class App: UIComponent
+    public class AppProps: StyleProps
     {
-        private enum Pages
+        public OptionalValue<App.Pages> page { get; set; } = new();
+    }
+    
+    public class App: UIComponent<AppProps>
+    {
+        public enum Pages
         {
             Menu,
             Options
@@ -19,45 +24,45 @@ namespace Examples.Todo
         
         private void HandleMenu()
         {
-            Props.Set("page", Pages.Menu);
+            Props.Set(new AppProps() { page = Pages.Menu });
         }
         
         private void HandleOptions()
         {
-            Props.Set("page", Pages.Options);
+            Props.Set(new AppProps() { page = Pages.Options });
         }
 
-        public override IProp[] DefaultProps => new IProp[]
+        public override AppProps DefaultProps { get; } = new AppProps()
         {
-            new Prop("height", new StyleLength(Length.Percent(100))),
-            new Prop("page", Pages.Menu),
+            style = new Style() { height = new StyleLength(Length.Percent(100)) },
+            page = Pages.Menu
         };
 
         public override void OnRender(BaseContext<VisualElement> ctx)
         {
-            ctx._<Layout>(
-                props: new Prop("height", new StyleLength(Length.Percent(100))),
+            ctx._<Layout, StyleProps>(
+                props: new StyleProps() { style = new Style() { height = new StyleLength(Length.Percent(100)) } },
                 render: ctx => 
                 {
                     ctx._<TodoProvider>(render: ctx =>
                     {
-                        if (Props.Get<Pages>("page") == Pages.Menu)
+                        if (OwnProps.page == Pages.Menu)
                         {
-                            ctx._<Todos>(
-                                props: new IProp[]
+                            ctx._<Todos, TodoProps>(
+                                props: new TodoProps()
                                 {
-                                    new EventProp("onOptions", HandleOptions),
-                                    new Prop("flexGrow", new StyleFloat(1f))
+                                    onOptions = (Action)HandleOptions,
+                                    style = new Style() { flexGrow = new StyleFloat(1f) }
                                 }
                             );
                         }
                         else
                         {
-                            ctx._<Options>(
-                                props: new IProp[]
+                            ctx._<Options, OptionsProps>(
+                                props: new OptionsProps()
                                 {
-                                    new EventProp("onBack", HandleMenu),
-                                    new Prop("flexGrow", new StyleFloat(1f))
+                                    onBack = (Action)HandleMenu,
+                                    style = new Style() { flexGrow = new StyleFloat(1f) }
                                 }
                             );
                         }

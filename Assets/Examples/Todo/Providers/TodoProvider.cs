@@ -4,50 +4,56 @@ using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
 {
-    public class TodoProvider: UIProvider
+    public class TodoProviderProps
     {
-        public override IProp[] DefaultProps => new IProp[]
+        public OptionalValue<List<string>> todos { get; set; } = new();
+    }
+    
+    public class TodoProvider: UIProvider<TodoProviderProps>
+    {
+        public override TodoProviderProps DefaultProps { get; } = new TodoProviderProps()
         {
-            new Prop("todos", new List<string>()
+            todos = new List<string>()
             {
                 "Buy milk",
                 "Feed the cat",
                 "Do the laundry"
-            })
+            }
         };
 
         public void Add(string todo)
         {
-            List<string> todos = new List<string>(Props.Get("todos", new List<string>()));
+            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
             todos.Add(todo);
-            Props.Set("todos", todos);
+            Props.Set(new TodoProviderProps() { todos = todos });
         }
         
         public void Remove(int index)
         {
-            List<string> todos = new List<string>(Props.Get("todos", new List<string>()));
+            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
             todos.RemoveAt(index);
-            Props.Set("todos", todos);
+            Props.Set(new TodoProviderProps() { todos = todos });
         }
         
         public string Get(int index)
         {
-            return Props.Get("todos", new List<string>())[index];
+            List<string> todos = OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
+            return todos[index];
         }
         
         public void Clear()
         {
-            Props.Set("todos", new List<string>());
+            Props.Set(new TodoProviderProps() { todos = new List<string>() });
         }
         
         public List<string> GetTodos()
         {
-            return Props.Get("todos", new List<string>());
+            return OwnProps.todos.IsSet ? new List<string>((List<string>)OwnProps.todos) : new List<string>();
         }
         
         public int GetCount()
         {
-            return Props.Get("todos", new List<string>()).Count;
+            return OwnProps.todos.IsSet ? ((List<string>)OwnProps.todos).Count : 0;
         }
     }
 }

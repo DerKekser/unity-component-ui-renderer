@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Kekser.ComponentSystem.ComponentUI;
+﻿using System.Collections.Generic;
+using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Object = UnityEngine.Object;
 
 namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
 {
-    public sealed class ResourceProvider<T>: BaseProvider<T> where T: class, new()
+    public class ResourceProps
+    {
+        public ObligatoryValue<ResourceDatabase> resources { get; set; } = new();
+    }
+    
+    public sealed class ResourceProvider<TNode>: BaseProvider<TNode, ResourceProps> where TNode: class, new()
     {
         private Dictionary<string, Object> _resources = new Dictionary<string, Object>();
         
@@ -19,15 +23,21 @@ namespace Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement
         
         public T GetResource<T>(string key) where T : Object
         {
+            if (key.Contains("@"))
+            {
+                string[] split = key.Split('@');
+                key = split[0];
+            }
+            
             if (!_resources.ContainsKey(key))
                 return null;
             
             return _resources[key] as T;
         }
         
-        public override void OnRender(BaseContext<T> ctx)
+        public override void OnRender(BaseContext<TNode> ctx)
         {
-            UpdateResources(Props.Get<ResourceDatabase>("resources"));
+            UpdateResources(OwnProps.resources);
             
             Children(ctx);
         }
