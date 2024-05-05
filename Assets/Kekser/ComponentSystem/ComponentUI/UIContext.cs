@@ -1,4 +1,5 @@
 ﻿using Kekser.ComponentSystem.ComponentBase;
+using Kekser.ComponentSystem.ComponentUI.Components;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
@@ -22,5 +23,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         {
             node?.BringToFront();
         }
+
+        public Text _(string text) => _<Text, TextProps>(props: new TextProps() {text = text});
     }
 }
