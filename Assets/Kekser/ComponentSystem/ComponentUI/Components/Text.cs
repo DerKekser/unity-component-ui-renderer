@@ -1,5 +1,6 @@
 ﻿using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components

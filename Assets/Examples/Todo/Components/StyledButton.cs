@@ -4,6 +4,7 @@ using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
@@ -14,7 +15,6 @@ namespace Examples.Todo.Components
     {
         public OptionalValue<Action> onClick { get; set; } = new();
         public OptionalValue<string> text { get; set; } = new();
-        public OptionalValue<Style> style { get; set; } = new();
     }
     
     public class StyledButton: UIComponent<StyledButtonProps>

@@ -1,6 +1,7 @@
 ﻿using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;

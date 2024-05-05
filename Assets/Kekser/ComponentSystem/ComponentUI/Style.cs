@@ -4,11 +4,6 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
 {
-    public class StyleProps
-    {
-        public OptionalValue<Style> style { get; set; } = new();
-    }
-    
     public class Style
     {
         public OptionalValue<StyleEnum<Align>> alignContent { get; set; } = new();

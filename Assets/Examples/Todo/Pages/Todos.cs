@@ -3,12 +3,14 @@ using Examples.Todo.Components;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Pages
 {
     public class TodoProps: StyleProps
+    
     {
         public ObligatoryValue<Action> onOptions { get; set; } = new();
     }

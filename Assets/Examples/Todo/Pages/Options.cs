@@ -4,6 +4,7 @@ using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo.Pages

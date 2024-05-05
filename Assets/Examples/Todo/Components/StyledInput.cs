@@ -4,6 +4,7 @@ using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Input = Kekser.ComponentSystem.ComponentUI.Components.Input;

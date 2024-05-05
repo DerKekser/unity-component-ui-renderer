@@ -4,6 +4,9 @@ using System.Linq;
 using System.Reflection;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI.Components;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
@@ -20,9 +23,6 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : class, new()
     {
-        private static readonly PropertyInfo StylePropProperty = 
-            typeof(TProps)
-                .GetProperty("style");
         private static readonly List<(PropertyInfo, PropertyInfo)> StylePropMap = 
             typeof(Style)
                 .GetProperties()
@@ -46,29 +46,16 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         public override void Render()
         {
-            ApplyStyle();
+            ApplyStyling();
             base.Render();
         }
         
-        public void ApplyStyle()
+        public void ApplyStyling()
         {
-            switch (StylePropProperty.GetValue(OwnProps))
-            {
-                case OptionalValue<Style> optionalValue:
-                    if (optionalValue.IsSet)
-                        ApplyStyle(optionalValue);
-                    break;
-                case ObligatoryValue<Style> obligatoryValue:
-                    if (!obligatoryValue.IsSet)
-                        throw new Exception("Required prop not set");
-                    ApplyStyle(obligatoryValue);
-                    break;
-                case Style style:
-                    ApplyStyle(style);
-                    break;
-                default:
-                    break;
-            }
+            if (OwnProps is IStyleProp styleProps && styleProps.style.IsSet)
+                ApplyStyle(styleProps.style);
+            if (OwnProps is IClassNameProp classNameProps && classNameProps.className.IsSet)
+                ApplyClassName(classNameProps.className);
         }
         
         public void ApplyStyle(Style style)
@@ -87,6 +74,15 @@ namespace Kekser.ComponentSystem.ComponentUI
                         iStyleProperty.SetValue(FragmentRoot.style, styleValue);
                         break;
                 }
+            }
+        }
+
+        public void ApplyClassName(string classNames)
+        {
+            FragmentRoot.ClearClassList();
+            foreach (string className in classNames.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
+            {
+                FragmentRoot.AddToClassList(className);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -8,7 +9,6 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     public class ButtonProps: StyleProps
     {
         public OptionalValue<Action> onClick { get; set; } = new();
-        public OptionalValue<Style> style { get; set; } = new();
     }
     
     public sealed class Button : UIComponent<UnityEngine.UIElements.Button, ButtonProps>
