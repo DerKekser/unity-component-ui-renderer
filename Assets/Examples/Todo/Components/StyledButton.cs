@@ -26,11 +26,11 @@ namespace Examples.Todo.Components
                 props: new ButtonProps()
                 {
                     onClick = OwnProps.onClick,
+                    className = "unity-button todo-button",
                     style = new Style()
                     {
                         width = new StyleLength(Length.Percent(100)),
                         height = new StyleLength(Length.Percent(100)),
-                        backgroundImage = new StyleBackground(provider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--4590443009793632628@blue_button11.png")),
                     }
                 },
                 render: () => _<Text, TextProps>(
