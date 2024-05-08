@@ -17,6 +17,9 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public override BaseContext<VisualElement> CreateContext(VisualElement rootNode)
         {
+            for (int i = rootNode.childCount - 1; i >= 0; i--)
+                rootNode.RemoveAt(i);
+            
             _fragment = new RenderFragment<VisualElement, UIRendererProps>(rootNode);
             return new UIContext(_fragment);
         }
