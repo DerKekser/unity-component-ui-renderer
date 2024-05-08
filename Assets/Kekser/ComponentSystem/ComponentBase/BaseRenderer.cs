@@ -29,6 +29,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public void Render(Action<BaseContext<TNode>> render, TNode rootNode)
         {
+            if (rootNode == null)
+                throw new Exception("Root node is null");
             _context = CreateContext(rootNode);
             _context.SetRender(render);
         }

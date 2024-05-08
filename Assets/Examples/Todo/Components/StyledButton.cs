@@ -1,5 +1,4 @@
 ﻿using System;
-using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
@@ -20,8 +19,6 @@ namespace Examples.Todo.Components
     {
         public override void OnRender()
         {
-            ResourceProvider<VisualElement> provider = GetProvider<ResourceProvider<VisualElement>>();
-            
             _<Button, ButtonProps>(
                 props: new ButtonProps()
                 {

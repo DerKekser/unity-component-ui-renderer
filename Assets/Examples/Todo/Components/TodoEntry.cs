@@ -1,11 +1,9 @@
 ﻿using System;
 using Examples.Todo.Providers;
-using Kekser.ComponentSystem.ComponentBase.Extension.ResourceManagement;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
@@ -36,7 +34,6 @@ namespace Examples.Todo.Components
         public override void OnRender()
         {
             TodoData todo = OwnProps.todo;
-            ResourceProvider<VisualElement> resProvider = GetProvider<ResourceProvider<VisualElement>>();
             
             _<Box, StyleProps>(
                 props: new StyleProps() { style = new Style() 
@@ -52,28 +49,30 @@ namespace Examples.Todo.Components
                         props: new ButtonProps()
                         {
                             onClick = (Action)HandleToggle,
+                            className = "todo-done",
                             style = new Style()
                             {
                                 width = new StyleLength(30),
                                 height = new StyleLength(30),
                                 marginRight = new StyleLength(5),
-                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31--3244089793890354390@grey_button13.png")),
                             }
                         },
                         render: () =>
                         {
                             if (!todo.done) return;
                             _<Box, StyleProps>(
-                                props: new StyleProps() { style = new Style() 
-                                {
-                                    position = new StyleEnum<Position>(Position.Absolute),
-                                    width = new StyleLength(10),
-                                    height = new StyleLength(10),
-                                    top = new StyleLength(Length.Percent(50)),
-                                    left = new StyleLength(Length.Percent(50)),
-                                    translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                                    backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123--7938629432754144731@blue_checkmark.png")),
-                                }}
+                                props: new StyleProps() { 
+                                    className = "icon",
+                                    style = new Style() 
+                                    {
+                                        position = new StyleEnum<Position>(Position.Absolute),
+                                        width = new StyleLength(10),
+                                        height = new StyleLength(10),
+                                        top = new StyleLength(Length.Percent(50)),
+                                        left = new StyleLength(Length.Percent(50)),
+                                        translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
+                                    }
+                                }
                             );
                         }
                     );
@@ -95,25 +94,27 @@ namespace Examples.Todo.Components
                         props: new ButtonProps()
                         {
                             onClick = (Action)HandleRemove,
+                            className = "todo-remove",
                             style = new Style()
                             {
                                 width = new StyleLength(30),
                                 height = new StyleLength(30),
                                 marginLeft = new StyleLength(5),
-                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("d1023af4809dfc74ea55d04ae9bfe123-7285192305131594788@blue_button10.png")),
                             }
                         },
                         render: () => _<Box, StyleProps>(
-                            props: new StyleProps() { style = new Style() 
-                            {
-                                position = new StyleEnum<Position>(Position.Absolute),
-                                width = new StyleLength(10),
-                                height = new StyleLength(10),
-                                top = new StyleLength(Length.Percent(50)),
-                                left = new StyleLength(Length.Percent(50)),
-                                translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                                backgroundImage = new StyleBackground(resProvider.GetResource<Sprite>("3d456c5ff9b4bb14981f2428d2c17e31-8517964494106879923@grey_crossWhite.png")),
-                            }}
+                            props: new StyleProps() { 
+                                className = "icon",
+                                style = new Style() 
+                                {
+                                    position = new StyleEnum<Position>(Position.Absolute),
+                                    width = new StyleLength(10),
+                                    height = new StyleLength(10),
+                                    top = new StyleLength(Length.Percent(50)),
+                                    left = new StyleLength(Length.Percent(50)),
+                                    translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
+                                }
+                            }
                         )
                     );
                 }

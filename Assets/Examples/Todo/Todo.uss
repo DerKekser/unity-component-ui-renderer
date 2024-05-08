@@ -1,13 +1,6 @@
 * {
     cursor: url('project://database/Assets/Kenny%20UI/Cursor/pointer_a.png?fileID=2800000&guid=92e85c6b975303843aba0d8d488a0734&type=3#pointer_a');
-}
-
-.todo-button {
-    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=-4590443009793632628&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button11.png');
-}
-
-.todo-button:hover {
-    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=3552386328965880685&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button12.png');
+    -unity-font: url('project://database/Assets/Kenny%20UI/Font/kenvector_future.ttf?fileID=12800000&guid=4c29cdb1468d6ba4e9a7ab64a88eb632&type=3#kenvector_future');
 }
 
 Button {
@@ -24,4 +17,46 @@ TextField {
 
 TextInput {
     cursor: url('project://database/Assets/Kenny%20UI/Cursor/bracket_a_vertical.png?fileID=2800000&guid=754ee3adf9a4dfd4bb80cb7fa6678c4d&type=3#bracket_a_vertical');
+}
+
+.todo-bg {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=8215518951599258611&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_panel.png');
+}
+
+.todo-button {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=-4590443009793632628&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button11.png');
+}
+
+.todo-button:hover {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=3552386328965880685&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button12.png');
+}
+
+.todo-input {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=-3244089793890354390&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_button13.png');
+}
+
+.todo-remove {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=7285192305131594788&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button10.png');
+}
+
+.todo-remove:hover {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=7285192305131594788&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button10.png');
+    -unity-background-image-tint-color: rgba(225, 225, 225, 255);
+}
+
+.todo-remove .icon {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=8517964494106879923&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_crossWhite.png');
+}
+
+.todo-done {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=-5339687759002196245&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_button09.png');
+}
+
+.todo-done:hover {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=-5339687759002196245&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_button09.png');
+    -unity-background-image-tint-color: rgba(225, 225, 225, 255);
+}
+
+.todo-done .icon {
+    background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=-7938629432754144731&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_checkmark.png');
 }
