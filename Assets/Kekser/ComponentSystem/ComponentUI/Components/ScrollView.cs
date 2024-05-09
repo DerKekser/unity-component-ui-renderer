@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public sealed class Box : UIComponent<UnityEngine.UIElements.Box, StyleProps>
+    public sealed class ScrollView: UIComponent<UnityEngine.UIElements.ScrollView, StyleProps>
     {
         public override void OnRender()
         {

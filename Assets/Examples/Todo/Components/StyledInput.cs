@@ -5,7 +5,7 @@ using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Input = Kekser.ComponentSystem.ComponentUI.Components.Input;
+using TextField = Kekser.ComponentSystem.ComponentUI.Components.TextField;
 
 namespace Examples.Todo.Components
 {
@@ -19,8 +19,8 @@ namespace Examples.Todo.Components
     {
         public override void OnRender()
         {
-            _<Input, InputProps>(
-                props: new InputProps()
+            _<TextField, TextFieldProps>(
+                props: new TextFieldProps()
                 {
                     onChange = OwnProps.onChange,
                     value = OwnProps.value,

@@ -5,6 +5,7 @@ using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
+using ScrollView = Kekser.ComponentSystem.ComponentUI.Components.ScrollView;
 
 namespace Examples.Todo.Pages
 {
@@ -23,7 +24,7 @@ namespace Examples.Todo.Pages
         
         public override void OnRender()
         {
-            _<ScrollArea>(
+            _<ScrollView>(
                 render: () =>
                 {
                     Each(new int[15], (x, i) => 

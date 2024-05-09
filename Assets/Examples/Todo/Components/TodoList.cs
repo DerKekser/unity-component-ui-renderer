@@ -5,6 +5,8 @@ using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
+using ScrollView = Kekser.ComponentSystem.ComponentUI.Components.ScrollView;
 
 namespace Examples.Todo.Components
 {
@@ -26,7 +28,7 @@ namespace Examples.Todo.Components
         {
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             
-            _<ScrollArea, StyleProps>(
+            _<ScrollView, StyleProps>(
                 props: new StyleProps() { style = new Style() 
                 {
                     height = new StyleLength(Length.Percent(100)),
@@ -48,8 +50,8 @@ namespace Examples.Todo.Components
                     });
                     if (todoProvider.GetTodos().Count == 0)
                     {
-                        _<Text, TextProps>(
-                            props: new TextProps()
+                        _<Label, LabelProps>(
+                            props: new LabelProps()
                             {
                                 text = "No todos",
                                 style = new Style()

@@ -7,6 +7,7 @@ using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
+using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
 
 namespace Examples.Todo.Components
 {
@@ -76,8 +77,8 @@ namespace Examples.Todo.Components
                             );
                         }
                     );
-                    _<Text, TextProps>(
-                        props: new TextProps()
+                    _<Label, LabelProps>(
+                        props: new LabelProps()
                         {
                             text = todo.text,
                             style = new Style()

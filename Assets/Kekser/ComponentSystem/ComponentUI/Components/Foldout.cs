@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public sealed class Box : UIComponent<UnityEngine.UIElements.Box, StyleProps>
+    public class Foldout: UIComponent<UnityEngine.UIElements.Foldout, StyleProps>
     {
         public override void OnRender()
         {

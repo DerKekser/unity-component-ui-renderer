@@ -6,6 +6,7 @@ using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
+using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
 
 namespace Examples.Todo.Components
 {
@@ -30,8 +31,8 @@ namespace Examples.Todo.Components
                         height = new StyleLength(Length.Percent(100)),
                     }
                 },
-                render: () => _<Text, TextProps>(
-                    props: new TextProps()
+                render: () => _<Label, LabelProps>(
+                    props: new LabelProps()
                     {
                         text = OwnProps.text,
                         style = new Style()

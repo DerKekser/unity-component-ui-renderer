@@ -35,6 +35,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         public override void Mount(VisualElement parent)
         {
             parent?.Add(_fragmentRoot);
+            _fragmentNode = _fragmentRoot.contentContainer;
             base.Mount(parent);
         }
         

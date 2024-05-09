@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class InputProps: StyleProps
+    public class TextFieldProps: StyleProps
     {
         public OptionalValue<string> value { get; set; } = new();
         public OptionalValue<Action<string>> onChange { get; set; } = new();
     }
     
-    public sealed class Input: UIComponent<TextField, InputProps>
+    public sealed class TextField: UIComponent<UnityEngine.UIElements.TextField, TextFieldProps>
     {
         private void Change(ChangeEvent<string> eChangeEvent)
         {

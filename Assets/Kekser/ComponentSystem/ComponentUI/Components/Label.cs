@@ -1,15 +1,14 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
-using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class TextProps: StyleProps
+    public class LabelProps: StyleProps
     {
         public OptionalValue<string> text { get; set; } = new();
     }
     
-    public sealed class Text: UIComponent<Label, TextProps>
+    public sealed class Label: UIComponent<UnityEngine.UIElements.Label, LabelProps>
     {
         public override void OnRender()
         {
