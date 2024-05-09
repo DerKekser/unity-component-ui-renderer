@@ -1,4 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Kekser/ComponentSystem/ComponentUI/Assets/Reset.uss?fileID=7433441132597879392&amp;guid=d3b2620b856e6a64aa734b80d1956dd9&amp;type=3#Reset" />
-    <Style src="project://database/Assets/Examples/Todo/Todo.uss?fileID=7433441132597879392&amp;guid=7c8e41fca0b5f014194f82320ddd52cd&amp;type=3#Todo" />
-</ui:UXML>
