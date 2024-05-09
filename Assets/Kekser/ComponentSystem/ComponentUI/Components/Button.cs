@@ -6,6 +6,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 {
     public class ButtonProps: StyleProps
     {
+        public OptionalValue<string> text { get; set; } = new();
         public OptionalValue<Action> onClick { get; set; } = new();
     }
     
@@ -30,6 +31,9 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnRender()
         {
+            if (OwnProps.text.IsSet)
+                FragmentRoot.text = OwnProps.text;
+            
             Children();
         }
     }

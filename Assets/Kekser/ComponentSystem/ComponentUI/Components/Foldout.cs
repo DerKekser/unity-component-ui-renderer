@@ -14,7 +14,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     
     public sealed class Foldout: UIComponent<UnityEngine.UIElements.Foldout, FoldoutProps>
     {
-        public void Change(ChangeEvent<bool> e)
+        private void Change(ChangeEvent<bool> e)
         {
             Action<bool> eAction = OwnProps.onChange;
             eAction?.Invoke(e.newValue);

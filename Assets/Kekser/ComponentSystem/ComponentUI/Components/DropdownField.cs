@@ -19,7 +19,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
             options = new List<string>(),
         };
         
-        public void Change(ChangeEvent<string> eChangeEvent)
+        private void Change(ChangeEvent<string> eChangeEvent)
         {
             Action<string> e = OwnProps.onChange;
             e?.Invoke(eChangeEvent.newValue);

@@ -56,8 +56,8 @@ namespace Kekser.ComponentSystem.ComponentUI
                 ApplyStyle(styleProps.style);
             if (OwnProps is IClassNameProp classNameProps && classNameProps.className.IsSet)
                 ApplyClassName(classNameProps.className);
-            else 
-                ApplyClassName("");
+            /*else 
+                ApplyClassName("");*/
         }
         
         public void ApplyStyle(Style style)

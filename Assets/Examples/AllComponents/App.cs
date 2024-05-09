@@ -10,7 +10,6 @@ using UnityEngine.UIElements;
 using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
 using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
-using ListView = Kekser.ComponentSystem.ComponentUI.Components.ListView;
 using ScrollView = Kekser.ComponentSystem.ComponentUI.Components.ScrollView;
 
 namespace Examples.AllComponents
@@ -29,13 +28,11 @@ namespace Examples.AllComponents
             Foldout,
             GroupBox,
             Label,
-            ListView,
             MinMaxSlider,
             Portal,
             ProgressBar,
             RadioButton,
             RadioButtonGroup,
-            Scroller,
             ScrollView,
             Slider,
             SliderInt,
@@ -98,6 +95,7 @@ namespace Examples.AllComponents
                         {
                             flexGrow = new StyleFloat(1),
                             marginLeft = new StyleLength(10),
+                            minWidth = new StyleLength(600),
                         }},
                         render: () =>
                         {
@@ -128,9 +126,6 @@ namespace Examples.AllComponents
                                 case Pages.Label:
                                     _<LabelPage>();
                                     break;
-                                case Pages.ListView:
-                                    _<ListViewPage>();
-                                    break;
                                 case Pages.MinMaxSlider:
                                     _<MinMaxSliderPage>();
                                     break;
@@ -145,9 +140,6 @@ namespace Examples.AllComponents
                                     break;
                                 case Pages.RadioButtonGroup:
                                     _<RadioButtonGroupPage>();
-                                    break;
-                                case Pages.Scroller:
-                                    _<ScrollerPage>();
                                     break;
                                 case Pages.ScrollView:
                                     _<ScrollViewPage>();
