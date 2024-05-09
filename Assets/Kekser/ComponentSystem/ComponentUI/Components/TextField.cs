@@ -21,18 +21,18 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnMount()
         {
-            FragmentNode.RegisterValueChangedCallback(Change);
+            FragmentRoot.RegisterValueChangedCallback(Change);
         }
         
         public override void OnUnmount()
         {
-            FragmentNode.UnregisterValueChangedCallback(Change);
+            FragmentRoot.UnregisterValueChangedCallback(Change);
         }
 
         public override void OnRender()
         {
             if (OwnProps.value.IsSet)
-                FragmentNode.value = OwnProps.value;
+                FragmentRoot.value = OwnProps.value;
         }
     }
 }

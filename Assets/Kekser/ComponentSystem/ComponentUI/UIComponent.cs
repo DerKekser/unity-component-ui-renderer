@@ -30,7 +30,6 @@ namespace Kekser.ComponentSystem.ComponentUI
                 .ToList();
 
         public new TElement FragmentRoot => _fragmentRoot as TElement;
-        public new TElement FragmentNode => _fragmentNode as TElement;
 
         public override void Mount(VisualElement parent)
         {

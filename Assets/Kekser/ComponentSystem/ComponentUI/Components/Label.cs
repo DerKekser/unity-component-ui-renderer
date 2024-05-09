@@ -12,7 +12,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         public override void OnRender()
         {
-            FragmentNode.text = OwnProps.text;
+            FragmentRoot.text = OwnProps.text;
         }
     }
 }

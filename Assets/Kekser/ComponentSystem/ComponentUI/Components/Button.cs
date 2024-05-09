@@ -19,13 +19,13 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         public override void OnMount()
         {
-            FragmentNode.clickable.clicked += Click;
-            FragmentNode.text = "";
+            FragmentRoot.clickable.clicked += Click;
+            FragmentRoot.text = "";
         }
         
         public override void OnUnmount()
         {
-            FragmentNode.clickable.clicked -= Click;
+            FragmentRoot.clickable.clicked -= Click;
         }
         
         public override void OnRender()
