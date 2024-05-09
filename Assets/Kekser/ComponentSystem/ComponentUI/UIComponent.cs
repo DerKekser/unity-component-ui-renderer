@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.Components;
@@ -50,6 +51,12 @@ namespace Kekser.ComponentSystem.ComponentUI
             base.Render();
         }
         
+        public string CleanupClassName(string className)
+        {
+            //escape all non alphanumeric characters with backslash
+            return Regex.Replace(className, @"[^a-zA-Z0-9-._]", @"_");
+        }
+
         public void ApplyStyling()
         {
             if (OwnProps is IStyleProp styleProps && styleProps.style.IsSet)
@@ -87,7 +94,7 @@ namespace Kekser.ComponentSystem.ComponentUI
             FragmentRoot.ClearClassList();
             foreach (string className in classNames.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
             {
-                FragmentRoot.AddToClassList(className);
+                FragmentRoot.AddToClassList(CleanupClassName(className));
             }
         }
 
