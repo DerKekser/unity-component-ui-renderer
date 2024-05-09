@@ -30,14 +30,6 @@ namespace Examples.AllComponents.Pages
                     {
                         Props.Set(new ButtonPageProps() { buttonCount = OwnProps.buttonCount + 1 });
                     }),
-                    style = new Style()
-                    {
-                        paddingBottom = new StyleLength(5),
-                        paddingLeft = new StyleLength(10),
-                        paddingRight = new StyleLength(10),
-                        paddingTop = new StyleLength(5),
-                        backgroundColor = new StyleColor(new UnityEngine.Color(1f, 1f, 1f, 1)),
-                    }
                 },
                 render: () =>
                 {

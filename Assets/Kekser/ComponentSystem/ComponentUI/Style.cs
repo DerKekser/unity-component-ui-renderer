@@ -82,5 +82,109 @@ namespace Kekser.ComponentSystem.ComponentUI
         public OptionalValue<StyleEnum<WhiteSpace>> whiteSpace { get; set; } = new();
         public OptionalValue<StyleLength> width { get; set; } = new();
         public OptionalValue<StyleLength> wordSpacing { get; set; } = new();
+        
+        //Wrapper setter
+        
+        public StyleLength borderRadius
+        {
+            set
+            {
+                borderBottomLeftRadius = value;
+                borderBottomRightRadius = value;
+                borderTopLeftRadius = value;
+                borderTopRightRadius = value;
+            }
+        }
+
+        public StyleLength borderLeftRadius
+        {
+            set
+            {
+                borderBottomLeftRadius = value;
+                borderTopLeftRadius = value;
+            }
+        }
+        
+        public StyleLength borderRightRadius
+        {
+            set
+            {
+                borderBottomRightRadius = value;
+                borderTopRightRadius = value;
+            }
+        }
+        
+        public StyleLength borderTopRadius
+        {
+            set
+            {
+                borderTopLeftRadius = value;
+                borderTopRightRadius = value;
+            }
+        }
+        
+        public StyleLength borderBottomRadius
+        {
+            set
+            {
+                borderBottomLeftRadius = value;
+                borderBottomRightRadius = value;
+            }
+        }
+        
+        public StyleColor borderColor
+        {
+            set
+            {
+                borderBottomColor = value;
+                borderLeftColor = value;
+                borderRightColor = value;
+                borderTopColor = value;
+            }
+        }
+        
+        public StyleFloat borderSpacing
+        {
+            set
+            {
+                borderLeftWidth = value;
+                borderRightWidth = value;
+                borderBottomWidth = value;
+                borderTopWidth = value;
+            }
+        }
+        
+        public StyleLength margin
+        {
+            set
+            {
+                marginBottom = value;
+                marginLeft = value;
+                marginRight = value;
+                marginTop = value;
+            }
+        }
+        
+        public StyleLength padding
+        {
+            set
+            {
+                paddingBottom = value;
+                paddingLeft = value;
+                paddingRight = value;
+                paddingTop = value;
+            }
+        }
+        
+        public StyleFloat border
+        {
+            set
+            {
+                borderBottomWidth = value;
+                borderLeftWidth = value;
+                borderRightWidth = value;
+                borderTopWidth = value;
+            }
+        }
     }
 }

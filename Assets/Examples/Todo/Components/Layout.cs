@@ -1,7 +1,7 @@
 ﻿using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Components
 {
@@ -9,7 +9,7 @@ namespace Examples.Todo.Components
     {
         public override void OnRender()
         {
-            _<Box, StyleProps>(
+            _<Group, StyleProps>(
                 props: new StyleProps() { 
                     className = "todo-bg",
                     style = new Style()
@@ -17,10 +17,7 @@ namespace Examples.Todo.Components
                         position = new StyleEnum<Position>(Position.Absolute),
                         width = new StyleLength(500),
                         height = new StyleLength(500),
-                        paddingBottom = new StyleLength(20),
-                        paddingLeft = new StyleLength(20),
-                        paddingRight = new StyleLength(20),
-                        paddingTop = new StyleLength(20),
+                        padding = new StyleLength(20),
                         maxWidth = new StyleLength(Length.Percent(90)),
                         maxHeight = new StyleLength(Length.Percent(90)),
                         top = new StyleLength(Length.Percent(50)),

@@ -18,7 +18,7 @@ namespace Examples.AllComponents.Pages
     {
         public override void OnRender()
         {
-            _<Box, StyleProps>(
+            _<Group, StyleProps>(
                 props: new StyleProps() {style = new Style()
                 {
                     borderBottomColor = new StyleColor(new UnityEngine.Color(0.5f, 0.5f, 0.5f, 1)),
@@ -58,7 +58,7 @@ namespace Examples.AllComponents.Pages
 
             Props.Set(new PortalPageProps()
             {
-                target = _<Box>().FragmentNode
+                target = _<Group>().FragmentNode
             });
         }
     }

@@ -64,6 +64,9 @@ namespace Kekser.ComponentSystem.ComponentUI
         {
             foreach ((PropertyInfo styleProperty, PropertyInfo iStyleProperty) in StylePropMap)
             {
+                if (!styleProperty.CanRead || !iStyleProperty.CanWrite)
+                    continue;
+                
                 object styleValue = styleProperty.GetValue(style);
                 switch (styleValue)
                 {

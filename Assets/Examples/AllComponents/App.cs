@@ -68,16 +68,7 @@ namespace Examples.AllComponents
                                         onClick = new Action(() => Props.Set(new AppProps() { page = (Pages)page })),
                                         style = new Style()
                                         {
-                                            paddingBottom = new StyleLength(5),
-                                            paddingLeft = new StyleLength(5),
-                                            paddingRight = new StyleLength(5),
-                                            paddingTop = new StyleLength(5),
                                             marginBottom = new StyleLength(5),
-                                            backgroundColor = new StyleColor(new Color(1f, 1f, 1f, 1)),
-                                            borderTopRightRadius = new StyleLength(5),
-                                            borderBottomRightRadius = new StyleLength(5),
-                                            borderBottomLeftRadius = new StyleLength(5),
-                                            borderTopLeftRadius = new StyleLength(5),
                                         }
                                     },
                                     render: () =>

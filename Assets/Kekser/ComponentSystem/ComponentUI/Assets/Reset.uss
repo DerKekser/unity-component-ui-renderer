@@ -46,12 +46,3 @@
     border-width: 0;
     padding: 0;
 }
-
-.unity-base-text-field__input {
-    border-radius: 0;
-    border-width: 0;
-    padding: 0;
-    background-color: transparent;
-    border-color: transparent;
-    margin: 0;
-}

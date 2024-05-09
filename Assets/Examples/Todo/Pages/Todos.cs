@@ -2,9 +2,9 @@
 using Examples.Todo.Components;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI;
+using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 
 namespace Examples.Todo.Pages
 {
@@ -46,7 +46,7 @@ namespace Examples.Todo.Pages
                     marginTop = new StyleLength(5)
                 }}
             );
-            _<Box, StyleProps>(
+            _<Group, StyleProps>(
                 props: new StyleProps() { style = new Style()
                 {
                     flexShrink = new StyleFloat(0f),

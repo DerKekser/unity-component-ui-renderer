@@ -29,8 +29,6 @@ namespace Examples.Todo.Components
                     {
                         width = new StyleLength(Length.Percent(100)),
                         height = new StyleLength(Length.Percent(100)),
-                        paddingLeft = new StyleLength(10),
-                        paddingRight = new StyleLength(10),
                         fontSize = new StyleLength(24),
                         color = new StyleColor(Color.black),
                     }

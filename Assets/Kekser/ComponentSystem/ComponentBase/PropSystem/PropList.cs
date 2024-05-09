@@ -16,6 +16,9 @@ namespace Kekser.ComponentSystem.ComponentBase.PropSystem
         {
             foreach (PropertyInfo propertyInfo in PropProperties)
             {
+                if (!propertyInfo.CanRead || !propertyInfo.CanWrite)
+                    continue;
+
                 switch (propertyInfo.GetValue(props))
                 {
                     case IPropValue propValue:

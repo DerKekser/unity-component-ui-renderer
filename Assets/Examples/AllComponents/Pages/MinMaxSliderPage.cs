@@ -26,7 +26,6 @@ namespace Examples.AllComponents.Pages
                 props: new MinMaxSliderProps()
                 {
                     onChange = (Action<float, float>)HandleChange,
-                    label = "MinMaxSlider",
                     min = OwnProps.min,
                     max = OwnProps.max,
                     lowLimit = 25,

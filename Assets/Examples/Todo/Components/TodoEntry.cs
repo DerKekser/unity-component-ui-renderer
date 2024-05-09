@@ -5,8 +5,8 @@ using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
-using Box = Kekser.ComponentSystem.ComponentUI.Components.Box;
 using Button = Kekser.ComponentSystem.ComponentUI.Components.Button;
+using GroupBox = Kekser.ComponentSystem.ComponentUI.Components.GroupBox;
 using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
 
 namespace Examples.Todo.Components
@@ -36,7 +36,7 @@ namespace Examples.Todo.Components
         {
             TodoData todo = OwnProps.todo;
             
-            _<Box, StyleProps>(
+            _<Group, StyleProps>(
                 props: new StyleProps() { style = new Style() 
                 {
                     height = new StyleLength(50),
@@ -61,7 +61,7 @@ namespace Examples.Todo.Components
                         render: () =>
                         {
                             if (!todo.done) return;
-                            _<Box, StyleProps>(
+                            _<Group, StyleProps>(
                                 props: new StyleProps() { 
                                     className = "icon",
                                     style = new Style() 
@@ -103,8 +103,8 @@ namespace Examples.Todo.Components
                                 marginLeft = new StyleLength(5),
                             }
                         },
-                        render: () => _<Box, StyleProps>(
-                            props: new StyleProps() { 
+                        render: () => _<GroupBox, GroupBoxProps>(
+                            props: new GroupBoxProps() { 
                                 className = "icon",
                                 style = new Style() 
                                 {
