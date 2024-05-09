@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class ListView: UIComponent<UnityEngine.UIElements.ListView, StyleProps>
+    public sealed class ListView: UIComponent<UnityEngine.UIElements.ListView, StyleProps>
     {
         public override void OnRender()
         {

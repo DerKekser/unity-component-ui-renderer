@@ -8,10 +8,20 @@
         public bool IsSet => _isSet;
         public bool IsOptional => false;
         
+        public ObligatoryValue() { }
+        public ObligatoryValue(T value)
+        {
+            _value = value;
+            _isSet = true;
+        }
+        
         public bool Equals(IPropValue other)
         {
             if (other is ObligatoryValue<T> obligatoryValue)
+            {
+                if (obligatoryValue._value == null) return _value == null;
                 return obligatoryValue._value.Equals(_value);
+            }
             return false;
         }
 

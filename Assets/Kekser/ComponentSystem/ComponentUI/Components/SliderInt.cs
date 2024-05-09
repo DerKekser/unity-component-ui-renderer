@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class SliderInt: UIComponent<UnityEngine.UIElements.SliderInt, StyleProps>
+    public sealed class SliderInt: UIComponent<UnityEngine.UIElements.SliderInt, StyleProps>
     {
         
     }

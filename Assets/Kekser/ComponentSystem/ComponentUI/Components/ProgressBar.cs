@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class ProgressBar: UIComponent<UnityEngine.UIElements.ProgressBar, StyleProps>
+    public sealed class ProgressBar: UIComponent<UnityEngine.UIElements.ProgressBar, StyleProps>
     {
 
     }

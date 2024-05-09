@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class GroupBox: UIComponent<UnityEngine.UIElements.GroupBox, StyleProps>
+    public sealed class GroupBox: UIComponent<UnityEngine.UIElements.GroupBox, StyleProps>
     {
         public override void OnRender()
         {

@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class MinMaxSlider: UIComponent<UnityEngine.UIElements.MinMaxSlider, StyleProps>
+    public sealed class MinMaxSlider: UIComponent<UnityEngine.UIElements.MinMaxSlider, StyleProps>
     {
         
     }

@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class Toggle: UIComponent<UnityEngine.UIElements.Toggle, StyleProps>
+    public sealed class Toggle: UIComponent<UnityEngine.UIElements.Toggle, StyleProps>
     {
         
     }

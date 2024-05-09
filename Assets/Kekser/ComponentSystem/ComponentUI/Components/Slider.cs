@@ -11,7 +11,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<float>> onChange { get; set; } = new();
     }
     
-    public class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>
+    public sealed class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>
     {
         private void Change(ChangeEvent<float> eChangeEvent)
         {

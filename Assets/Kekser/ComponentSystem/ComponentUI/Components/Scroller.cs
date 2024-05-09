@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class Scroller: UIComponent<UnityEngine.UIElements.ScrollView, StyleProps>
+    public sealed class Scroller: UIComponent<UnityEngine.UIElements.ScrollView, StyleProps>
     {
         
     }
