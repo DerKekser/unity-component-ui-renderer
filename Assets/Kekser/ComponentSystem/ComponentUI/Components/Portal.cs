@@ -1,6 +1,11 @@
 ﻿namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public sealed class Portal: UIPortal
+    public class PortalProps: UIPortalProps
+    {
+        
+    }
+    
+    public sealed class Portal: UIPortal<PortalProps>
     {
         
     }

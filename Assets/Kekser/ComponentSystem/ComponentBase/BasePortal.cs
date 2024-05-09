@@ -1,22 +1,34 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using UnityEngine;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public class BasePortal<TNode>: BaseFragment<TNode, BasePortal<TNode>.PortalProps> where TNode: class, new()
+    public abstract class PortalProps<TNode> where TNode: class, new()
     {
-        public class PortalProps
+        public OptionalValue<TNode> target { get; set; } = new();
+    }
+    
+    public abstract class BasePortal<TNode, TPortalProps>: BaseFragment<TNode, TPortalProps> where TNode: class, new() where TPortalProps: PortalProps<TNode>, new()
+    {
+        private class InternalFragment: BaseFragment<TNode>
         {
-            public OptionalValue<TNode> target { get; set; }
+            public override void OnRender()
+            {
+                Children();
+            }
         }
         
         public override void OnRender()
         {
             if (OwnProps.target.IsSet)
-                _fragmentNode = OwnProps.target;
+                _fragmentNode = ((TNode)OwnProps.target) ?? _fragmentRoot;
             else
                 _fragmentNode = _fragmentRoot;
             
-            Children();
+            _<InternalFragment>(
+                key: _fragmentNode.GetHashCode().ToString(),
+                render: Children
+            );
         }
     }
 }
