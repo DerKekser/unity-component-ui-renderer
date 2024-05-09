@@ -3,9 +3,9 @@ using Kekser.ComponentSystem.ComponentUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Examples.Todo
+namespace Examples.AllComponents
 {
-    public class Example : MonoBehaviour
+    public class AllComponentsExample : MonoBehaviour
     {
         [SerializeField] 
         private UIDocument _uiDocument;
