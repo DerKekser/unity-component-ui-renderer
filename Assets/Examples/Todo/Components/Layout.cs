@@ -11,7 +11,7 @@ namespace Examples.Todo.Components
         {
             _<Group, StyleProps>(
                 props: new StyleProps() { 
-                    className = "todo-bg absolute p-20 w-500 h-500 max-w-[90%] max-h-[90%] t-[50%] l-[50%] translate-[-50%]",
+                    className = "bg-[Assets/Kenny%20UI/Spritesheet/greySheet.png@grey_panel.png] absolute p-20 w-500 h-500 max-w-[90%] max-h-[90%] t-[50%] l-[50%] translate-[-50%]",
                 },
                 render: Children
             );

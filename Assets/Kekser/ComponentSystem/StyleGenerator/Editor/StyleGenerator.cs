@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace Kekser.ComponentSystem.StyleGenerator
 {
-    public class StyleGenerator
+    public static class StyleGenerator
     {
         [MenuItem("Edit/Style Generator/Generate Styles")]
         [UnityEditor.Callbacks.DidReloadScripts]
@@ -16,10 +17,26 @@ namespace Kekser.ComponentSystem.StyleGenerator
         {
             EditorUtility.DisplayProgressBar("Generating Styles", "Extracting words from scripts", 0.0f);
             
-            StyleGeneratorSettings settings = StyleGeneratorSettingsEditor.GetSettings();
-            string[] words = ExtractWords(settings.LookUpPaths, settings.AddClasses);
+            StyleGeneratorSettings[] settings = FindSettings();
+            for (int i = 0; i < settings.Length; i++)
+            {
+                StyleGeneratorSettings setting = settings[i];
+                EditorUtility.DisplayProgressBar("Generating Styles", $"Generating styles for {setting.name}", (float)i / settings.Length);
+                GenerateStyles(setting);
+            }
             
-            EditorUtility.DisplayProgressBar("Generating Styles", "Applying styles", 0.5f);
+            EditorUtility.ClearProgressBar();
+        }
+        
+        private static StyleGeneratorSettings[] FindSettings()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:StyleGeneratorSettings");
+            return guids.Select(guid => AssetDatabase.LoadAssetAtPath<StyleGeneratorSettings>(AssetDatabase.GUIDToAssetPath(guid))).ToArray();
+        }
+        
+        public static void GenerateStyles(StyleGeneratorSettings settings)
+        {
+            string[] words = ExtractWords(settings.LookUpPaths, settings.AddClasses);
             
             StringBuilder styleSheet = new StringBuilder();
             foreach (StyleRule rule in _rules)
@@ -33,11 +50,9 @@ namespace Kekser.ComponentSystem.StyleGenerator
                 }
             }
             
-            EditorUtility.DisplayProgressBar("Generating Styles", "Saving styles", 1.0f);
-            
-            System.IO.File.WriteAllText("Assets/Kekser/ComponentSystem/StyleGenerator/GeneratedStyles.uss", styleSheet.ToString());
-            
-            EditorUtility.ClearProgressBar();
+            string settingsPath = AssetDatabase.GetAssetPath(settings);
+            string styleSheetPath = settingsPath.Replace(".asset", ".uss");
+            System.IO.File.WriteAllText(styleSheetPath, styleSheet.ToString());
         }
 
         private static string[] ExtractStringsFromScripts(string[] paths)
@@ -86,6 +101,9 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         private static StyleRule[] _rules = new []
         {
+            // TODO: add support for deep selectors like [&_*] or [&>*]
+            // TODO: add support for pseudo classes like :hover or :active
+            
             new StyleRule("^m-([0-9]+)$", (match, className) => $".{className} {{ margin: {match.Groups[1].Value}px; }}"),
             new StyleRule(@"^m-\[(.*?)]$", (match, className) => $".{className} {{ margin: {match.Groups[1].Value}; }}"),
             new StyleRule("^mt-([0-9]+)$", (match, className) => $".{className} {{ margin-top: {match.Groups[1].Value}px; }}"),
@@ -139,27 +157,36 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule(@"^translateY-\[(.*?)]$", (match, className) => $".{className} {{ translate: 0px {match.Groups[1].Value}; }}"),
             
             new StyleRule("^bg-([a-zA-Z]+)$", (match, className) => $".{className} {{ background-color: {match.Groups[1].Value}; }}"),
-            new StyleRule(@"^bg-\[([a-zA-Z]+)]$", (match, className) =>
+            new StyleRule(@"^bg-\[(.*?)]$", (match, className) =>
             {
                 string raw = match.Groups[1].Value;
-                if (ColorUtility.TryParseHtmlString(raw, out Color color))
+                string[] parts = raw.Split('@');
+                
+                if (ColorUtility.TryParseHtmlString(raw, out Color color) || parts.Length == 0)
                     return $".{className} {{ background-color: {raw}; }}";
                 
-                //check if raw as path exists in assetdb
-                if (AssetDatabase.LoadAssetAtPath<Texture2D>(raw) != null)
+                string assetPath = parts[0].Replace("%20", " ");
+                string fileName = parts.Length > 1 ? parts[1].Replace("%20", " ") : null;
+                
+                Object[] assets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
+                if (assets.Length > 0)
                 {
-                    // TODO: get file from path
-                    // get guid and file id
-                    // build path e.g. "project://database/Assets/Kenny%20UI/Cursor/hand_thin_point.png?fileID=2800000&guid=d11bc17a7fc984f4fa3d15bd775a0f63&type=3#hand_thin_point"
+                    string guid = AssetDatabase.AssetPathToGUID(assetPath);
+                    Object fileObj = assets.FirstOrDefault(x => x.name == fileName);
                     
-                    string a;
-                    return $".{className} {{ background-image: url(project://database/{raw}); }}";
+                    // TODO: add handling for fileID of single asset and support for type
+                    if (fileName == null || fileObj == null)
+                        return $".{className} {{ background-image: url('project://database/{assetPath.Replace(" ", "%20")}?fileID=2800000&guid={guid}'); }}";
+                    
+                    AssetDatabase.TryGetGUIDAndLocalFileIdentifier(fileObj, out string fileId, out long _);
+                    
+                    return $".{className} {{ background-image: url('project://database/{assetPath.Replace(" ", "%20")}?fileID={fileId}&guid={guid}&type=3#{fileName.Replace(" ", "%20")}'); }}";
                 }
                 
-                return $".{className} {{ background-image: url({raw}); }}";
+                return $".{className} {{ background-image: url('{raw}'); }}";
             }),
             new StyleRule("^color-([a-zA-Z]+)$", (match, className) => $".{className} {{ color: {match.Groups[1].Value}; }}"),
-            new StyleRule(@"^color-\[([a-zA-Z]+)]$", (match, className) => $".{className} {{ color: {match.Groups[1].Value}; }}"),
+            new StyleRule(@"^color-\[(.*?)]$", (match, className) => $".{className} {{ color: {match.Groups[1].Value}; }}"),
             
             new StyleRule("^font-([0-9]+)$", (match, className) => $".{className} {{ font-size: {match.Groups[1].Value}px; }}"),
             new StyleRule(@"^font-\[(.*?)]$", (match, className) => $".{className} {{ font-size: {match.Groups[1].Value}; }}"),
@@ -221,3 +248,4 @@ namespace Kekser.ComponentSystem.StyleGenerator
         };
     }
 }
+#endif

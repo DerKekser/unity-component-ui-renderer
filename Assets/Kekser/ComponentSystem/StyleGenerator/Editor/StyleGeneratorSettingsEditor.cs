@@ -1,34 +1,28 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Kekser.ComponentSystem.StyleGenerator
 {
-    public class StyleGeneratorSettingsEditor
+    [CustomEditor(typeof(StyleGeneratorSettings))]
+    public class StyleGeneratorSettingsEditor : Editor
     {
-        [MenuItem("Edit/Style Generator/Select Settings")]
-        public static void SelectSettings()
+        public override void OnInspectorGUI()
         {
-            if (GetSettings() == null) CreateSettings();
-            Selection.activeObject = GetSettings();
-        }
-        
-        [InitializeOnLoadMethod]
-        private static void Initialize()
-        {
-            if (GetSettings() != null) return;
-            CreateSettings();
-        }
-        
-        private static void CreateSettings()
-        {
-            StyleGeneratorSettings settings = ScriptableObject.CreateInstance<StyleGeneratorSettings>();
-            AssetDatabase.CreateAsset(settings, "Assets/Kekser/ComponentSystem/StyleGenerator/StyleGeneratorSettings.asset");
-            AssetDatabase.SaveAssets();
-        }
-        
-        public static StyleGeneratorSettings GetSettings()
-        {
-            return AssetDatabase.LoadAssetAtPath<StyleGeneratorSettings>("Assets/Kekser/ComponentSystem/StyleGenerator/StyleGeneratorSettings.asset");
+            StyleGeneratorSettings settings = (StyleGeneratorSettings) target;
+            
+            if (GUILayout.Button("Generate Styles"))
+                StyleGenerator.GenerateStyles(settings);
+            
+            List<string> lookUpPaths = new List<string>(settings.LookUpPaths);
+            if (lookUpPaths.Count == 0)
+                EditorGUILayout.HelpBox("No look up paths set", MessageType.Warning);
+            if (lookUpPaths.Contains("Assets"))
+                EditorGUILayout.HelpBox("Assets folder is too broad", MessageType.Warning);
+            
+            base.OnInspectorGUI();
         }
     }
 }
+#endif

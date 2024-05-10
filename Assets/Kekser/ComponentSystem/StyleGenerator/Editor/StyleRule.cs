@@ -1,6 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Text.RegularExpressions;
-using JetBrains.Annotations;
 
 namespace Kekser.ComponentSystem.StyleGenerator
 {
@@ -9,7 +9,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
         private string _className;
         private Func<Match, string, string> _style;
         
-        public StyleRule([NotNull, RegexPattern] string className, Func<Match, string, string> style)
+        public StyleRule(string className, Func<Match, string, string> style)
         {
             _className = className;
             _style = style;
@@ -17,7 +17,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         public string CleanupClassName(string className)
         {
-            return Regex.Replace(className, @"[^a-zA-Z0-9-._]", @"_");
+            return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
         }
         
         public bool IsMatch(string className)
@@ -32,3 +32,4 @@ namespace Kekser.ComponentSystem.StyleGenerator
         }
     }
 }
+#endif

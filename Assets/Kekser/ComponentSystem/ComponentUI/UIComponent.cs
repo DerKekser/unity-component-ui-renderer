@@ -54,7 +54,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         public string CleanupClassName(string className)
         {
             //escape all non alphanumeric characters with backslash
-            return Regex.Replace(className, @"[^a-zA-Z0-9-._]", @"_");
+            return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
         }
 
         public void ApplyStyling()
@@ -63,8 +63,8 @@ namespace Kekser.ComponentSystem.ComponentUI
                 ApplyStyle(styleProps.style);
             if (OwnProps is IClassNameProp classNameProps && classNameProps.className.IsSet)
                 ApplyClassName(classNameProps.className);
-            /*else 
-                ApplyClassName("");*/
+            else 
+                ApplyClassName("");
         }
         
         public void ApplyStyle(Style style)
