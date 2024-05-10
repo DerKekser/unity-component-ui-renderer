@@ -103,6 +103,8 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         private static StyleRule[] _rules = new []
         {
+            // TODO: add style reset
+            
             // TODO: add support for deep selectors like [&_*] or [&>*]
             // TODO: add support for pseudo classes like :hover or :active
             // TODO: add support for different color formats like rgb
