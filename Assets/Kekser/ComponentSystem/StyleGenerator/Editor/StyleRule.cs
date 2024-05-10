@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using System;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 namespace Kekser.ComponentSystem.StyleGenerator
 {
@@ -22,13 +23,17 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         public bool IsMatch(string className)
         {
-            return Regex.IsMatch(className, _className);
+            return Regex.IsMatch(className, $"^(.+:)?{_className}$");
         }
 
         public string ApplyStyle(string className)
         {
-            Match matches = Regex.Match(className, _className);
-            return _style(matches, CleanupClassName(className));
+            Match matches = Regex.Match(className, $"^(.+:)?{_className}$");
+            
+            string pseudo = matches.Groups[1].Value.TrimEnd(':');
+            string cName = CleanupClassName(className) + (string.IsNullOrEmpty(pseudo) ? "" : $":{pseudo}");
+            
+            return _style(matches, cName);
         }
     }
 }

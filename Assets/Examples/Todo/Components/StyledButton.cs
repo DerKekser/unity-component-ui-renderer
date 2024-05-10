@@ -24,7 +24,7 @@ namespace Examples.Todo.Components
                 props: new ButtonProps()
                 {
                     onClick = OwnProps.onClick,
-                    className = "unity-button bg-[Assets/Kenny%20UI/Spritesheet/blueSheet.png@blue_button11.png] w-[100%] h-[100%]",
+                    className = "unity-button bg-[Assets/Kenny%20UI/Spritesheet/blueSheet.png@blue_button11.png] hover:bg-[Assets/Kenny%20UI/Spritesheet/blueSheet.png@blue_button12.png] w-[100%] h-[100%]",
                 },
                 render: () => _<Label, LabelProps>(
                     props: new LabelProps()

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: StyleGeneratorSettings
   m_EditorClassIdentifier: 
   _lookUpPaths:
-  - Assets/Example/Todo
-  _addClasses: []
+  - Assets/Examples/Todo
+  _safeList: []
