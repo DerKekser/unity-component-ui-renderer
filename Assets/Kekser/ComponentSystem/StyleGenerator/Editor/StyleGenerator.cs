@@ -103,38 +103,36 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         private static StyleRule[] _rules = new []
         {
-            // TODO: add style reset
-
-            new StyleRule("m", "px", true, value => $"margin: {value}"),
-            new StyleRule("mt", "px", true, value => $"margin-top: {value}"),
-            new StyleRule("mr", "px", true, value => $"margin-right: {value}"),
-            new StyleRule("mb", "px", true, value => $"margin-bottom: {value}"),
-            new StyleRule("ml", "px", true, value => $"margin-left: {value}"),
+            new StyleRule("m", StyleRule.Unit.Pixel, value => $"margin: {value}"),
+            new StyleRule("mt", StyleRule.Unit.Pixel, value => $"margin-top: {value}"),
+            new StyleRule("mr", StyleRule.Unit.Pixel, value => $"margin-right: {value}"),
+            new StyleRule("mb", StyleRule.Unit.Pixel, value => $"margin-bottom: {value}"),
+            new StyleRule("ml", StyleRule.Unit.Pixel, value => $"margin-left: {value}"),
             
-            new StyleRule("p", "px", true, value => $"padding: {value}"),
-            new StyleRule("pt", "px", true, value => $"padding-top: {value}"),
-            new StyleRule("pr", "px", true, value => $"padding-right: {value}"),
-            new StyleRule("pb", "px", true, value => $"padding-bottom: {value}"),
-            new StyleRule("pl", "px", true, value => $"padding-left: {value}"),
+            new StyleRule("p", StyleRule.Unit.Pixel, value => $"padding: {value}"),
+            new StyleRule("pt", StyleRule.Unit.Pixel, value => $"padding-top: {value}"),
+            new StyleRule("pr", StyleRule.Unit.Pixel, value => $"padding-right: {value}"),
+            new StyleRule("pb", StyleRule.Unit.Pixel, value => $"padding-bottom: {value}"),
+            new StyleRule("pl", StyleRule.Unit.Pixel, value => $"padding-left: {value}"),
             
-            new StyleRule("w", "px", true, value => $"width: {value}"),
-            new StyleRule("h", "px", true, value => $"height: {value}"),
+            new StyleRule("w", StyleRule.Unit.Pixel, value => $"width: {value}"),
+            new StyleRule("h", StyleRule.Unit.Pixel, value => $"height: {value}"),
             
-            new StyleRule("max-w", "px", true, value => $"max-width: {value}"),
-            new StyleRule("max-h", "px", true, value => $"max-height: {value}"),
-            new StyleRule("min-w", "px", true, value => $"min-width: {value}"),
-            new StyleRule("min-h", "px", true, value => $"min-height: {value}"),
+            new StyleRule("max-w", StyleRule.Unit.Pixel, value => $"max-width: {value}"),
+            new StyleRule("max-h", StyleRule.Unit.Pixel, value => $"max-height: {value}"),
+            new StyleRule("min-w", StyleRule.Unit.Pixel, value => $"min-width: {value}"),
+            new StyleRule("min-h", StyleRule.Unit.Pixel, value => $"min-height: {value}"),
             
-            new StyleRule("t", "px", true, value => $"top: {value}"),
-            new StyleRule("r", "px", true, value => $"right: {value}"),
-            new StyleRule("b", "px", true, value => $"bottom: {value}"),
-            new StyleRule("l", "px", true, value => $"left: {value}"),
+            new StyleRule("t", StyleRule.Unit.Pixel, value => $"top: {value}"),
+            new StyleRule("r", StyleRule.Unit.Pixel, value => $"right: {value}"),
+            new StyleRule("b", StyleRule.Unit.Pixel, value => $"bottom: {value}"),
+            new StyleRule("l", StyleRule.Unit.Pixel, value => $"left: {value}"),
             
-            new StyleRule("translate", "px", true, value => $"translate: {value}"),
-            new StyleRule("translate-x", "px", true, value => $"translate: {value} 0px"),
-            new StyleRule("translate-y", "px", true, value => $"translate: 0px {value}"),
+            new StyleRule("translate", StyleRule.Unit.Pixel, value => $"translate: {value}"),
+            new StyleRule("translate-x", StyleRule.Unit.Pixel, value => $"translate: {value} 0px"),
+            new StyleRule("translate-y", StyleRule.Unit.Pixel, value => $"translate: 0px {value}"),
             
-            new StyleRule("bg", "", true, value =>
+            new StyleRule("bg", StyleRule.Unit.String, value =>
                 {
                     value = value.Replace(" ", "_");
                     string[] parts = value.Split('@');
@@ -162,66 +160,62 @@ namespace Kekser.ComponentSystem.StyleGenerator
                 
                     return $"background-image: url('{value}')";
                 }),
-            new StyleRule("color", "", true, value => $"color: {value}"),
+            new StyleRule("color", StyleRule.Unit.String, value => $"color: {value}"),
             
-            new StyleRule("font", "px", true, value => $"font-size: {value}"),
+            new StyleRule("font", StyleRule.Unit.Pixel, value => $"font-size: {value}"),
             
-            new StyleRule("absolute", "", false, _ => "position: absolute"),
-            new StyleRule("relative", "", false, _ => "position: relative"),
+            new StyleRule("absolute", StyleRule.Unit.None, _ => "position: absolute"),
+            new StyleRule("relative", StyleRule.Unit.None, _ => "position: relative"),
             
-            new StyleRule("flex", "", false, _ => "display: flex"),
-            new StyleRule("none", "", false, _ => "display: none"),
+            new StyleRule("flex", StyleRule.Unit.None, _ => "display: flex"),
+            new StyleRule("none", StyleRule.Unit.None, _ => "display: none"),
             
-            new StyleRule("flex", "", true, value => $"flex: {value}"),
-            new StyleRule("flex-grow", "", true, value => $"flex-grow: {value}"),
-            new StyleRule("flex-shrink", "", true, value => $"flex-shrink: {value}"),
-            new StyleRule("flex-basis", "", true, value => $"flex-basis: {value}"),
+            new StyleRule("flex", StyleRule.Unit.Int, value => $"flex: {value}"),
+            new StyleRule("flex-grow", StyleRule.Unit.Int, value => $"flex-grow: {value}"),
+            new StyleRule("flex-shrink", StyleRule.Unit.Int, value => $"flex-shrink: {value}"),
+            new StyleRule("flex-basis", StyleRule.Unit.Int, value => $"flex-basis: {value}"),
             
-            new StyleRule("flex-row", "", false, _ => "flex-direction: row"),
-            new StyleRule("flex-row-reverse", "", false, _ => "flex-direction: row-reverse"),
-            new StyleRule("flex-column", "", false, _ => "flex-direction: column"),
-            new StyleRule("flex-column-reverse", "", false, _ => "flex-direction: column-reverse"),
+            new StyleRule("flex-row", StyleRule.Unit.None, _ => "flex-direction: row"),
+            new StyleRule("flex-row-reverse", StyleRule.Unit.None, _ => "flex-direction: row-reverse"),
+            new StyleRule("flex-column", StyleRule.Unit.None, _ => "flex-direction: column"),
+            new StyleRule("flex-column-reverse", StyleRule.Unit.None, _ => "flex-direction: column-reverse"),
             
-            new StyleRule("flex-wrap", "", false, _ => "flex-wrap: wrap"),
-            new StyleRule("flex-wrap-reverse", "", false, _ => "flex-wrap: wrap-reverse"),
-            new StyleRule("flex-nowrap", "", false, _ => "flex-wrap: nowrap"),
+            new StyleRule("flex-wrap", StyleRule.Unit.None, _ => "flex-wrap: wrap"),
+            new StyleRule("flex-wrap-reverse", StyleRule.Unit.None, _ => "flex-wrap: wrap-reverse"),
+            new StyleRule("flex-nowrap", StyleRule.Unit.None, _ => "flex-wrap: nowrap"),
             
-            new StyleRule("justify-start", "", false, _ => "justify-content: flex-start"),
-            new StyleRule("justify-end", "", false, _ => "justify-content: flex-end"),
-            new StyleRule("justify-center", "", false, _ => "justify-content: center"),
-            new StyleRule("justify-between", "", false, _ => "justify-content: space-between"),
-            new StyleRule("justify-around", "", false, _ => "justify-content: space-around"),
+            new StyleRule("justify-start", StyleRule.Unit.None, _ => "justify-content: flex-start"),
+            new StyleRule("justify-end", StyleRule.Unit.None, _ => "justify-content: flex-end"),
+            new StyleRule("justify-center", StyleRule.Unit.None, _ => "justify-content: center"),
+            new StyleRule("justify-between", StyleRule.Unit.None, _ => "justify-content: space-between"),
+            new StyleRule("justify-around", StyleRule.Unit.None, _ => "justify-content: space-around"),
             
-            new StyleRule("items-auto", "", false, _ => "align-items: auto"),
-            new StyleRule("items-start", "", false, _ => "align-items: flex-start"),
-            new StyleRule("items-end", "", false, _ => "align-items: flex-end"),
-            new StyleRule("items-center", "", false, _ => "align-items: center"),
-            new StyleRule("items-stretch", "", false, _ => "align-items: stretch"),
+            new StyleRule("items-auto", StyleRule.Unit.None, _ => "align-items: auto"),
+            new StyleRule("items-start", StyleRule.Unit.None, _ => "align-items: flex-start"),
+            new StyleRule("items-end", StyleRule.Unit.None, _ => "align-items: flex-end"),
+            new StyleRule("items-center", StyleRule.Unit.None, _ => "align-items: center"),
+            new StyleRule("items-stretch", StyleRule.Unit.None, _ => "align-items: stretch"),
             
-            new StyleRule("self-auto", "", false, _ => "align-self: auto"),
-            new StyleRule("self-start", "", false, _ => "align-self: flex-start"),
-            new StyleRule("self-end", "", false, _ => "align-self: flex-end"),
-            new StyleRule("self-center", "", false, _ => "align-self: center"),
-            new StyleRule("self-stretch", "", false, _ => "align-self: stretch"),
+            new StyleRule("self-auto", StyleRule.Unit.None, _ => "align-self: auto"),
+            new StyleRule("self-start", StyleRule.Unit.None, _ => "align-self: flex-start"),
+            new StyleRule("self-end", StyleRule.Unit.None, _ => "align-self: flex-end"),
+            new StyleRule("self-center", StyleRule.Unit.None, _ => "align-self: center"),
+            new StyleRule("self-stretch", StyleRule.Unit.None, _ => "align-self: stretch"),
             
-            new StyleRule("align-auto", "", false, _ => "align-content: auto"),
-            new StyleRule("align-start", "", false, _ => "align-content: flex-start"),
-            new StyleRule("align-end", "", false, _ => "align-content: flex-end"),
-            new StyleRule("align-center", "", false, _ => "align-content: center"),
-            new StyleRule("align-stretch", "", false, _ => "align-content: stretch"),
+            new StyleRule("align-auto", StyleRule.Unit.None, _ => "align-content: auto"),
+            new StyleRule("align-start", StyleRule.Unit.None, _ => "align-content: flex-start"),
+            new StyleRule("align-end", StyleRule.Unit.None, _ => "align-content: flex-end"),
+            new StyleRule("align-center", StyleRule.Unit.None, _ => "align-content: center"),
+            new StyleRule("align-stretch", StyleRule.Unit.None, _ => "align-content: stretch"),
             
-            new StyleRule("overflow-visible", "", false, _ => "overflow: visible"),
-            new StyleRule("overflow-hidden", "", false, _ => "overflow: hidden"),
+            new StyleRule("overflow-visible", StyleRule.Unit.None, _ => "overflow: visible"),
+            new StyleRule("overflow-hidden", StyleRule.Unit.None, _ => "overflow: hidden"),
             
-            new StyleRule("text", "", true, value => $"-unity-text-align: {value}"),
+            new StyleRule("text-align", StyleRule.Unit.String, value => $"-unity-text-align: {value}"),
             
-            new StyleRule("text-ellipsis", "", false, _ => "text-overflow: ellipsis"),
-            new StyleRule("text-wrap", "", false, _ => "white-space: wrap"),
-            new StyleRule("text-nowrap", "", false, _ => "white-space: nowrap"),
-            
-            // TODO: add support for deep selectors like [&_*] or [&>*]
-            // TODO: add support for pseudo classes like :hover or :active
-            // TODO: add support for different color formats like rgb
+            new StyleRule("text-ellipsis", StyleRule.Unit.None, _ => "text-overflow: ellipsis"),
+            new StyleRule("text-wrap", StyleRule.Unit.None, _ => "white-space: wrap"),
+            new StyleRule("text-nowrap", StyleRule.Unit.None, _ => "white-space: nowrap"),
         };
     }
 }

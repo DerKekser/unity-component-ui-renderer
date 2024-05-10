@@ -28,8 +28,10 @@
 .bg-_Assets_Kenny_20UI_Spritesheet_blueSheet_png_blue_checkmark_png_ { background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=d1023af4809dfc74ea55d04ae9bfe123&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_checkmark.png'); }
 .bg-_Assets_Kenny_20UI_Spritesheet_blueSheet_png_blue_button10_png_ { background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/blueSheet.png?fileID=d1023af4809dfc74ea55d04ae9bfe123&guid=d1023af4809dfc74ea55d04ae9bfe123&type=3#blue_button10.png'); }
 .bg-_Assets_Kenny_20UI_Spritesheet_greySheet_png_grey_crossWhite_png_ { background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=3d456c5ff9b4bb14981f2428d2c17e31&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_crossWhite.png'); }
-.color-_white_ { color: white; }
+.color-white { color: white; }
+.color-black { color: black; }
 .______color-_red_>* { color: red; }
+.color-grey { color: grey; }
 .font-24 { font-size: 24px; }
 .font-20 { font-size: 20px; }
 .absolute { position: absolute; }
@@ -42,6 +44,6 @@
 .items-center { align-items: center; }
 .self-center { align-self: center; }
 .overflow-hidden { overflow: hidden; }
-.text-_middle-center_ { -unity-text-align: middle-center; }
+.text-align-middle-center { -unity-text-align: middle-center; }
 .text-ellipsis { text-overflow: ellipsis; }
 .text-nowrap { white-space: nowrap; }

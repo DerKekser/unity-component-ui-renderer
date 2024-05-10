@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -7,24 +8,45 @@ namespace Kekser.ComponentSystem.StyleGenerator
 {
     public class StyleRule
     {
+        public enum Unit
+        {
+            None,
+            Pixel,
+            String,
+            Int,
+        }
+        
+        private readonly Dictionary<Unit, string> _unitMap = new()
+        {
+            {Unit.None, ""},
+            {Unit.Pixel, "px"},
+            {Unit.String, ""},
+            {Unit.Int, ""},
+        }; 
+        
+        private readonly Dictionary<Unit, string> _patternMap = new()
+        {
+            {Unit.None, @""},
+            {Unit.Pixel, @"-(\[(.+)]|([0-9]+))"},
+            {Unit.String, @"-(\[(.+)]|([0-9a-zA-Z-_]+))"},
+            {Unit.Int, @"-(\[(.+)]|([0-9]+))"},
+        };
+        
         private const string _pseudoClassPattern = @"((\[(.+)]|(.+)):)?";
-        private const string _valuePattern = @"-(\[(.+)]|([0-9]+))";
         
         private string _identifier;
-        private string _unit;
-        private bool _hasValue;
+        private Unit _unit;
         private Func<string, string> _callback;
 
         private Regex _pattern;
         
-        public StyleRule(string identifier, string unit, bool hasValue, Func<string, string> callback)
+        public StyleRule(string identifier, Unit unit, Func<string, string> callback)
         {
             _identifier = identifier;
             _unit = unit;
-            _hasValue = hasValue;
             _callback = callback;
             
-            _pattern = new Regex($"^{_pseudoClassPattern}{_identifier}{(_hasValue ? _valuePattern : "")}$");
+            _pattern = new Regex($"^{_pseudoClassPattern}{_identifier}{_patternMap[unit]}$");
         }
         
         public string CleanupClassName(string className)
@@ -43,7 +65,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             Match matches = _pattern.Match(className);
             
             string pseudo = matches.Groups[3].Success ? matches.Groups[3].Value : matches.Groups[4].Value;
-            string value = _hasValue ? (matches.Groups[6].Success ? matches.Groups[6].Value : $"{matches.Groups[7].Value}{_unit}") : "";
+            string value = _unit != Unit.None ? (matches.Groups[6].Success ? matches.Groups[6].Value : $"{matches.Groups[7].Value}{_unitMap[_unit]}") : "";
             
             pseudo = pseudo.Replace("_", " ").Replace("&", "");
             value = value.Replace("_", " ");

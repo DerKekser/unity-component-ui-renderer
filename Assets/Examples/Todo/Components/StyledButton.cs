@@ -30,7 +30,7 @@ namespace Examples.Todo.Components
                     props: new LabelProps()
                     {
                         text = OwnProps.text,
-                        className = "w-[100%] h-[100%] font-24 color-[white] text-[middle-center]",
+                        className = "w-[100%] h-[100%] font-24 color-white text-align-middle-center",
                     }
                 )
             );
