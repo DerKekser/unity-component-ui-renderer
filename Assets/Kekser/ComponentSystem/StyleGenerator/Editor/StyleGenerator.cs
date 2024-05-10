@@ -169,9 +169,9 @@ namespace Kekser.ComponentSystem.StyleGenerator
                 
                 if (ColorUtility.TryParseHtmlString(raw, out Color color) || parts.Length == 0)
                     return $".{className} {{ background-color: {raw}; }}";
-                
-                string assetPath = parts[0].Replace("%20", " ");
-                string fileName = parts.Length > 1 ? parts[1].Replace("%20", " ") : null;
+
+                string assetPath = HttpUtility.UrlDecode(parts[0]);
+                string fileName = parts.Length > 1 ? HttpUtility.UrlDecode(parts[1]) : null;
                 
                 Object[] assets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
                 if (assets.Length > 0)
@@ -181,11 +181,11 @@ namespace Kekser.ComponentSystem.StyleGenerator
                     
                     // TODO: add handling for fileID of single asset and support for type
                     if (fileName == null || fileObj == null)
-                        return $".{className} {{ background-image: url('project://database/{assetPath.Replace(" ", "%20")}?fileID=2800000&guid={guid}'); }}";
+                        return $".{className} {{ background-image: url('project://database/{HttpUtility.UrlPathEncode(assetPath)}?fileID=2800000&guid={guid}'); }}";
                     
                     AssetDatabase.TryGetGUIDAndLocalFileIdentifier(fileObj, out string fileId, out long _);
                     
-                    return $".{className} {{ background-image: url('project://database/{assetPath.Replace(" ", "%20")}?fileID={fileId}&guid={guid}&type=3#{fileName.Replace(" ", "%20")}'); }}";
+                    return $".{className} {{ background-image: url('project://database/{HttpUtility.UrlPathEncode(assetPath)}?fileID={fileId}&guid={guid}&type=3#{HttpUtility.UrlPathEncode(fileName)}'); }}";
                 }
                 
                 return $".{className} {{ background-image: url('{raw}'); }}";
