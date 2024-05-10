@@ -32,8 +32,16 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         public new TElement FragmentRoot => _fragmentRoot as TElement;
 
+        private void RemoveClasses(VisualElement element)
+        {
+            element.ClearClassList();
+            foreach (VisualElement child in element.Children())
+                RemoveClasses(child);
+        }
+        
         public override void Mount(VisualElement parent)
         {
+            RemoveClasses(_fragmentRoot);
             parent?.Add(_fragmentRoot);
             _fragmentNode = _fragmentRoot.contentContainer;
             base.Mount(parent);
