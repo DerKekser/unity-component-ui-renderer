@@ -41,5 +41,6 @@
 .items-center { align-items: center; }
 .self-center { align-self: center; }
 .overflow-hidden { overflow: hidden; }
+.text-_middle-center_ { -unity-text-align: middle-center; }
 .text-ellipsis { text-overflow: ellipsis; }
 .text-nowrap { white-space: nowrap; }
