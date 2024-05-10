@@ -238,8 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 1709937683}
   _styles:
-  - {fileID: 7433441132597879392, guid: d3b2620b856e6a64aa734b80d1956dd9, type: 3}
-  - {fileID: 7433441132597879392, guid: 7c8e41fca0b5f014194f82320ddd52cd, type: 3}
   - {fileID: 7433441132597879392, guid: 6e99ca0b8bcb6d94b921651a04bec08f, type: 3}
 --- !u!4 &1195754581
 Transform:
