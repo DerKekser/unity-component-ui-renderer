@@ -29,11 +29,9 @@ namespace Examples.Todo.Components
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             
             _<ScrollView, StyleProps>(
-                props: new StyleProps() { style = new Style() 
-                {
-                    height = new StyleLength(Length.Percent(100)),
-                    width = new StyleLength(Length.Percent(100)),
-                }},
+                props: new StyleProps() {
+                    className = "w-[100%] h-[100%]",
+                },
                 render: () =>
                 {
                     Each(todoProvider.GetTodos(), (todo, i) =>
@@ -54,13 +52,7 @@ namespace Examples.Todo.Components
                             props: new LabelProps()
                             {
                                 text = "No todos",
-                                style = new Style()
-                                {
-                                    color = new StyleColor(Color.grey),
-                                    fontSize = new StyleLength(20),
-                                    alignSelf = new StyleEnum<Align>(Align.Center),
-                                    marginTop = new StyleLength(10),
-                                }
+                                className = "color-grey font-20 mt-10 self-center",
                             }
                         );
                     }

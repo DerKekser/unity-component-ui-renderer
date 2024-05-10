@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.Components;
@@ -31,8 +32,16 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         public new TElement FragmentRoot => _fragmentRoot as TElement;
 
+        private void RemoveClasses(VisualElement element)
+        {
+            element.ClearClassList();
+            foreach (VisualElement child in element.Children())
+                RemoveClasses(child);
+        }
+        
         public override void Mount(VisualElement parent)
         {
+            RemoveClasses(_fragmentRoot);
             parent?.Add(_fragmentRoot);
             _fragmentNode = _fragmentRoot.contentContainer;
             base.Mount(parent);
@@ -50,14 +59,20 @@ namespace Kekser.ComponentSystem.ComponentUI
             base.Render();
         }
         
+        public string CleanupClassName(string className)
+        {
+            //escape all non alphanumeric characters with backslash
+            return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
+        }
+
         public void ApplyStyling()
         {
             if (OwnProps is IStyleProp styleProps && styleProps.style.IsSet)
                 ApplyStyle(styleProps.style);
             if (OwnProps is IClassNameProp classNameProps && classNameProps.className.IsSet)
                 ApplyClassName(classNameProps.className);
-            /*else 
-                ApplyClassName("");*/
+            else 
+                ApplyClassName("");
         }
         
         public void ApplyStyle(Style style)
@@ -87,7 +102,7 @@ namespace Kekser.ComponentSystem.ComponentUI
             FragmentRoot.ClearClassList();
             foreach (string className in classNames.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
             {
-                FragmentRoot.AddToClassList(className);
+                FragmentRoot.AddToClassList(CleanupClassName(className));
             }
         }
 

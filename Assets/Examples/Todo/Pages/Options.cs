@@ -33,12 +33,7 @@ namespace Examples.Todo.Pages
                             key: i.ToString(),
                             props: new StyledButtonProps()
                             {
-                                style = new Style()
-                                {
-                                    marginBottom = new StyleLength(i == 14 ? 0 : 5),
-                                    height = new StyleLength(50),
-                                    flexShrink = new StyleFloat(0f)
-                                },
+                                className = "mb-5 h-50 flex-shrink-0",
                                 text = $"Option {i}"
                             }
                         );
@@ -48,12 +43,7 @@ namespace Examples.Todo.Pages
             _<StyledButton, StyledButtonProps>(
                 props: new StyledButtonProps()
                 {
-                    style = new Style()
-                    {
-                        marginTop = new StyleLength(5),
-                        height = new StyleLength(50),
-                        flexShrink = new StyleFloat(0f)
-                    },
+                    className = "mb-5 h-50 flex-shrink-0",
                     onClick = (Action)HandleBack,
                     text = "Back"
                 }

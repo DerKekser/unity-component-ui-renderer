@@ -36,23 +36,19 @@ namespace Examples.Todo.Pages
         public override void OnRender()
         {
             _<TodoList, StyleProps>(
-                props: new StyleProps() { style = new Style() { flexGrow = new StyleFloat(1f) } }
+                props: new StyleProps(){
+                    className = "flex-grow-1"
+                }
             );
             _<TodoInput, StyleProps>(
-                props: new StyleProps() { style = new Style()
-                {
-                    flexShrink = new StyleFloat(0f),
-                    flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row),
-                    marginTop = new StyleLength(5)
-                }}
+                props: new StyleProps() { 
+                    className = "flex-shrink-0 flex-row mt-5",
+                }
             );
             _<Group, StyleProps>(
-                props: new StyleProps() { style = new Style()
-                {
-                    flexShrink = new StyleFloat(0f),
-                    flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row),
-                    marginTop = new StyleLength(5)
-                }},
+                props: new StyleProps() { 
+                    className = "flex-shrink-0 flex-row mt-5",
+                },
                 render: () =>
                 {
                     _<StyledButton, StyledButtonProps>(
@@ -60,12 +56,7 @@ namespace Examples.Todo.Pages
                         {
                             onClick = (Action)HandleOptions,
                             text = "Options",
-                            style = new Style()
-                            {
-                                height = new StyleLength(50),
-                                flexShrink = new StyleFloat(0f),
-                                flexGrow = new StyleFloat(1f)
-                            }
+                            className = "h-50 flex-shrink-0 flex-grow-1",
                         }
                     );
                     _<StyledButton, StyledButtonProps>(
@@ -73,13 +64,7 @@ namespace Examples.Todo.Pages
                         {
                             onClick = (Action)HandleQuit,
                             text = "Exit",
-                            style = new Style()
-                            {
-                                marginLeft = new StyleLength(5),
-                                height = new StyleLength(50),
-                                flexShrink = new StyleFloat(0f),
-                                flexGrow = new StyleFloat(1f)
-                            }
+                            className = "ml-5 h-50 flex-shrink-0 flex-grow-1",
                         }
                     );
                 }

@@ -24,14 +24,7 @@ namespace Examples.Todo.Components
                 {
                     onChange = OwnProps.onChange,
                     value = OwnProps.value,
-                    className = "todo-input",
-                    style = new Style()
-                    {
-                        width = new StyleLength(Length.Percent(100)),
-                        height = new StyleLength(Length.Percent(100)),
-                        fontSize = new StyleLength(24),
-                        color = new StyleColor(Color.black),
-                    }
+                    className = "bg-[Assets/Kenny%20UI/Spritesheet/greySheet.png@grey_button13.png] w-[100%] h-[100%] font-24 color-black [&>*]:color-[red]",
                 }
             );
         }

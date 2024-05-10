@@ -11,19 +11,7 @@ namespace Examples.Todo.Components
         {
             _<Group, StyleProps>(
                 props: new StyleProps() { 
-                    className = "todo-bg",
-                    style = new Style()
-                    {
-                        position = new StyleEnum<Position>(Position.Absolute),
-                        width = new StyleLength(500),
-                        height = new StyleLength(500),
-                        padding = new StyleLength(20),
-                        maxWidth = new StyleLength(Length.Percent(90)),
-                        maxHeight = new StyleLength(Length.Percent(90)),
-                        top = new StyleLength(Length.Percent(50)),
-                        left = new StyleLength(Length.Percent(50)),
-                        translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                    }
+                    className = "bg-[Assets/Kenny%20UI/Spritesheet/greySheet.png@grey_panel.png] absolute p-20 w-500 h-500 max-w-[90%] max-h-[90%] t-[50%] l-[50%] translate-[-50%_-50%]",
                 },
                 render: Children
             );

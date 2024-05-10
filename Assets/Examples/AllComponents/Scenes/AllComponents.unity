@@ -253,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 1709937683}
   _styles:
-  - {fileID: 7433441132597879392, guid: d3b2620b856e6a64aa734b80d1956dd9, type: 3}
+  - {fileID: 7433441132597879392, guid: e86c8796408cea84fbf7f0144ac40ebd, type: 3}
 --- !u!114 &1709937683 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8373484275458704297, guid: b23f6cb01f100ab48a84e3b256e8b979, type: 3}

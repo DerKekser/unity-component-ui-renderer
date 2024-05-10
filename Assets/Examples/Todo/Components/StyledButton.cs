@@ -24,24 +24,13 @@ namespace Examples.Todo.Components
                 props: new ButtonProps()
                 {
                     onClick = OwnProps.onClick,
-                    className = "unity-button todo-button",
-                    style = new Style()
-                    {
-                        width = new StyleLength(Length.Percent(100)),
-                        height = new StyleLength(Length.Percent(100)),
-                    }
+                    className = "bg-[Assets/Kenny%20UI/Spritesheet/blueSheet.png@blue_button11.png] hover:bg-[Assets/Kenny%20UI/Spritesheet/blueSheet.png@blue_button12.png] w-[100%] h-[100%]",
                 },
                 render: () => _<Label, LabelProps>(
                     props: new LabelProps()
                     {
                         text = OwnProps.text,
-                        style = new Style()
-                        {
-                            width = new StyleLength(Length.Percent(100)),
-                            height = new StyleLength(Length.Percent(100)),
-                            fontSize = new StyleLength(24),
-                            color = new StyleColor(Color.white),
-                        }
+                        className = "w-[100%] h-[100%] font-24 color-[white] text-[middle-center]",
                     }
                 )
             );

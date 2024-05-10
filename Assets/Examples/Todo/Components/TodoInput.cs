@@ -31,12 +31,7 @@ namespace Examples.Todo.Components
                 {
                     onChange = (Action<string>)HandleChange,
                     value = _inputValue,
-                    style = new Style()
-{
-                        flexGrow = new StyleFloat(1f),
-                        flexShrink = new StyleFloat(1f),
-                        height = new StyleLength(50)
-                    }
+                    className = "w-50 flex-1 text-nowrap",
                 }
             );
             _<StyledButton, StyledButtonProps>(
@@ -44,14 +39,7 @@ namespace Examples.Todo.Components
                 {
                     onClick = (Action)HandleAdd,
                     text = "Add",
-                    style = new Style()
-                    {
-                        marginLeft = new StyleLength(5),
-                        height = new StyleLength(50),
-                        width = new StyleLength(100),
-                        flexShrink = new StyleFloat(0f),
-                        flexGrow = new StyleFloat(0f)
-                    }
+                    className = "h-50 w-100 flex-0 ml-5",
                 }
             );
         }
