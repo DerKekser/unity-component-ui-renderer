@@ -36,7 +36,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
         
         public static void GenerateStyles(StyleGeneratorSettings settings)
         {
-            string[] words = ExtractWords(settings.LookUpPaths, settings.AddClasses);
+            string[] words = ExtractWords(settings.LookUpPaths, settings.SafeList);
             
             StringBuilder styleSheet = new StringBuilder();
             foreach (StyleRule rule in _rules)

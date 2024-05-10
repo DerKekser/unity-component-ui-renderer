@@ -9,10 +9,10 @@ namespace Kekser.ComponentSystem.StyleGenerator
         [SerializeField]
         private string[] _lookUpPaths = new string[0];
         [SerializeField]
-        private string[] _addClasses = new string[0];
+        private string[] _safeList = new string[0];
         
         public string[] LookUpPaths => _lookUpPaths;
-        public string[] AddClasses => _addClasses;
+        public string[] SafeList => _safeList;
 
         private void Reset()
         {
@@ -21,7 +21,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             {
                 UnityEditor.AssetDatabase.GetAssetPath(this)
             };
-            _addClasses = Array.Empty<string>();
+            _safeList = Array.Empty<string>();
 #endif
         }
     }
