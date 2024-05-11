@@ -61,7 +61,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public string CleanupClassName(string className)
         {
-            //escape all non alphanumeric characters with backslash
+            // TODO: escape some special characters instead of replacing them with "_"
             return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
         }
 
@@ -110,7 +110,6 @@ namespace Kekser.ComponentSystem.ComponentUI
         {
             base.SetContext(ctx);
             _fragmentRoot = new TElement();
-            _fragmentRoot.AddToClassList(GetType().Name);
             _fragmentNode = _fragmentRoot;
         }
     }

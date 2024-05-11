@@ -1,9 +1,11 @@
+TextInput { --unity-sync-text-editor-engine: true; }
 .mt-10 { margin-top: 10px; }
 .mt-5 { margin-top: 5px; }
 .mr-5 { margin-right: 5px; }
 .mb-5 { margin-bottom: 5px; }
 .ml-5 { margin-left: 5px; }
 .p-20 { padding: 20px; }
+.___TextInput__p-10>TextInput { padding: 10px; }
 .w-500 { width: 500px; }
 .w-_100__ { width: 100%; }
 .w-30 { width: 30px; }
@@ -30,7 +32,7 @@
 .bg-_Assets_Kenny_20UI_Spritesheet_greySheet_png_grey_crossWhite_png_ { background-image: url('project://database/Assets/Kenny%20UI/Spritesheet/greySheet.png?fileID=3d456c5ff9b4bb14981f2428d2c17e31&guid=3d456c5ff9b4bb14981f2428d2c17e31&type=3#grey_crossWhite.png'); }
 .color-white { color: white; }
 .color-black { color: black; }
-.______color-_red_>* { color: red; }
+.___TextInput__color-black>TextInput { color: black; }
 .color-grey { color: grey; }
 .font-24 { font-size: 24px; }
 .font-20 { font-size: 20px; }

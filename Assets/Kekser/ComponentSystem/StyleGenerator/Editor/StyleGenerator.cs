@@ -39,6 +39,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             string[] words = ExtractWords(settings.LookUpPaths, settings.SafeList);
          
             StringBuilder styleSheet = new StringBuilder();
+            styleSheet.Append("TextInput { --unity-sync-text-editor-engine: true; }\n"); // We need to enable this so that the TextInput can be interacted with
             foreach (StyleRule rule in _rules)
             {
                 foreach (string word in words)
