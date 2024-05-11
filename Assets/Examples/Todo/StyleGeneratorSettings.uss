@@ -10,7 +10,6 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .w-_100__ { width: 100%; }
 .w-30 { width: 30px; }
 .w-10 { width: 10px; }
-.w-50 { width: 50px; }
 .w-100 { width: 100px; }
 .h-500 { height: 500px; }
 .h-_100__ { height: 100%; }
@@ -42,10 +41,12 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .flex-0 { flex: 0; }
 .flex-grow-1 { flex-grow: 1; }
 .flex-shrink-0 { flex-shrink: 0; }
+.flex-basis-_100px_ { flex-basis: 100px; }
 .flex-row { flex-direction: row; }
 .justify-between { justify-content: space-between; }
 .items-center { align-items: center; }
 .self-center { align-self: center; }
+.___TextInput__overflow-hidden>TextInput { overflow: hidden; }
 .overflow-hidden { overflow: hidden; }
 .text-align-middle-center { -unity-text-align: middle-center; }
 .text-ellipsis { text-overflow: ellipsis; }

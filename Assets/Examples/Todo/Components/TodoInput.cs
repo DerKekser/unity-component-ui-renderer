@@ -31,7 +31,7 @@ namespace Examples.Todo.Components
                 {
                     onChange = (Action<string>)HandleChange,
                     value = _inputValue,
-                    className = "w-50 flex-1 text-nowrap",
+                    className = "h-50 flex-1 text-nowrap",
                 }
             );
             _<StyledButton, StyledButtonProps>(
@@ -39,7 +39,7 @@ namespace Examples.Todo.Components
                 {
                     onClick = (Action)HandleAdd,
                     text = "Add",
-                    className = "h-50 w-100 flex-0 ml-5",
+                    className = "h-50 w-100 flex-basis-[100px] flex-0 ml-5",
                 }
             );
         }
