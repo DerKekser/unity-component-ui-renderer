@@ -1,8 +1,8 @@
 ﻿namespace Kekser.ComponentSystem.StyleGenerator
 {
-    public class StyleUtils
+    public static class StyleUtils
     {
-        public string Concat(params string[] values)
+        public static string Concat(params string[] values)
         {
             return string.Join(" ", values);
         }
