@@ -24,7 +24,7 @@ namespace Examples.Todo.Components
                 {
                     onChange = OwnProps.onChange,
                     value = OwnProps.value,
-                    className = "bg-[Assets/Kenny%20UI/Spritesheet/greySheet.png@grey_button13.png] w-[100%] h-[100%] font-24 color-black [&>TextInput]:color-black [&>TextInput]:p-10",
+                    className = "bg-[/Assets/Kenny%20UI/Spritesheet/greySheet.png#grey_button13.png] w-[100%] h-[100%] font-24 color-black [&>TextInput]:color-black [&>TextInput]:p-10",
                 }
             );
         }

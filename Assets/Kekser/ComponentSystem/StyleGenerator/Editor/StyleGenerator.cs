@@ -9,6 +9,8 @@ using UnityEngine;
 
 namespace Kekser.ComponentSystem.StyleGenerator
 {
+    //https://docs.unity3d.com/Manual/UIE-uss-properties.html
+    
     public static class StyleGenerator
     {
         [MenuItem("Edit/Style Generator/Generate Styles")]
@@ -136,34 +138,19 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("bg", StyleRule.Unit.String, value =>
                 {
                     value = value.Replace(" ", "_");
-                    string[] parts = value.Split('@');
-                    
-                    if (ColorUtility.TryParseHtmlString(value, out Color color) || parts.Length == 0)
+                    if (ColorUtility.TryParseHtmlString(value, out Color color))
                         return $"background-color: {value}";
-
-                    string assetPath = HttpUtility.UrlDecode(parts[0]);
-                    string fileName = parts.Length > 1 ? HttpUtility.UrlDecode(parts[1]) : null;
-                
-                    Object[] assets = AssetDatabase.LoadAllAssetsAtPath(assetPath);
-                    if (assets.Length > 0)
-                    {
-                        string guid = AssetDatabase.AssetPathToGUID(assetPath);
-                        Object fileObj = assets.FirstOrDefault(x => x.name == fileName);
-                    
-                        // TODO: add handling for fileID of single asset and support for type
-                        if (fileName == null || fileObj == null)
-                            return $"background-image: url('project://database/{HttpUtility.UrlPathEncode(assetPath)}?fileID=2800000&guid={guid}')";
-                    
-                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(fileObj, out string fileId, out long _);
-                    
-                        return $"background-image: url('project://database/{HttpUtility.UrlPathEncode(assetPath)}?fileID={fileId}&guid={guid}&type=3#{HttpUtility.UrlPathEncode(fileName)}')";
-                    }
-                
                     return $"background-image: url('{value}')";
                 }),
             new StyleRule("color", StyleRule.Unit.String, value => $"color: {value}"),
             
             new StyleRule("font", StyleRule.Unit.Pixel, value => $"font-size: {value}"),
+            
+            new StyleRule("unity-font", StyleRule.Unit.String, value =>
+            {
+                value = value.Replace(" ", "_");
+                return $"-unity-font-definition: url('{value}')";
+            }),
             
             new StyleRule("absolute", StyleRule.Unit.None, _ => "position: absolute"),
             new StyleRule("relative", StyleRule.Unit.None, _ => "position: relative"),
