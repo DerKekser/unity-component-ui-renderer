@@ -160,6 +160,8 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("rotate", StyleRule.Unit.Deg, value => $"rotate: {value}"),
             new StyleRule("scale", StyleRule.Unit.String, value => $"scale: {value}"),
             
+            new StyleRule("origin", StyleRule.Unit.String, value => $"transform-origin: {value}"),
+            
             new StyleRule("bg", StyleRule.Unit.String, value =>
                 {
                     value = value.Replace(" ", "_");
