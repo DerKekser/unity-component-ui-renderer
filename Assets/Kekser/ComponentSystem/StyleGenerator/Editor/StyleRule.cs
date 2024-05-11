@@ -14,6 +14,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             Pixel,
             String,
             Int,
+            Deg,
         }
         
         private readonly Dictionary<Unit, string> _unitMap = new()
@@ -22,6 +23,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             {Unit.Pixel, "px"},
             {Unit.String, ""},
             {Unit.Int, ""},
+            {Unit.Deg, "deg"},
         }; 
         
         private readonly Dictionary<Unit, string> _patternMap = new()
@@ -30,6 +32,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             {Unit.Pixel, @"-(\[(.+)]|([0-9]+))"},
             {Unit.String, @"-(\[(.+)]|([0-9a-zA-Z-_]+))"},
             {Unit.Int, @"-(\[(.+)]|([0-9]+))"},
+            {Unit.Deg, @"-(\[(.+)]|([0-9]+))"},
         };
         
         private const string _pseudoClassPattern = @"((\[(.+)]|(.+)):)?";
