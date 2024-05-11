@@ -2,7 +2,7 @@
 {
     public class StyleUtils
     {
-        public string Concat(string[] values)
+        public string Concat(params string[] values)
         {
             return string.Join(" ", values);
         }
