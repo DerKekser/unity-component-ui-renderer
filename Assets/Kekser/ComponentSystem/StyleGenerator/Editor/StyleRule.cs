@@ -33,6 +33,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
         };
         
         private const string _pseudoClassPattern = @"((\[(.+)]|(.+)):)?";
+        private const string _importantPattern = @"(!)?";
         
         private string _identifier;
         private Unit _unit;
@@ -46,7 +47,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             _unit = unit;
             _callback = callback;
             
-            _pattern = new Regex($"^{_pseudoClassPattern}{_identifier}{_patternMap[unit]}$");
+            _pattern = new Regex($"^{_pseudoClassPattern}{_importantPattern}{_identifier}{_patternMap[unit]}$");
         }
         
         public string CleanupClassName(string className)
@@ -65,14 +66,16 @@ namespace Kekser.ComponentSystem.StyleGenerator
             Match matches = _pattern.Match(className);
             
             string pseudo = matches.Groups[3].Success ? matches.Groups[3].Value : matches.Groups[4].Value;
-            string value = _unit != Unit.None ? (matches.Groups[6].Success ? matches.Groups[6].Value : $"{matches.Groups[7].Value}{_unitMap[_unit]}") : "";
+            string value = _unit != Unit.None ? (matches.Groups[7].Success ? matches.Groups[7].Value : $"{matches.Groups[8].Value}{_unitMap[_unit]}") : "";
+            
+            string important = matches.Groups[5].Success ? " !important" : "";
             
             pseudo = pseudo.Replace("_", " ").Replace("&", "");
             value = value.Replace("_", " ");
             
             className = CleanupClassName(className) + (matches.Groups[4].Success ? $":{pseudo}" : pseudo);
 
-            return $".{className} {{ {_callback(value)}; }}";
+            return $".{className} {{ {_callback(value)}{important}; }}";
         }
     }
 }
