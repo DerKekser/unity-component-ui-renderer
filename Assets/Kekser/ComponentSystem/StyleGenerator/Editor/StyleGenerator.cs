@@ -157,7 +157,8 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("translate-x", StyleRule.Unit.Pixel, value => $"translate: {value} 0px"),
             new StyleRule("translate-y", StyleRule.Unit.Pixel, value => $"translate: 0px {value}"),
             
-            new StyleRule("rotation", StyleRule.Unit.Deg, value => $"rotate: {value}"),
+            new StyleRule("rotate", StyleRule.Unit.Deg, value => $"rotate: {value}"),
+            new StyleRule("scale", StyleRule.Unit.String, value => $"scale: {value}"),
             
             new StyleRule("bg", StyleRule.Unit.String, value =>
                 {
