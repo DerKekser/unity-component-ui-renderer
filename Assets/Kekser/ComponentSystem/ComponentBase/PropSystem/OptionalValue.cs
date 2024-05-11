@@ -15,6 +15,8 @@
             _isSet = true;
         }
         
+        public T Value => _value;
+        
         public bool Equals(IPropValue other)
         {
             if (other is OptionalValue<T> obligatoryValue)
@@ -35,6 +37,7 @@
         }
         
         public object ToObject() => _value;
+        public TCast Cast<TCast>() => _value is TCast casted ? casted : default;
         
         public static implicit operator T(OptionalValue<T> value) => value._value;
         public static implicit operator OptionalValue<T>(T value) => new OptionalValue<T> { _value = value, _isSet = true };
