@@ -242,7 +242,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("overflow-hidden", StyleRule.Unit.None, _ => "overflow: hidden"),
             
             new StyleRule("text-align", StyleRule.Unit.String, value => $"-unity-text-align: {value}"),
-            new StyleRule("test-shadow", StyleRule.Unit.String, value => $"text-shadow: {value}"),
+            new StyleRule("text-shadow", StyleRule.Unit.String, value => $"text-shadow: {value}"),
                 
             new StyleRule("text-ellipsis", StyleRule.Unit.None, _ => "text-overflow: ellipsis"),
             new StyleRule("text-wrap", StyleRule.Unit.None, _ => "white-space: wrap"),
