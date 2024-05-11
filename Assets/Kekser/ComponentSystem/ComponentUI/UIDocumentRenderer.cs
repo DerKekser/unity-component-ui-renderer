@@ -22,7 +22,12 @@ namespace Kekser.ComponentSystem.ComponentUI
                 _uiDocument.rootVisualElement.styleSheets.Add(style);
 
             _renderer = new UIRenderer();
-            _renderer.Render(ctx => ctx.CreateComponent<TComponent>(), _uiDocument.rootVisualElement);
+            _renderer.Render(Render, _uiDocument.rootVisualElement);
+        }
+        
+        protected virtual void Render(BaseContext<VisualElement> ctx)
+        {
+            ctx.CreateComponent<TComponent>();
         }
         
         private void Start()
