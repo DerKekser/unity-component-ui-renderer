@@ -1,1 +1,16 @@
 TextInput { --unity-sync-text-editor-engine: true; }
+.mb-5 { margin-bottom: 5px; }
+.p-10 { padding: 10px; }
+.p-20 { padding: 20px; }
+.w-_100__ { width: 100%; }
+.max-w-_90__ { max-width: 90%; }
+.max-h-_90__ { max-height: 90%; }
+.top-_50__ { top: 50%; }
+.left-_50__ { left: 50%; }
+.translate-_-50__-50__ { translate: -50% -50%; }
+.bg-white { background-color: white; }
+.hover_bg-__f0f0f0_:hover { background-color: #f0f0f0; }
+.bg-__cccccc_ { background-color: #cccccc; }
+.rounded-10 { border-radius: 10px; }
+.absolute { position: absolute; }
+.flex-row { flex-direction: row; }

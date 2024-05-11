@@ -11,19 +11,9 @@ namespace Examples.AllComponents.Components
         public override void OnRender()
         {
             _<Box, StyleProps>(
-                props: new StyleProps() { style = new Style()
-                {
-                    position = new StyleEnum<Position>(Position.Absolute),
-                    flexDirection = new StyleEnum<FlexDirection>(FlexDirection.Row),
-                    top = new StyleLength(Length.Percent(50)),
-                    left = new StyleLength(Length.Percent(50)),
-                    maxHeight = new StyleLength(Length.Percent(90)),
-                    maxWidth = new StyleLength(Length.Percent(90)),
-                    padding = new StyleLength(20),
-                    backgroundColor = new StyleColor(new Color(0.8f, 0.8f, 0.8f, 1)),
-                    borderRadius = new StyleLength(10),
-                    translate = new StyleTranslate(new Translate(Length.Percent(-50), Length.Percent(-50), 0)),
-                }},
+                props: new StyleProps() { 
+                    className = "absolute flex-row top-[50%] left-[50%] max-w-[90%] max-h-[90%] p-20 bg-[#cccccc] rounded-10 translate-[-50%_-50%]",
+                },
                 render: Children
             );
         }

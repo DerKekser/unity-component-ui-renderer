@@ -19,7 +19,9 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .max-w-_90__ { max-width: 90%; }
 .max-h-_90__ { max-height: 90%; }
 .t-_50__ { top: 50%; }
+.top-_50__ { top: 50%; }
 .l-_50__ { left: 50%; }
+.left-_50__ { left: 50%; }
 .translate-_-50__-50__ { translate: -50% -50%; }
 .bg-__Assets_Kenny_20UI_Spritesheet_greySheet_png_grey_panel_png_ { background-image: url('/Assets/Kenny%20UI/Spritesheet/greySheet.png#grey_panel.png'); }
 .bg-__Assets_Kenny_20UI_Spritesheet_blueSheet_png_blue_button11_png_ { background-image: url('/Assets/Kenny%20UI/Spritesheet/blueSheet.png#blue_button11.png'); }

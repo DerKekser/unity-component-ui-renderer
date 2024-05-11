@@ -104,32 +104,54 @@ namespace Kekser.ComponentSystem.StyleGenerator
             return words.Distinct().ToArray();
         }
         
+        // TODO: color variables like red-500, blue-200, etc.
+        
         private static StyleRule[] _rules = new []
         {
             new StyleRule("m", StyleRule.Unit.Pixel, value => $"margin: {value}"),
+            new StyleRule("margin", StyleRule.Unit.Pixel, value => $"margin: {value}"),
             new StyleRule("mt", StyleRule.Unit.Pixel, value => $"margin-top: {value}"),
+            new StyleRule("margin-top", StyleRule.Unit.Pixel, value => $"margin-top: {value}"),
             new StyleRule("mr", StyleRule.Unit.Pixel, value => $"margin-right: {value}"),
+            new StyleRule("margin-right", StyleRule.Unit.Pixel, value => $"margin-right: {value}"),
             new StyleRule("mb", StyleRule.Unit.Pixel, value => $"margin-bottom: {value}"),
+            new StyleRule("margin-bottom", StyleRule.Unit.Pixel, value => $"margin-bottom: {value}"),
             new StyleRule("ml", StyleRule.Unit.Pixel, value => $"margin-left: {value}"),
+            new StyleRule("margin-left", StyleRule.Unit.Pixel, value => $"margin-left: {value}"),
             
             new StyleRule("p", StyleRule.Unit.Pixel, value => $"padding: {value}"),
+            new StyleRule("padding", StyleRule.Unit.Pixel, value => $"padding: {value}"),
             new StyleRule("pt", StyleRule.Unit.Pixel, value => $"padding-top: {value}"),
+            new StyleRule("padding-top", StyleRule.Unit.Pixel, value => $"padding-top: {value}"),
             new StyleRule("pr", StyleRule.Unit.Pixel, value => $"padding-right: {value}"),
+            new StyleRule("padding-right", StyleRule.Unit.Pixel, value => $"padding-right: {value}"),
             new StyleRule("pb", StyleRule.Unit.Pixel, value => $"padding-bottom: {value}"),
+            new StyleRule("padding-bottom", StyleRule.Unit.Pixel, value => $"padding-bottom: {value}"),
             new StyleRule("pl", StyleRule.Unit.Pixel, value => $"padding-left: {value}"),
+            new StyleRule("padding-left", StyleRule.Unit.Pixel, value => $"padding-left: {value}"),
             
             new StyleRule("w", StyleRule.Unit.Pixel, value => $"width: {value}"),
+            new StyleRule("width", StyleRule.Unit.Pixel, value => $"width: {value}"),
             new StyleRule("h", StyleRule.Unit.Pixel, value => $"height: {value}"),
+            new StyleRule("height", StyleRule.Unit.Pixel, value => $"height: {value}"),
             
             new StyleRule("max-w", StyleRule.Unit.Pixel, value => $"max-width: {value}"),
+            new StyleRule("max-width", StyleRule.Unit.Pixel, value => $"max-width: {value}"),
             new StyleRule("max-h", StyleRule.Unit.Pixel, value => $"max-height: {value}"),
+            new StyleRule("max-height", StyleRule.Unit.Pixel, value => $"max-height: {value}"),
             new StyleRule("min-w", StyleRule.Unit.Pixel, value => $"min-width: {value}"),
+            new StyleRule("min-width", StyleRule.Unit.Pixel, value => $"min-width: {value}"),
             new StyleRule("min-h", StyleRule.Unit.Pixel, value => $"min-height: {value}"),
+            new StyleRule("min-height", StyleRule.Unit.Pixel, value => $"min-height: {value}"),
             
             new StyleRule("t", StyleRule.Unit.Pixel, value => $"top: {value}"),
+            new StyleRule("top", StyleRule.Unit.Pixel, value => $"top: {value}"),
             new StyleRule("r", StyleRule.Unit.Pixel, value => $"right: {value}"),
+            new StyleRule("right", StyleRule.Unit.Pixel, value => $"right: {value}"),
             new StyleRule("b", StyleRule.Unit.Pixel, value => $"bottom: {value}"),
+            new StyleRule("bottom", StyleRule.Unit.Pixel, value => $"bottom: {value}"),
             new StyleRule("l", StyleRule.Unit.Pixel, value => $"left: {value}"),
+            new StyleRule("left", StyleRule.Unit.Pixel, value => $"left: {value}"),
             
             new StyleRule("translate", StyleRule.Unit.Pixel, value => $"translate: {value}"),
             new StyleRule("translate-x", StyleRule.Unit.Pixel, value => $"translate: {value} 0px"),
@@ -142,6 +164,14 @@ namespace Kekser.ComponentSystem.StyleGenerator
                         return $"background-color: {value}";
                     return $"background-image: url('{value}')";
                 }),
+            new StyleRule("background", StyleRule.Unit.String, value =>
+                {
+                    value = value.Replace(" ", "_");
+                    if (ColorUtility.TryParseHtmlString(value, out Color color))
+                        return $"background-color: {value}";
+                    return $"background-image: url('{value}')";
+                }),
+                
             new StyleRule("color", StyleRule.Unit.String, value => $"color: {value}"),
             
             new StyleRule("font", StyleRule.Unit.Pixel, value => $"font-size: {value}"),
@@ -151,6 +181,16 @@ namespace Kekser.ComponentSystem.StyleGenerator
                 value = value.Replace(" ", "_");
                 return $"-unity-font-definition: url('{value}')";
             }),
+            
+            new StyleRule("rounded", StyleRule.Unit.Pixel, value => $"border-radius: {value}"),
+            new StyleRule("rounded-top", StyleRule.Unit.Pixel, value => $"border-top-left-radius: {value}; border-top-right-radius: {value}"),
+            new StyleRule("rounded-right", StyleRule.Unit.Pixel, value => $"border-top-right-radius: {value}; border-bottom-right-radius: {value}"),
+            new StyleRule("rounded-bottom", StyleRule.Unit.Pixel, value => $"border-bottom-right-radius: {value}; border-bottom-left-radius: {value}"),
+            new StyleRule("rounded-left", StyleRule.Unit.Pixel, value => $"border-top-left-radius: {value}; border-bottom-left-radius: {value}"),
+            new StyleRule("rounded-tl", StyleRule.Unit.Pixel, value => $"border-top-left-radius: {value}"),
+            new StyleRule("rounded-tr", StyleRule.Unit.Pixel, value => $"border-top-right-radius: {value}"),
+            new StyleRule("rounded-br", StyleRule.Unit.Pixel, value => $"border-bottom-right-radius: {value}"),
+            new StyleRule("rounded-bl", StyleRule.Unit.Pixel, value => $"border-bottom-left-radius: {value}"),
             
             new StyleRule("absolute", StyleRule.Unit.None, _ => "position: absolute"),
             new StyleRule("relative", StyleRule.Unit.None, _ => "position: relative"),

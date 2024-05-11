@@ -66,10 +66,7 @@ namespace Examples.AllComponents
                                     props: new ButtonProps()
                                     {
                                         onClick = new Action(() => Props.Set(new AppProps() { page = (Pages)page })),
-                                        style = new Style()
-                                        {
-                                            marginBottom = new StyleLength(5),
-                                        }
+                                        className = "mb-5 bg-white w-[100%] p-10 text-left hover:bg-[#f0f0f0]",
                                     },
                                     render: () =>
                                     {

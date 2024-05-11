@@ -30,6 +30,7 @@ namespace Examples.AllComponents.Pages
                     {
                         Props.Set(new ButtonPageProps() { buttonCount = OwnProps.buttonCount + 1 });
                     }),
+                    className = "bg-white w-[100%] p-10 text-center hover:bg-[#f0f0f0]"
                 },
                 render: () =>
                 {

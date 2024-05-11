@@ -186,5 +186,14 @@ namespace Kekser.ComponentSystem.ComponentUI
                 borderTopWidth = value;
             }
         }
+        
+        public StyleFloat flex
+        {
+            set
+            {
+                flexGrow = value;
+                flexShrink = value;
+            }
+        }
     }
 }
