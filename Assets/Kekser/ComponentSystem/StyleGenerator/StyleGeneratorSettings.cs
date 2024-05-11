@@ -17,9 +17,11 @@ namespace Kekser.ComponentSystem.StyleGenerator
         private void Reset()
         {
 #if UNITY_EDITOR
+            string filePath = UnityEditor.AssetDatabase.GetAssetPath(this);
+            string directory = System.IO.Path.GetDirectoryName(filePath);
             _lookUpPaths = new[]
             {
-                UnityEditor.AssetDatabase.GetAssetPath(this)
+                directory
             };
             _safeList = Array.Empty<string>();
 #endif
