@@ -203,6 +203,9 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("flex", StyleRule.Unit.None, _ => "display: flex"),
             new StyleRule("none", StyleRule.Unit.None, _ => "display: none"),
             
+            new StyleRule("visible", StyleRule.Unit.None, _ => "visibility: visible"),
+            new StyleRule("hidden", StyleRule.Unit.None, _ => "visibility: hidden"),
+            
             new StyleRule("flex", StyleRule.Unit.Int, value => $"flex: {value}"),
             new StyleRule("flex-grow", StyleRule.Unit.Int, value => $"flex-grow: {value}"),
             new StyleRule("flex-shrink", StyleRule.Unit.Int, value => $"flex-shrink: {value}"),
