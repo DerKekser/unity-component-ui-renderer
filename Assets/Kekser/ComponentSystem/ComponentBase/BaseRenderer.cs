@@ -35,6 +35,11 @@ namespace Kekser.ComponentSystem.ComponentBase
             _context.SetRender(render);
         }
         
+        public void Destroy()
+        {
+            _context.Destroy();
+        }
+        
         public abstract BaseContext<TNode> CreateContext(TNode rootNode);
 
         public void Update()

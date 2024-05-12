@@ -41,5 +41,10 @@ namespace Kekser.ComponentSystem.ComponentUI
                 CreateRenderer();
             _renderer.Update();
         }
+        
+        private void OnDestroy()
+        {
+            _renderer?.Destroy();
+        }
     }
 }

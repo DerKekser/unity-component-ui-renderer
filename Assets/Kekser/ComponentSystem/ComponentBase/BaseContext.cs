@@ -48,6 +48,11 @@ namespace Kekser.ComponentSystem.ComponentBase
             _render = render;
         }
         
+        public void Destroy()
+        {
+            Remove();
+        }
+        
         public void Traverse()
         {
             _contextHolder.Reset();
