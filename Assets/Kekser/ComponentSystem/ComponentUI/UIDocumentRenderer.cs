@@ -14,9 +14,13 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         private UIRenderer _renderer;
         
+        // TODO: check if uiDocument is null
+        
         private void CreateRenderer()
         {
+#if UNITY_EDITOR
             _uiDocument.runInEditMode = true;
+#endif
             _uiDocument.rootVisualElement.styleSheets.Clear();
             foreach (var style in _styles)
                 _uiDocument.rootVisualElement.styleSheets.Add(style);
@@ -37,8 +41,10 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         private void Update()
         {
+#if UNITY_EDITOR
             if (_renderer == null)
                 CreateRenderer();
+#endif
             _renderer.Update();
         }
         
