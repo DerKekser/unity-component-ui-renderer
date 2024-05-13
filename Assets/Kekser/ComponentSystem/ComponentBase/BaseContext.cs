@@ -19,8 +19,6 @@ namespace Kekser.ComponentSystem.ComponentBase
         public BaseContext<TNode> Parent => _parent;
         public IFragment<TNode> Fragment => _fragment;
 
-        public bool NeedsRerender => Fragment.Props.IsDirty;
-        
         // TODO: make abstract create separate context classes for different node types
         public BaseContext(IFragment<TNode> fragment)
         {
@@ -53,17 +51,13 @@ namespace Kekser.ComponentSystem.ComponentBase
             Remove();
         }
         
-        public void Traverse()
+        public void Traverse(bool forceRerender)
         {
             _contextHolder.Reset();
-            if (NeedsRerender)
+            if (_fragment.IsDirty || forceRerender)
             {
-                _fragment.Props.IsDirty = false;
                 _usedContexts.Clear();
-                if (_fragment != null)
-                    _fragment.Render();
-                else
-                    Render(this);
+                _fragment.Render();
 
                 foreach (BaseContext<TNode> context in _contextHolder.GetContexts().Except(_usedContexts).ToArray())
                 {
@@ -76,7 +70,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             foreach (BaseContext<TNode> child in _contextHolder.GetContexts())
             {
-                child.Traverse();
+                child.Traverse(false);
             }
         }
 
@@ -139,8 +133,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             TComponent component = (TComponent) child._fragment;
             
             component.Props.Set(props);
-            component.Props.IsDirty = true;
-            child.Traverse();
+            child.Traverse(true);
             
             return component;
         }
@@ -157,8 +150,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             SetNodeAsLastSibling(child._fragment.FragmentRoot);
             child.SetRender(render);
 
-            child._fragment.Props.IsDirty = true;
-            child.Traverse();
+            child.Traverse(true);
             
             return (TComponent) child._fragment;
         }
