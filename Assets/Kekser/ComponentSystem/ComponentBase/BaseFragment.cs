@@ -16,16 +16,29 @@ namespace Kekser.ComponentSystem.ComponentBase
         protected TNode _fragmentRoot;
         protected TNode _fragmentNode;
         protected BaseContext<TNode> _ctx;
-        protected PropList<TProps> _props = new PropList<TProps>();
+        protected PropList<TProps> _props;
+        
+        private bool _isDirty;
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
-        IPropList IFragment<TNode>.Props => Props;
 
         public IPropList<TProps> Props => _props;
         
         public TProps OwnProps => _props.Props;
         public virtual TProps DefaultProps { get; } = new TProps();
+        
+        public bool IsDirty => _isDirty;
+        
+        public BaseFragment()
+        {
+            _props = new PropList<TProps>(SetDirty);
+        }
+        
+        protected void SetDirty()
+        {
+            _isDirty = true;
+        }
         
         public virtual void Mount(TNode parent)
         {
@@ -41,6 +54,7 @@ namespace Kekser.ComponentSystem.ComponentBase
 
         public virtual void Render()
         {
+            _isDirty = false;
             BaseRenderer<TNode>.Log(() => "Rendering " + GetType().Name);
             OnRender();
         }

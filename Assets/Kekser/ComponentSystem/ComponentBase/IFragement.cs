@@ -7,7 +7,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         TNode FragmentRoot { get; }
         TNode FragmentNode { get; }
         
-        IPropList Props { get; }
+        bool IsDirty { get; }
         
         void Mount(TNode parent);
         void Unmount();
@@ -20,6 +20,6 @@ namespace Kekser.ComponentSystem.ComponentBase
     {
         TProps OwnProps { get; }
         TProps DefaultProps { get; }
-        new IPropList<TProps> Props { get; }
+        IPropList<TProps> Props { get; }
     }
 }

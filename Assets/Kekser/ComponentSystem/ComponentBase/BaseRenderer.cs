@@ -44,7 +44,7 @@ namespace Kekser.ComponentSystem.ComponentBase
 
         public void Update()
         {
-            _context.Traverse();
+            _context.Traverse(false);
             Tick(_context);
         }
         
