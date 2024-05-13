@@ -1,18 +1,18 @@
 ﻿using System;
 using Examples.Todo.Providers;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
-using Kekser.ComponentSystem.ComponentUI.UIStates;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo.Components
 {
     public class TodoInput: UIComponent
     {
-        private UIState<string> _inputValue;
+        private State<string> _inputValue;
         
         public TodoInput()
         {
-            _inputValue = new UIState<string>(SetDirty, "");
+            _inputValue = CreateState("");
         }
         
         private void HandleChange(string value)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
@@ -32,12 +33,12 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         public BaseFragment()
         {
-            _props = new PropList<TProps>(SetDirty);
+            _props = new PropList<TProps>(() => _isDirty = true);
         }
         
-        protected void SetDirty()
+        public State<T> CreateState<T>(T defaultValue = default)
         {
-            _isDirty = true;
+            return new State<T>(() => _isDirty = true, defaultValue);
         }
         
         public virtual void Mount(TNode parent)
