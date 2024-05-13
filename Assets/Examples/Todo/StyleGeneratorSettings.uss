@@ -5,7 +5,7 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .mb-5 { margin-bottom: 5px; }
 .ml-5 { margin-left: 5px; }
 .p-20 { padding: 20px; }
-.___TextInput__p-10>TextInput { padding: 10px; }
+.__and__gt_TextInput__p-10>TextInput { padding: 10px; }
 .w-500 { width: 500px; }
 .w-_100__ { width: 100%; }
 .w-30 { width: 30px; }
@@ -33,7 +33,7 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .bg-__Assets_Kenny_20UI_Spritesheet_greySheet_png_grey_crossWhite_png_ { background-image: url('/Assets/Kenny%20UI/Spritesheet/greySheet.png#grey_crossWhite.png'); }
 .color-white { color: white; }
 .color-black { color: black; }
-.___TextInput__color-black>TextInput { color: black; }
+.__and__gt_TextInput__color-black>TextInput { color: black; }
 .color-grey { color: grey; }
 .font-24 { font-size: 24px; }
 .font-20 { font-size: 20px; }
@@ -48,7 +48,7 @@ TextInput { --unity-sync-text-editor-engine: true; }
 .justify-between { justify-content: space-between; }
 .items-center { align-items: center; }
 .self-center { align-self: center; }
-.___TextInput__overflow-hidden>TextInput { overflow: hidden; }
+.__and__gt_TextInput__overflow-hidden>TextInput { overflow: hidden; }
 .overflow-hidden { overflow: hidden; }
 .text-align-middle-center { -unity-text-align: middle-center; }
 .text-ellipsis { text-overflow: ellipsis; }

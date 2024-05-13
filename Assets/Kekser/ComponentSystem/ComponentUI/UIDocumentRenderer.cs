@@ -14,10 +14,10 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         private UIRenderer _renderer;
         
-        // TODO: check if uiDocument is null
-        
         private void CreateRenderer()
         {
+            if (_uiDocument == null)
+                return;
 #if UNITY_EDITOR
             _uiDocument.runInEditMode = true;
 #endif
@@ -45,7 +45,7 @@ namespace Kekser.ComponentSystem.ComponentUI
             if (_renderer == null)
                 CreateRenderer();
 #endif
-            _renderer.Update();
+            _renderer?.Update();
         }
         
         private void OnDestroy()

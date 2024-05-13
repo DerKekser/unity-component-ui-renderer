@@ -53,12 +53,6 @@ namespace Kekser.ComponentSystem.StyleGenerator
             _pattern = new Regex($"^{_pseudoClassPattern}{_importantPattern}{_identifier}{_patternMap[unit]}$");
         }
         
-        public string CleanupClassName(string className)
-        {
-            // TODO: escape some special characters instead of replacing them with "_"
-            return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
-        }
-
         public bool IsMatch(string className)
         {
             return _pattern.IsMatch(className);
@@ -76,7 +70,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             pseudo = pseudo.Replace("_", " ").Replace("&", "");
             value = value.Replace("_", " ");
             
-            className = CleanupClassName(className) + (matches.Groups[4].Success ? $":{pseudo}" : pseudo);
+            className = StyleUtils.CleanupClassName(className) + (matches.Groups[4].Success ? $":{pseudo}" : pseudo);
 
             return $".{className} {{ {_callback(value)}{important}; }}";
         }

@@ -7,6 +7,7 @@ using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using Kekser.ComponentSystem.StyleGenerator;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -59,12 +60,6 @@ namespace Kekser.ComponentSystem.ComponentUI
             base.Render();
         }
         
-        public string CleanupClassName(string className)
-        {
-            // TODO: escape some special characters instead of replacing them with "_"
-            return Regex.Replace(className, @"[^a-zA-Z0-9-_]", @"_");
-        }
-
         public void ApplyStyling()
         {
             if (OwnProps is IStyleProp styleProps && styleProps.style.IsSet)
@@ -102,7 +97,7 @@ namespace Kekser.ComponentSystem.ComponentUI
             FragmentRoot.ClearClassList();
             foreach (string className in classNames.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)))
             {
-                FragmentRoot.AddToClassList(CleanupClassName(className));
+                FragmentRoot.AddToClassList(StyleUtils.CleanupClassName(className));
             }
         }
 
