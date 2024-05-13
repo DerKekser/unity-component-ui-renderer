@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.UIStates
 {
-    public class UIState<T>: BaseState<T, VisualElement>
+    public class UIState<T>: BaseState<T>
     {
         public UIState(Action setDirty, T defaultValue = default) : base(setDirty, defaultValue)
         {

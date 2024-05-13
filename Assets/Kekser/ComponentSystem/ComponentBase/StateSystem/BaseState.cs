@@ -2,7 +2,7 @@
 
 namespace Kekser.ComponentSystem.ComponentBase.StateSystem
 {
-    public class BaseState<T, TNode> where TNode : class, new()
+    public class BaseState<T>
     {
         private T _value;
         private Action _setDirty;
