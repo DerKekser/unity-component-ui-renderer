@@ -22,19 +22,19 @@ namespace Examples.Todo.Components
     {
         private void HandleToggle()
         {
-            Action e = OwnProps.onToggle;
+            Action e = Props.onToggle;
             e?.Invoke();
         }
         
         private void HandleRemove()
         {
-            Action e = OwnProps.onRemove;
+            Action e = Props.onRemove;
             e?.Invoke();
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
-            TodoData todo = OwnProps.todo;
+            TodoData todo = Props.todo;
             
             _<Group, StyleProps>(
                 props: new StyleProps() { 

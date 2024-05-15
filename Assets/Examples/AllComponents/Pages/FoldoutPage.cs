@@ -5,7 +5,7 @@ namespace Examples.AllComponents.Pages
 {
     public class FoldoutPage: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Foldout, FoldoutProps>(
                 props: new FoldoutProps()

@@ -102,7 +102,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             context._fragment = Activator.CreateInstance<TComponent>();
             context._fragment.SetContext(context);
             
-            context._fragment.Mount(_fragment?.FragmentNode ?? _mainNode);
+            context._fragment.Mount(_fragment?.Node ?? _mainNode);
             return context;
         }
         
@@ -132,7 +132,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             
             TComponent component = (TComponent) child._fragment;
             
-            component.Props.Set(props);
+            component.Props = props;
             child.Traverse(true);
             
             return component;

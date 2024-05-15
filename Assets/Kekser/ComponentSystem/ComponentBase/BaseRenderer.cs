@@ -10,8 +10,8 @@ namespace Kekser.ComponentSystem.ComponentBase
             _fragmentRoot = node;
             _fragmentNode = node;
         }
-            
-        public override void OnRender()
+
+        protected override void OnRender()
         {
             Children();
         }

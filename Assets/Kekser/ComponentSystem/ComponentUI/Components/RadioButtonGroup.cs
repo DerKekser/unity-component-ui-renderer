@@ -22,26 +22,26 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         
         private void Change(ChangeEvent<int> e)
         {
-            Action<int> eAction = OwnProps.onChange;
+            Action<int> eAction = Props.onChange;
             eAction?.Invoke(e.newValue);
         }
-        
-        public override void OnMount()
+
+        protected override void OnMount()
         {
             FragmentRoot.RegisterValueChangedCallback(Change);
         }
-        
-        public override void OnUnmount()
+
+        protected override void OnUnmount()
         {
             FragmentRoot.UnregisterValueChangedCallback(Change);
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
-            if (OwnProps.options.IsSet)
-                FragmentRoot.choices = (List<string>)OwnProps.options;
-            if (OwnProps.value.IsSet)
-                FragmentRoot.value = OwnProps.value;
+            if (Props.options.IsSet)
+                FragmentRoot.choices = (List<string>)Props.options;
+            if (Props.value.IsSet)
+                FragmentRoot.value = Props.value;
         }
     }
 }

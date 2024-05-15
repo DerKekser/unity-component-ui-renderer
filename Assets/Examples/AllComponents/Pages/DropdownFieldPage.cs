@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 
 namespace Examples.AllComponents.Pages
-{
-    public class DropdownFieldPageProps : StyleProps
+{ 
+    public class DropdownFieldPage: UIComponent
     {
-        public OptionalValue<string> value { get; set; } = new();
-    }
-    
-    public class DropdownFieldPage: UIComponent<DropdownFieldPageProps>
-    {
-        public void HandleChange(string value)
+        private State<string> _selected;
+        
+        public DropdownFieldPage()
         {
-            Props.Set(new DropdownFieldPageProps() { value = value });
+            _selected = CreateState("Option 1");
         }
         
-        public override void OnRender()
+        private void HandleChange(string selected)
+        {
+            _selected.Value = selected;
+        }
+
+        protected override void OnRender()
         {
             _<DropdownField, DropdownFieldProps>(
                 props: new DropdownFieldProps()
                 {
-                    value = OwnProps.value,
+                    value = _selected.Value,
                     onChange = new Action<string>(HandleChange),
                     options = new List<string>()
                     {
@@ -37,7 +40,7 @@ namespace Examples.AllComponents.Pages
                 }
             );
             _<Label, LabelProps>(
-                props: new LabelProps() { text = $"Selected value: {(string)OwnProps.value}" }
+                props: new LabelProps() { text = $"Selected value: {_selected.Value}" }
             );
         }
     }

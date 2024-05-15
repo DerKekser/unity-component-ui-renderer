@@ -14,24 +14,24 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Change(UnityEngine.UIElements.ChangeEvent<bool> e)
         {
-            System.Action<bool> eAction = OwnProps.onChange;
+            System.Action<bool> eAction = Props.onChange;
             eAction?.Invoke(e.newValue);
         }
 
-        public override void OnMount()
-        {
-            FragmentRoot.RegisterValueChangedCallback(Change);
-        }
-        
-        public override void OnUnmount()
+        protected override void OnMount()
         {
             FragmentRoot.RegisterValueChangedCallback(Change);
         }
 
-        public override void OnRender()
+        protected override void OnUnmount()
         {
-            if (OwnProps.value.IsSet)
-                FragmentRoot.value = OwnProps.value;
+            FragmentRoot.RegisterValueChangedCallback(Change);
+        }
+
+        protected override void OnRender()
+        {
+            if (Props.value.IsSet)
+                FragmentRoot.value = Props.value;
             
             Children();
         }

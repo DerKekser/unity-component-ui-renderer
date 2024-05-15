@@ -18,18 +18,18 @@ namespace Examples.Todo.Components
     
     public class StyledButton: UIComponent<StyledButtonProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Button, ButtonProps>(
                 props: new ButtonProps()
                 {
-                    onClick = OwnProps.onClick,
+                    onClick = Props.onClick,
                     className = "bg-[/Assets/Kenny%20UI/Spritesheet/blueSheet.png#blue_button11.png] hover:bg-[/Assets/Kenny%20UI/Spritesheet/blueSheet.png#blue_button12.png] w-[100%] h-[100%]",
                 },
                 render: () => _<Label, LabelProps>(
                     props: new LabelProps()
                     {
-                        text = OwnProps.text,
+                        text = Props.text,
                         className = "w-[100%] h-[100%] font-24 color-white text-align-middle-center",
                     }
                 )

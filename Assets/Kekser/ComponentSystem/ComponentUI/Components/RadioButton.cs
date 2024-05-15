@@ -16,26 +16,26 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Change(ChangeEvent<bool> e)
         {
-            Action<bool> eAction = OwnProps.onChange;
+            Action<bool> eAction = Props.onChange;
             eAction?.Invoke(e.newValue);
         }
-        
-        public override void OnMount()
+
+        protected override void OnMount()
         {
             FragmentRoot.RegisterValueChangedCallback(Change);
         }
-        
-        public override void OnUnmount()
+
+        protected override void OnUnmount()
         {
             FragmentRoot.UnregisterValueChangedCallback(Change);
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
-            if (OwnProps.text.IsSet)
-                FragmentRoot.text = OwnProps.text;
-            if (OwnProps.value.IsSet)
-                FragmentRoot.value = OwnProps.value;
+            if (Props.text.IsSet)
+                FragmentRoot.text = Props.text;
+            if (Props.value.IsSet)
+                FragmentRoot.value = Props.value;
             
             Children();
         }

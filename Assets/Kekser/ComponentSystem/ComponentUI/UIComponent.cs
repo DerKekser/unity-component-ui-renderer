@@ -62,9 +62,9 @@ namespace Kekser.ComponentSystem.ComponentUI
         
         public void ApplyStyling()
         {
-            if (OwnProps is IStyleProp styleProps && styleProps.style.IsSet)
+            if (Props is IStyleProp styleProps && styleProps.style.IsSet)
                 ApplyStyle(styleProps.style);
-            if (OwnProps is IClassNameProp classNameProps && classNameProps.className.IsSet)
+            if (Props is IClassNameProp classNameProps && classNameProps.className.IsSet)
                 ApplyClassName(classNameProps.className);
             else 
                 ApplyClassName("");

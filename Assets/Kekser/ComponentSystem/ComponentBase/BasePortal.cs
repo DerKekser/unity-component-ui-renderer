@@ -12,16 +12,16 @@ namespace Kekser.ComponentSystem.ComponentBase
     {
         private class InternalFragment: BaseFragment<TNode>
         {
-            public override void OnRender()
+            protected override void OnRender()
             {
                 Children();
             }
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
-            if (OwnProps.target.IsSet)
-                _fragmentNode = ((TNode)OwnProps.target) ?? _fragmentRoot;
+            if (Props.target.IsSet)
+                _fragmentNode = ((TNode)Props.target) ?? _fragmentRoot;
             else
                 _fragmentNode = _fragmentRoot;
             

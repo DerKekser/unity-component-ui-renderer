@@ -1,5 +1,6 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -9,26 +10,23 @@ using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
 
 namespace Examples.AllComponents.Pages
 {
-    public class ButtonPageProps: StyleProps
+    public class ButtonPage: UIComponent
     {
-        public OptionalValue<int> buttonCount { get; set; } = new();
-    }
-    
-    public class ButtonPage: UIComponent<ButtonPageProps>
-    {
-        public override ButtonPageProps DefaultProps { get; } = new ()
+        private State<int> _buttonCount;
+        
+        public ButtonPage()
         {
-            buttonCount = 0
-        };
+            _buttonCount = CreateState(0);
+        }
 
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Button, ButtonProps>(
                 props: new ButtonProps()
                 {
                     onClick = new Action(() =>
                     {
-                        Props.Set(new ButtonPageProps() { buttonCount = OwnProps.buttonCount + 1 });
+                        _buttonCount.Value++;
                     }),
                     className = "bg-white w-[100%] p-10 text-center hover:bg-[#f0f0f0]"
                 },
@@ -37,7 +35,7 @@ namespace Examples.AllComponents.Pages
                     _<Label, LabelProps>(
                         props: new LabelProps()
                         {
-                            text = $"Button clicked {(int)OwnProps.buttonCount} times"
+                            text = $"Button clicked {_buttonCount.Value} times"
                         }
                     );
                 }

@@ -2,7 +2,7 @@
 {
     public class Group: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             Children();
         }

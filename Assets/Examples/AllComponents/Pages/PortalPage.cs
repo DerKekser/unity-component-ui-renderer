@@ -1,4 +1,5 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -9,14 +10,16 @@ using Label = Kekser.ComponentSystem.ComponentUI.Components.Label;
 
 namespace Examples.AllComponents.Pages
 {
-    public class PortalPageProps: StyleProps
+    public class PortalPage: UIComponent
     {
-        public OptionalValue<VisualElement> target { get; set; } = new();
-    }
-    
-    public class PortalPage: UIComponent<PortalPageProps>
-    {
-        public override void OnRender()
+        private State<VisualElement> _target;
+        
+        public PortalPage()
+        {
+            _target = CreateState<VisualElement>(null);
+        }
+
+        protected override void OnRender()
         {
             _<Group, StyleProps>(
                 props: new StyleProps() {style = new Style()
@@ -41,7 +44,7 @@ namespace Examples.AllComponents.Pages
                     _<Portal, PortalProps>(
                         props: new PortalProps()
                         {
-                            target = OwnProps.target
+                            target = _target.Value
                         },
                         render: () =>
                         {
@@ -56,10 +59,7 @@ namespace Examples.AllComponents.Pages
                 }
             );
 
-            Props.Set(new PortalPageProps()
-            {
-                target = _<Group>().FragmentNode
-            });
+            _target.Value = _<Group>().Node;
         }
     }
 }

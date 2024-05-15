@@ -10,9 +10,9 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     
     public sealed class Label: UIComponent<UnityEngine.UIElements.Label, LabelProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
-            FragmentRoot.text = OwnProps.text;
+            FragmentRoot.text = Props.text;
         }
     }
 }

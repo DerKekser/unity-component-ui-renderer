@@ -2,7 +2,7 @@
 {
     public sealed class Fragment: UIFragment
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             Children();
         }

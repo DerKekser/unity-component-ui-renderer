@@ -2,6 +2,7 @@
 using Examples.AllComponents.Components;
 using Examples.AllComponents.Pages;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
@@ -14,14 +15,9 @@ using ScrollView = Kekser.ComponentSystem.ComponentUI.Components.ScrollView;
 
 namespace Examples.AllComponents
 {
-    public class AppProps : StyleProps
+    public class App: UIComponent
     {
-        public OptionalValue<App.Pages> page { get; set; } = new();
-    }
-    
-    public class App: UIComponent<AppProps>
-    {
-        public enum Pages
+        private enum Pages
         {
             Button,
             DropdownField,
@@ -40,13 +36,19 @@ namespace Examples.AllComponents
             Toggle,
         }
         
-        public override AppProps DefaultProps { get; } = new AppProps()
+        private State<Pages> _page;
+        
+        public App()
+        {
+            _page = CreateState(Pages.Button);
+        }
+        
+        public override StyleProps DefaultProps { get; } = new StyleProps()
         {
             style = new Style() { height = new StyleLength(Length.Percent(100)) },
-            page = Pages.Button
         };
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
             _<Layout, StyleProps>(
                 props: new StyleProps() { style = new Style()
@@ -65,7 +67,7 @@ namespace Examples.AllComponents
                                     key: index.ToString(),
                                     props: new ButtonProps()
                                     {
-                                        onClick = new Action(() => Props.Set(new AppProps() { page = (Pages)page })),
+                                        onClick = new Action(() => _page.Value = page),
                                         className = "mb-5 bg-white w-[100%] p-10 text-left hover:bg-[#f0f0f0]",
                                     },
                                     render: () =>
@@ -90,14 +92,14 @@ namespace Examples.AllComponents
                             _<Label, LabelProps>(
                                 props: new LabelProps()
                                 {
-                                    text = Enum.GetName(typeof(Pages), (Pages)OwnProps.page),
+                                    text = Enum.GetName(typeof(Pages), _page.Value),
                                     style = new Style()
                                     {
                                         fontSize = new StyleLength(20),
                                     }
                                 }
                             );
-                            switch ((Pages)OwnProps.page)
+                            switch (_page.Value)
                             {
                                 case Pages.Button:
                                     _<ButtonPage>();

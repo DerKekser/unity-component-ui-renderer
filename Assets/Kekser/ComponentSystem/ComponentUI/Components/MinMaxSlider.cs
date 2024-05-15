@@ -20,32 +20,32 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Change(ChangeEvent<Vector2> e)
         {
-            Action<float, float> eAction = OwnProps.onChange;
+            Action<float, float> eAction = Props.onChange;
             eAction?.Invoke(e.newValue.x, e.newValue.y);
         }
-        
-        public override void OnMount()
+
+        protected override void OnMount()
         {
             FragmentRoot.RegisterValueChangedCallback(Change);
         }
-        
-        public override void OnUnmount()
+
+        protected override void OnUnmount()
         {
             FragmentRoot.UnregisterValueChangedCallback(Change);
         }
 
-        public override void OnRender()
+        protected override void OnRender()
         {
-            if (OwnProps.lowLimit.IsSet)
-                FragmentRoot.lowLimit = OwnProps.lowLimit;
-            if (OwnProps.highLimit.IsSet)
-                FragmentRoot.highLimit = OwnProps.highLimit;
-            if (OwnProps.min.IsSet)
-                FragmentRoot.minValue = OwnProps.min;
-            if (OwnProps.max.IsSet)
-                FragmentRoot.maxValue = OwnProps.max;
-            if (OwnProps.label.IsSet)
-                FragmentRoot.label = OwnProps.label;
+            if (Props.lowLimit.IsSet)
+                FragmentRoot.lowLimit = Props.lowLimit;
+            if (Props.highLimit.IsSet)
+                FragmentRoot.highLimit = Props.highLimit;
+            if (Props.min.IsSet)
+                FragmentRoot.minValue = Props.min;
+            if (Props.max.IsSet)
+                FragmentRoot.maxValue = Props.max;
+            if (Props.label.IsSet)
+                FragmentRoot.label = Props.label;
             
             Children();
         }

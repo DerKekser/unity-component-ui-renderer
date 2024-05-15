@@ -8,7 +8,7 @@ namespace Examples.AllComponents.Components
 {
     public class Layout: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Box, StyleProps>(
                 props: new StyleProps() { 

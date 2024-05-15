@@ -29,11 +29,11 @@ namespace Examples.Todo.Pages
         
         private void HandleOptions()
         {
-            Action e = OwnProps.onOptions;
+            Action e = Props.onOptions;
             e?.Invoke();
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
             _<TodoList, StyleProps>(
                 props: new StyleProps(){

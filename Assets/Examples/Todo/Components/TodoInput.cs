@@ -30,7 +30,7 @@ namespace Examples.Todo.Components
             _inputValue.Value = "";
         }
 
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<StyledInput, StyledInputProps>(
                 props: new StyledInputProps()

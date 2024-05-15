@@ -5,7 +5,7 @@ namespace Examples.AllComponents.Pages
 {
     public class GroupBoxPage: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<GroupBox, GroupBoxProps>(
                 props: new GroupBoxProps()

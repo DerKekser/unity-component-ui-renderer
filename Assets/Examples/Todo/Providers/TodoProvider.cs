@@ -29,45 +29,45 @@ namespace Examples.Todo.Providers
 
         public void Add(string todo)
         {
-            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            List<TodoData> todos = Props.todos.IsSet ? new List<TodoData>((List<TodoData>)Props.todos) : new List<TodoData>();
             todos.Add(new TodoData() { text = todo, done = false });
-            Props.Set(new TodoProviderProps() { todos = todos });
+            Props = new TodoProviderProps() { todos = todos };
         }
         
         public void Remove(TodoData todo)
         {
-            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            List<TodoData> todos = Props.todos.IsSet ? new List<TodoData>((List<TodoData>)Props.todos) : new List<TodoData>();
             todos.Remove(todo);
-            Props.Set(new TodoProviderProps() { todos = todos });
+            Props = new TodoProviderProps() { todos = todos };
         }
         
         public void Toggle(TodoData todo)
         {
-            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            List<TodoData> todos = Props.todos.IsSet ? new List<TodoData>((List<TodoData>)Props.todos) : new List<TodoData>();
             int index = todos.FindIndex(t => t == todo);
             todos[index].done = !todos[index].done;
-            Props.Set(new TodoProviderProps() { todos = todos });
+            Props = new TodoProviderProps() { todos = todos };
         }
         
         public TodoData Get(int index)
         {
-            List<TodoData> todos = OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            List<TodoData> todos = Props.todos.IsSet ? new List<TodoData>((List<TodoData>)Props.todos) : new List<TodoData>();
             return todos[index];
         }
         
         public void Clear()
         {
-            Props.Set(new TodoProviderProps() { todos = new List<TodoData>() });
+            Props = new TodoProviderProps() { todos = new List<TodoData>() };
         }
         
         public List<TodoData> GetTodos()
         {
-            return OwnProps.todos.IsSet ? new List<TodoData>((List<TodoData>)OwnProps.todos) : new List<TodoData>();
+            return Props.todos.IsSet ? new List<TodoData>((List<TodoData>)Props.todos) : new List<TodoData>();
         }
         
         public int GetCount()
         {
-            return OwnProps.todos.IsSet ? ((List<TodoData>)OwnProps.todos).Count : 0;
+            return Props.todos.IsSet ? ((List<TodoData>)Props.todos).Count : 0;
         }
     }
 }

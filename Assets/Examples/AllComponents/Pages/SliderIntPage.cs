@@ -1,33 +1,35 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 
 namespace Examples.AllComponents.Pages
 {
-    public class SliderIntPageProps
+    public class SliderIntPage: UIComponent
     {
-        public OptionalValue<int> value { get; set; } = new();
-        public OptionalValue<Action<int>> onChange { get; set; } = new();
-    }
-    
-    public class SliderIntPage: UIComponent<SliderIntPageProps>
-    {
-        public void HandleChange(int selected)
+        private State<int> _selected;
+        
+        public SliderIntPage()
         {
-            Props.Set(new SliderIntPageProps() { value = selected });
+            _selected = CreateState(0);
         }
         
-        public override void OnRender()
+        private void HandleChange(int selected)
+        {
+            _selected.Value = selected;
+        }
+
+        protected override void OnRender()
         {
             _<SliderInt, SliderIntProps>(
                 props: new SliderIntProps()
                 {
                     onChange = (System.Action<int>)HandleChange,
-                    value = OwnProps.value
+                    value = _selected.Value,
                 }
             );
-            _<Label, LabelProps>(props: new LabelProps() { text = $"Selected: {(int)OwnProps.value}" });
+            _<Label, LabelProps>(props: new LabelProps() { text = $"Selected: {_selected.Value}" });
         }
     }
 }

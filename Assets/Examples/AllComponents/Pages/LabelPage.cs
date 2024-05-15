@@ -5,7 +5,7 @@ namespace Examples.AllComponents.Pages
 {
     public class LabelPage: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Label, LabelProps>(props: new LabelProps() { text = "Label" });
         }

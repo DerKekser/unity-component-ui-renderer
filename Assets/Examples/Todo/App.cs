@@ -3,42 +3,44 @@ using Examples.Todo.Components;
 using Examples.Todo.Pages;
 using Examples.Todo.Providers;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine.UIElements;
 
 namespace Examples.Todo
 {
-    public class AppProps: StyleProps
+    public class App: UIComponent
     {
-        public OptionalValue<App.Pages> page { get; set; } = new();
-    }
-    
-    public class App: UIComponent<AppProps>
-    {
-        public enum Pages
+        private enum Pages
         {
             Menu,
             Options
         }
+
+        private State<Pages> _page;
+
+        public App()
+        {
+            _page = CreateState(Pages.Menu);
+        }
         
         private void HandleMenu()
         {
-            Props.Set(new AppProps() { page = Pages.Menu });
+            _page.Value = Pages.Menu;
         }
         
         private void HandleOptions()
         {
-            Props.Set(new AppProps() { page = Pages.Options });
+            _page.Value = Pages.Options;
         }
 
-        public override AppProps DefaultProps { get; } = new AppProps()
+        public override StyleProps DefaultProps { get; } = new StyleProps()
         {
             style = new Style() { height = new StyleLength(Length.Percent(100)) },
-            page = Pages.Menu
         };
 
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Layout, StyleProps>(
                 props: new StyleProps() { style = new Style() { height = new StyleLength(Length.Percent(100)) } },
@@ -46,7 +48,7 @@ namespace Examples.Todo
                 {
                     _<TodoProvider>(render: () =>
                     {
-                        if (OwnProps.page == Pages.Menu)
+                        if (_page.Value == Pages.Menu)
                         {
                             _<Todos, TodoProps>(
                                 props: new TodoProps()

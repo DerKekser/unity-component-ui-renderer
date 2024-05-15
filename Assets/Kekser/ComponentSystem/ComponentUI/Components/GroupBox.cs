@@ -10,10 +10,10 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     
     public sealed class GroupBox: UIComponent<UnityEngine.UIElements.GroupBox, GroupBoxProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
-            if (OwnProps.text.IsSet)
-                FragmentRoot.text = OwnProps.text;
+            if (Props.text.IsSet)
+                FragmentRoot.text = Props.text;
             
             Children();
         }

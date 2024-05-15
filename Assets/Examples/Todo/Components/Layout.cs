@@ -7,7 +7,7 @@ namespace Examples.Todo.Components
 {
     public class Layout: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<Group, StyleProps>(
                 props: new StyleProps() { 

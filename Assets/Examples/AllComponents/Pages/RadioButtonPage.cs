@@ -1,31 +1,34 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 using Kekser.ComponentSystem.ComponentUI.Components;
 
 namespace Examples.AllComponents.Pages
 {
-    public class RadioButtonPageProps
+    public class RadioButtonPage: UIComponent
     {
-        public OptionalValue<bool> value { get; set; } = new();
-    }
-    
-    public class RadioButtonPage: UIComponent<RadioButtonPageProps>
-    {
-        public void HandleChange(bool selected)
+        private State<bool> _selected;
+        
+        public RadioButtonPage()
         {
-            Props.Set(new RadioButtonPageProps() { value = selected });
+            _selected = CreateState(false);
         }
         
-        public override void OnRender()
+        private void HandleChange(bool selected)
+        {
+            _selected.Value = selected;
+        }
+
+        protected override void OnRender()
         {
             _<RadioButton, RadioButtonProps>(
                 props: new RadioButtonProps()
                 {
                     onChange = (System.Action<bool>)HandleChange,
-                    value = OwnProps.value
+                    value = _selected.Value
                 }
             );
-            _<Label, LabelProps>(props: new LabelProps() { text = $"Selected: {(bool)OwnProps.value}" });
+            _<Label, LabelProps>(props: new LabelProps() { text = $"Selected: {_selected.Value}" });
         }
     }
 }

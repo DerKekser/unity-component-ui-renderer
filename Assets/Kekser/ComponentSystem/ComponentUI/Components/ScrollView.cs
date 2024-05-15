@@ -4,7 +4,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 {
     public sealed class ScrollView: UIComponent<UnityEngine.UIElements.ScrollView, StyleProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             Children();
         }

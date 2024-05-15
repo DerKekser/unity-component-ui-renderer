@@ -4,7 +4,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 {
     public sealed class Box : UIComponent<UnityEngine.UIElements.Box, StyleProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             Children();
         }

@@ -17,13 +17,13 @@ namespace Examples.Todo.Components
     
     public class StyledInput: UIComponent<StyledInputProps>
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<TextField, TextFieldProps>(
                 props: new TextFieldProps()
                 {
-                    onChange = OwnProps.onChange,
-                    value = OwnProps.value,
+                    onChange = Props.onChange,
+                    value = Props.value,
                     className = "bg-[/Assets/Kenny%20UI/Spritesheet/greySheet.png#grey_button13.png] w-[100%] h-[100%] font-24 color-black [&>TextInput]:color-black [&>TextInput]:p-10 [&>TextInput]:overflow-hidden",
                 }
             );

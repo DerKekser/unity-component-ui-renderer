@@ -5,7 +5,7 @@ namespace Kekser.ComponentSystem.ComponentBase
     public interface IFragment<TNode> where TNode: class, new()
     {
         TNode FragmentRoot { get; }
-        TNode FragmentNode { get; }
+        TNode Node { get; }
         
         bool IsDirty { get; }
         
@@ -18,8 +18,7 @@ namespace Kekser.ComponentSystem.ComponentBase
     
     public interface IFragment<TNode, TProps> : IFragment<TNode> where TNode: class, new() where TProps: class, new()
     {
-        TProps OwnProps { get; }
+        TProps Props { get; set; }
         TProps DefaultProps { get; }
-        IPropList<TProps> Props { get; }
     }
 }

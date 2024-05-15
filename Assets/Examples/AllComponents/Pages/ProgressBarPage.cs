@@ -5,7 +5,7 @@ namespace Examples.AllComponents.Pages
 {
     public class ProgressBarPage: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<ProgressBar, ProgressBarProps>(
                 props: new ProgressBarProps()

@@ -6,7 +6,7 @@ namespace Examples.AllComponents.Pages
 {
     public class ScrollViewPage: UIComponent
     {
-        public override void OnRender()
+        protected override void OnRender()
         {
             _<ScrollView>(
                 render: () =>

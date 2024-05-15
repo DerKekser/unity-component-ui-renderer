@@ -18,11 +18,11 @@ namespace Examples.Todo.Pages
     {
         private void HandleBack()
         {
-            Action e = OwnProps.onBack;
+            Action e = Props.onBack;
             e?.Invoke();
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
             _<ScrollView>(
                 render: () =>

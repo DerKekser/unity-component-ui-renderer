@@ -22,11 +22,14 @@ namespace Kekser.ComponentSystem.ComponentBase
         private bool _isDirty;
         
         public TNode FragmentRoot => _fragmentRoot;
-        public TNode FragmentNode => _fragmentNode ?? _fragmentRoot;
+        public TNode Node => _fragmentNode ?? _fragmentRoot;
 
-        public IPropList<TProps> Props => _props;
+        public TProps Props
+        {
+            get => _props.Props;
+            set => _props.Set(value);
+        }
         
-        public TProps OwnProps => _props.Props;
         public virtual TProps DefaultProps { get; } = new TProps();
         
         public bool IsDirty => _isDirty;
@@ -64,8 +67,8 @@ namespace Kekser.ComponentSystem.ComponentBase
         {
             _ctx = ctx;
             _fragmentRoot = _ctx?.Parent?.Fragment?.FragmentRoot;
-            _fragmentNode = _ctx?.Parent?.Fragment?.FragmentNode;
-            Props.Set(DefaultProps);
+            _fragmentNode = _ctx?.Parent?.Fragment?.Node;
+            Props = DefaultProps;
         }
         
         public TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>
@@ -135,8 +138,8 @@ namespace Kekser.ComponentSystem.ComponentBase
             CurrentContext.Each(props, callback);
         }
 
-        public virtual void OnMount() {}
-        public virtual void OnUnmount() {}
-        public virtual void OnRender() {}
+        protected virtual void OnMount() {}
+        protected virtual void OnUnmount() {}
+        protected virtual void OnRender() {}
     }
 }

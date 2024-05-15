@@ -24,7 +24,7 @@ namespace Examples.Todo.Components
             provider.Remove(todo);
         }
 
-        public override void OnRender()
+        protected override void OnRender()
         {
             TodoProvider todoProvider = GetProvider<TodoProvider>();
             

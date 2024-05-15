@@ -14,25 +14,25 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         private void Click()
         {
-            Action e = OwnProps.onClick;
+            Action e = Props.onClick;
             e?.Invoke();
         }
-        
-        public override void OnMount()
+
+        protected override void OnMount()
         {
             FragmentRoot.clickable.clicked += Click;
             FragmentRoot.text = "";
         }
-        
-        public override void OnUnmount()
+
+        protected override void OnUnmount()
         {
             FragmentRoot.clickable.clicked -= Click;
         }
-        
-        public override void OnRender()
+
+        protected override void OnRender()
         {
-            if (OwnProps.text.IsSet)
-                FragmentRoot.text = OwnProps.text;
+            if (Props.text.IsSet)
+                FragmentRoot.text = Props.text;
             
             Children();
         }

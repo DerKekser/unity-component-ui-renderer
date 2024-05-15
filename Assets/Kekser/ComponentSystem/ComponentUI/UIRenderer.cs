@@ -26,11 +26,11 @@ namespace Kekser.ComponentSystem.ComponentUI
 
         protected override void Tick(BaseContext<VisualElement> ctx)
         {
-            _fragment.Props.Set(new UIRendererProps
+            _fragment.Props = new UIRendererProps
             {
                 screenWidth = Screen.width,
                 screenHeight = Screen.height
-            });
+            };
         }
     }
 }
