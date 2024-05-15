@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +13,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
     public static class StyleGenerator
     {
         [MenuItem("Edit/Style Generator/Generate Styles")]
+        [InitializeOnLoadMethod]
         [UnityEditor.Callbacks.DidReloadScripts]
         public static void GenerateStyles()
         {
@@ -28,6 +28,7 @@ namespace Kekser.ComponentSystem.StyleGenerator
             }
             
             EditorUtility.ClearProgressBar();
+            EditorApplication.QueuePlayerLoopUpdate();
         }
         
         private static StyleGeneratorSettings[] FindSettings()
