@@ -254,6 +254,8 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("text-ellipsis", StyleRule.Unit.None, _ => "text-overflow: ellipsis"),
             new StyleRule("text-wrap", StyleRule.Unit.None, _ => "white-space: wrap"),
             new StyleRule("text-nowrap", StyleRule.Unit.None, _ => "white-space: nowrap"),
+            
+            new StyleRule("transition", StyleRule.Unit.String, value => $"transition: {value}"),
         };
     }
 }
