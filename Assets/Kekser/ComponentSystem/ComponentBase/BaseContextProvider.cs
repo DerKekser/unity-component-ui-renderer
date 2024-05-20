@@ -4,7 +4,12 @@ using Kekser.ComponentSystem.ComponentBase.StateSystem;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
-    public class BaseContextProvider<TNode>: BaseFragment<TNode, NoProps>, IContextProvider<TNode> where TNode: class, new()
+    public abstract class BaseContextProvider<TNode> : BaseContextProvider<TNode, NoProps> where TNode : class, new()
+    {
+        
+    }
+    
+    public abstract class BaseContextProvider<TNode, TProps>: BaseFragment<TNode, TProps>, IContextProvider<TNode> where TNode: class, new() where TProps: class, new()
     {
         protected event Action _setDirty;
         

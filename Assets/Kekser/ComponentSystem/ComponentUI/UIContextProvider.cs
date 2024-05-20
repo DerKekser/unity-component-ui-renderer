@@ -7,4 +7,9 @@ namespace Kekser.ComponentSystem.ComponentUI
     {
         
     }
+    
+    public class UIContextProvider<TProps>: BaseContextProvider<VisualElement, TProps> where TProps : class, new()
+    {
+        
+    }
 }
