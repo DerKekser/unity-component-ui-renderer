@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Kekser.ComponentSystem.ComponentBase;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.ComponentUI;
 
 namespace Examples.Todo.Providers
@@ -11,67 +12,61 @@ namespace Examples.Todo.Providers
         public bool done;
     }
     
-    public class TodoProviderProps
+    public class TodoProvider: UIContextProvider
     {
-        public OptionalValue<List<TodoData>> todos { get; set; } = new();
-    }
-    
-    public class TodoProvider: UIContextProvider<TodoProviderProps>
-    {
-        public override ContextProviderProps<TodoProviderProps> DefaultProps { get; } = new ContextProviderProps<TodoProviderProps>()
+        private State<List<TodoData>> _todos;
+        
+        protected override void OnMount()
         {
-            value = new TodoProviderProps()
+            _todos = UseState(new List<TodoData>()
             {
-                todos = new List<TodoData>()
-                {
-                    new TodoData() { text = "Buy milk", done = false },
-                    new TodoData() { text = "Feed the cat", done = false },
-                    new TodoData() { text = "Do the laundry", done = false }
-                }
-            }
-        };
-
+                new TodoData() { text = "Buy milk", done = false },
+                new TodoData() { text = "Feed the cat", done = false },
+                new TodoData() { text = "Do the laundry", done = false }
+            });
+        }
+        
         public void Add(string todo)
         {
-            List<TodoData> todos = ProviderProps.todos.IsSet ? new List<TodoData>((List<TodoData>)ProviderProps.todos) : new List<TodoData>();
+            List<TodoData> todos = new List<TodoData>(_todos.Value);
             todos.Add(new TodoData() { text = todo, done = false });
-            ProviderProps = new TodoProviderProps() { todos = todos };
+            _todos.Value = todos;
         }
         
         public void Remove(TodoData todo)
         {
-            List<TodoData> todos = ProviderProps.todos.IsSet ? new List<TodoData>((List<TodoData>)ProviderProps.todos) : new List<TodoData>();
+            List<TodoData> todos = new List<TodoData>(_todos.Value);
             todos.Remove(todo);
-            ProviderProps = new TodoProviderProps() { todos = todos };
+            _todos.Value = todos;
         }
         
         public void Toggle(TodoData todo)
         {
-            List<TodoData> todos = ProviderProps.todos.IsSet ? new List<TodoData>((List<TodoData>)ProviderProps.todos) : new List<TodoData>();
+            List<TodoData> todos = new List<TodoData>(_todos.Value);
             int index = todos.FindIndex(t => t == todo);
             todos[index].done = !todos[index].done;
-            ProviderProps = new TodoProviderProps() { todos = todos };
+            _todos.Value = todos;
         }
         
         public TodoData Get(int index)
         {
-            List<TodoData> todos = ProviderProps.todos.IsSet ? new List<TodoData>((List<TodoData>)ProviderProps.todos) : new List<TodoData>();
+            List<TodoData> todos = _todos.Value;
             return todos[index];
         }
         
         public void Clear()
         {
-            ProviderProps = new TodoProviderProps() { todos = new List<TodoData>() };
+            _todos.Value = new List<TodoData>();
         }
         
         public List<TodoData> GetTodos()
         {
-            return ProviderProps.todos.IsSet ? new List<TodoData>((List<TodoData>)ProviderProps.todos) : new List<TodoData>();
+            return _todos.Value;
         }
         
         public int GetCount()
         {
-            return ProviderProps.todos.IsSet ? ((List<TodoData>)ProviderProps.todos).Count : 0;
+            return _todos.Value.Count;
         }
     }
 }

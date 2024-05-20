@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI
 {
-    public class UIContextProvider<TProps>: BaseContextProvider<VisualElement, TProps> where TProps: class, new()
+    public class UIContextProvider: BaseContextProvider<VisualElement>
     {
         
     }
