@@ -239,6 +239,7 @@ MonoBehaviour:
   _uiDocument: {fileID: 1709937683}
   _styles:
   - {fileID: 7433441132597879392, guid: 6e99ca0b8bcb6d94b921651a04bec08f, type: 3}
+  _log: 0
 --- !u!4 &1195754581
 Transform:
   m_ObjectHideFlags: 0

@@ -8,12 +8,12 @@ namespace Examples.AllComponents.Pages
     public class TextFieldPage: UIComponent
     {
         private State<string> _text;
-        
-        public TextFieldPage()
+
+        protected override void OnMount()
         {
-            _text = CreateState("");
+            _text = UseState("");
         }
-        
+
         private void HandleChange(string selected)
         {
             _text.Value = selected;

@@ -10,11 +10,11 @@ namespace Examples.AllComponents.Pages
     {
         private State<int> _selected;
         
-        public RadioButtonGroupPage()
+        protected override void OnMount()
         {
-            _selected = CreateState(0);
+            _selected = UseState(0);
         }
-        
+
         private void HandleChange(int selected)
         {
             _selected.Value = selected;

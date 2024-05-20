@@ -20,11 +20,11 @@ namespace Examples.Todo
 
         private State<Pages> _page;
 
-        public App()
+        protected override void OnMount()
         {
-            _page = CreateState(Pages.Menu);
+            _page = UseState(Pages.Menu);
         }
-        
+
         private void HandleMenu()
         {
             _page.Value = Pages.Menu;

@@ -38,11 +38,11 @@ namespace Examples.AllComponents
         
         private State<Pages> _page;
         
-        public App()
+        protected override void OnMount()
         {
-            _page = CreateState(Pages.Button);
+            _page = UseState(Pages.Button);
         }
-        
+
         public override StyleProps DefaultProps { get; } = new StyleProps()
         {
             style = new Style() { height = new StyleLength(Length.Percent(100)) },

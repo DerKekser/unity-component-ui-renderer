@@ -9,12 +9,12 @@ namespace Examples.AllComponents.Pages
     public class SliderIntPage: UIComponent
     {
         private State<int> _selected;
-        
-        public SliderIntPage()
+
+        protected override void OnMount()
         {
-            _selected = CreateState(0);
+            _selected = UseState(0);
         }
-        
+
         private void HandleChange(int selected)
         {
             _selected.Value = selected;

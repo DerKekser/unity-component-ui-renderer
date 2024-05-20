@@ -12,29 +12,32 @@ namespace Examples.Todo.Components
 {
     public class TodoList: UIComponent
     {
+        TodoProvider _todoProvider;
+        
+        protected override void OnMount()
+        {
+            _todoProvider = UseContextProvider<TodoProvider>();
+        }
+
         private void HandleToggle(TodoData todo)
         {
-            TodoProvider provider = GetProvider<TodoProvider>();
-            provider.Toggle(todo);
+            _todoProvider.Toggle(todo);
         }
         
         private void HandleRemove(TodoData todo)
         {
-            TodoProvider provider = GetProvider<TodoProvider>();
-            provider.Remove(todo);
+            _todoProvider.Remove(todo);
         }
 
         protected override void OnRender()
         {
-            TodoProvider todoProvider = GetProvider<TodoProvider>();
-            
             _<ScrollView, StyleProps>(
                 props: new StyleProps() {
                     className = "w-[100%] h-[100%]",
                 },
                 render: () =>
                 {
-                    Each(todoProvider.GetTodos(), (todo, i) =>
+                    Each(_todoProvider.GetTodos(), (todo, i) =>
                     {
                         _<TodoEntry, TodoEntryProps>(
                             key: i.ToString(),
@@ -46,7 +49,7 @@ namespace Examples.Todo.Components
                             }
                         );
                     });
-                    if (todoProvider.GetTodos().Count == 0)
+                    if (_todoProvider.GetTodos().Count == 0)
                     {
                         _<Label, LabelProps>(
                             props: new LabelProps()

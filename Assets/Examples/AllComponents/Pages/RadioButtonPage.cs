@@ -8,12 +8,12 @@ namespace Examples.AllComponents.Pages
     public class RadioButtonPage: UIComponent
     {
         private State<bool> _selected;
-        
-        public RadioButtonPage()
+
+        protected override void OnMount()
         {
-            _selected = CreateState(false);
+            _selected = UseState(false);
         }
-        
+
         private void HandleChange(bool selected)
         {
             _selected.Value = selected;

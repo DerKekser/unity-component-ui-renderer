@@ -8,12 +8,12 @@ namespace Examples.AllComponents.Pages
     public class SliderPage: UIComponent
     {
         private State<float> _selected;
-        
-        public SliderPage()
+
+        protected override void OnMount()
         {
-            _selected = CreateState(0f);
+            _selected = UseState(0f);
         }
-        
+
         private void HandleChange(float selected)
         {
             _selected.Value = selected;

@@ -13,10 +13,10 @@ namespace Examples.AllComponents.Pages
     public class ButtonPage: UIComponent
     {
         private State<int> _buttonCount;
-        
-        public ButtonPage()
+
+        protected override void OnMount()
         {
-            _buttonCount = CreateState(0);
+            _buttonCount = UseState(0);
         }
 
         protected override void OnRender()

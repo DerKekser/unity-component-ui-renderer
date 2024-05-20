@@ -12,11 +12,11 @@ namespace Examples.AllComponents.Pages
     {
         private State<string> _selected;
         
-        public DropdownFieldPage()
+        protected override void OnMount()
         {
-            _selected = CreateState("Option 1");
+            _selected = UseState("Option 1");
         }
-        
+
         private void HandleChange(string selected)
         {
             _selected.Value = selected;

@@ -13,10 +13,10 @@ namespace Examples.AllComponents.Pages
     public class PortalPage: UIComponent
     {
         private State<VisualElement> _target;
-        
-        public PortalPage()
+
+        protected override void OnMount()
         {
-            _target = CreateState<VisualElement>(null);
+            _target = UseState<VisualElement>(null);
         }
 
         protected override void OnRender()

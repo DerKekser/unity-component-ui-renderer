@@ -39,9 +39,17 @@ namespace Kekser.ComponentSystem.ComponentBase
             _props = new PropList<TProps>(() => _isDirty = true);
         }
         
-        public State<T> CreateState<T>(T defaultValue = default)
+        public State<T> UseState<T>(T defaultValue = default)
         {
             return new State<T>(() => _isDirty = true, defaultValue);
+        }
+        
+        public TProvider UseContextProvider<TProvider>() where TProvider : class, IContextProvider<TNode>
+        {
+            TProvider provider = GetParent<TProvider>();
+            
+            provider.RegisterDirty(() => _isDirty = true);
+            return provider;
         }
         
         public virtual void Mount(TNode parent)
@@ -71,20 +79,20 @@ namespace Kekser.ComponentSystem.ComponentBase
             Props = DefaultProps;
         }
         
-        public TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>
+        public TParent GetParent<TParent>() where TParent : class, IFragment<TNode>
         {
-            if (this is TProvider provider)
+            if (this is TParent parent)
             {
-                return provider;
+                return parent;
             }
             
-            provider = _ctx?.Parent?.Fragment?.GetProvider<TProvider>();
-            if (provider != null)
+            parent = _ctx?.Parent?.Fragment?.GetParent<TParent>();
+            if (parent != null)
             {
-                return provider;
+                return parent;
             }
             
-            throw new Exception($"Provider {typeof(TProvider).Name} not found");
+            throw new Exception($"Parent {typeof(TParent).Name} not found");
         }
 
         protected void Children(BaseContext<TNode> ctx)

@@ -9,12 +9,14 @@ namespace Examples.Todo.Components
     public class TodoInput: UIComponent
     {
         private State<string> _inputValue;
+        private TodoProvider _todoProvider;
         
-        public TodoInput()
+        protected override void OnMount()
         {
-            _inputValue = CreateState("");
+            _inputValue = UseState("");
+            _todoProvider = UseContextProvider<TodoProvider>();
         }
-        
+
         private void HandleChange(string value)
         {
             _inputValue.Value = value?.Trim();
@@ -25,8 +27,7 @@ namespace Examples.Todo.Components
             if (string.IsNullOrEmpty(_inputValue.Value))
                 return;
             
-            TodoProvider provider = GetProvider<TodoProvider>();
-            provider.Add(_inputValue.Value);
+            _todoProvider.Add(_inputValue.Value);
             _inputValue.Value = "";
         }
 

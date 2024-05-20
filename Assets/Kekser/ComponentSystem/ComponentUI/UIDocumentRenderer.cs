@@ -12,6 +12,9 @@ namespace Kekser.ComponentSystem.ComponentUI
         [SerializeField]
         private StyleSheet[] _styles;
         
+        [SerializeField]
+        private bool _log = false;
+        
         private UIRenderer _renderer;
         
         private void CreateRenderer()
@@ -25,7 +28,10 @@ namespace Kekser.ComponentSystem.ComponentUI
             foreach (var style in _styles)
                 _uiDocument.rootVisualElement.styleSheets.Add(style);
 
-            _renderer = new UIRenderer();
+            _renderer = new UIRenderer
+            {
+                Logging = _log
+            };
             _renderer.Render(Render, _uiDocument.rootVisualElement);
         }
         

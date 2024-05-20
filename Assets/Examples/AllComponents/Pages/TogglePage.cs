@@ -8,12 +8,12 @@ namespace Examples.AllComponents.Pages
     public class TogglePage: UIComponent
     {
         private State<bool> _selected;
-        
-        public TogglePage()
+
+        protected override void OnMount()
         {
-            _selected = CreateState(false);
+            _selected = UseState(false);
         }
-        
+
         public void HandleChange(bool selected)
         {
             _selected.Value = selected;

@@ -13,7 +13,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         void Unmount();
         void Render();
         void SetContext(BaseContext<TNode> ctx);
-        TProvider GetProvider<TProvider>() where TProvider : class, IFragment<TNode>;
+        TParent GetParent<TParent>() where TParent : class, IFragment<TNode>;
     }
     
     public interface IFragment<TNode, TProps> : IFragment<TNode> where TNode: class, new() where TProps: class, new()

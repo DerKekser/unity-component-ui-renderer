@@ -12,13 +12,13 @@ namespace Examples.AllComponents.Pages
     {
         private State<float> _min;
         private State<float> _max;
-        
-        public MinMaxSliderPage()
+
+        protected override void OnMount()
         {
-            _min = CreateState(0f);
-            _max = CreateState(100f);
+            _min = UseState(0f);
+            _max = UseState(100f);
         }
-        
+
         private void HandleChange(float min, float max)
         {
             _min.Value = min;
