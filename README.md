@@ -8,7 +8,7 @@ Unity - Component UI Renderer is a component-based framework for Unity, inspired
 
 - **Tailwind CSS-Inspired Styling**: Define styles for components using the `StyleProps` class. The use of class names like "flex-grow-1" and "mt-5" is reminiscent of Tailwind's naming conventions.
 
-For a more detailed look at these features, please refer to the [Todo Example Project](https://github.com/DerKekser/unity-component-ui-renderer/tree/main/Assets/Examples/Todo).
+For a more detailed look at these features, please refer to the [Todo Example Project](https://github.com/DerKekser/unity-component-ui-renderer/tree/master/Assets/Examples/Todo).
 
 ### Install
 
