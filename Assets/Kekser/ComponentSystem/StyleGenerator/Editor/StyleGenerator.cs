@@ -135,6 +135,8 @@ namespace Kekser.ComponentSystem.StyleGenerator
             new StyleRule("width", StyleRule.Unit.Pixel, value => $"width: {value}"),
             new StyleRule("h", StyleRule.Unit.Pixel, value => $"height: {value}"),
             new StyleRule("height", StyleRule.Unit.Pixel, value => $"height: {value}"),
+            new StyleRule("w-full", StyleRule.Unit.None, _ => "width: 100%"),
+            new StyleRule("h-full", StyleRule.Unit.None, _ => "height: 100%"),
             
             new StyleRule("max-w", StyleRule.Unit.Pixel, value => $"max-width: {value}"),
             new StyleRule("max-width", StyleRule.Unit.Pixel, value => $"max-width: {value}"),
