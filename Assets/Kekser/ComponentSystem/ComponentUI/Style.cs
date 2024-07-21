@@ -52,6 +52,7 @@ namespace Kekser.ComponentSystem.ComponentUI
         public OptionalValue<StyleLength> paddingRight { get; set; } = new();
         public OptionalValue<StyleLength> paddingTop { get; set; } = new();
         public OptionalValue<StyleEnum<Position>> position { get; set; } = new();
+        public OptionalValue<StyleLength> right { get; set; } = new();
         public OptionalValue<StyleRotate> rotate { get; set; } = new();
         public OptionalValue<StyleScale> scale { get; set; } = new();
         public OptionalValue<StyleEnum<TextOverflow>> textOverflow { get; set; } = new();
