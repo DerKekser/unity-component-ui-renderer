@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
 {
@@ -8,6 +9,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
     {
         public OptionalValue<string> text { get; set; } = new();
         public OptionalValue<Action> onClick { get; set; } = new();
+        public OptionalValue<Action> onPointerDown { get; set; } = new();
+        public OptionalValue<Action> onPointerUp { get; set; } = new();
     }
     
     public sealed class Button : UIComponent<UnityEngine.UIElements.Button, ButtonProps>
@@ -17,16 +20,33 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
             Action e = Props.onClick;
             e?.Invoke();
         }
+        
+        // TODO: Add onPointerDown and onPointerUp events on every component
+        private void OnPointerDown(PointerDownEvent pEvent)
+        {
+            Action e = Props.onPointerDown;
+            e?.Invoke();
+        }
+        
+        private void OnPointerUp(PointerUpEvent pEvent)
+        {
+            Action e = Props.onPointerUp;
+            e?.Invoke();
+        }
 
         protected override void OnMount()
         {
             FragmentRoot.clickable.clicked += Click;
+            FragmentRoot.RegisterCallback<PointerDownEvent>(OnPointerDown);
+            FragmentRoot.RegisterCallback<PointerUpEvent>(OnPointerUp);
             FragmentRoot.text = "";
         }
 
         protected override void OnUnmount()
         {
             FragmentRoot.clickable.clicked -= Click;
+            FragmentRoot.UnregisterCallback<PointerDownEvent>(OnPointerDown);
+            FragmentRoot.UnregisterCallback<PointerUpEvent>(OnPointerUp);
         }
 
         protected override void OnRender()
