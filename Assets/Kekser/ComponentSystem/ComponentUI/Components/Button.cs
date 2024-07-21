@@ -37,8 +37,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         protected override void OnMount()
         {
             FragmentRoot.clickable.clicked += Click;
-            FragmentRoot.RegisterCallback<PointerDownEvent>(OnPointerDown);
-            FragmentRoot.RegisterCallback<PointerUpEvent>(OnPointerUp);
+            FragmentRoot.RegisterCallback<PointerDownEvent>(OnPointerDown, TrickleDown.TrickleDown);
+            FragmentRoot.RegisterCallback<PointerUpEvent>(OnPointerUp, TrickleDown.TrickleDown);
             FragmentRoot.text = "";
         }
 
