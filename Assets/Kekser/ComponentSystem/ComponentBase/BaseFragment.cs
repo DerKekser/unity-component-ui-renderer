@@ -19,7 +19,7 @@ namespace Kekser.ComponentSystem.ComponentBase
         protected BaseContext<TNode> _ctx;
         protected PropList<TProps> _props;
         
-        private bool _isDirty;
+        private bool _isDirty = true;
         
         public TNode FragmentRoot => _fragmentRoot;
         public TNode Node => _fragmentNode ?? _fragmentRoot;
