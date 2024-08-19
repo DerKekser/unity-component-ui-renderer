@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentBase.StateSystem;
+using UnityEngine.Scripting;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
@@ -21,17 +22,22 @@ namespace Kekser.ComponentSystem.ComponentBase
         
         private bool _isDirty = true;
         
+        [RequiredMember]
         public TNode FragmentRoot => _fragmentRoot;
+        [RequiredMember]
         public TNode Node => _fragmentNode ?? _fragmentRoot;
 
+        [RequiredMember]
         public TProps Props
         {
             get => _props.Props;
             set => _props.Set(value);
         }
         
+        [RequiredMember]
         public virtual TProps DefaultProps { get; } = new TProps();
         
+        [RequiredMember]
         public bool IsDirty => _isDirty;
         
         public BaseFragment()
@@ -39,11 +45,13 @@ namespace Kekser.ComponentSystem.ComponentBase
             _props = new PropList<TProps>(() => _isDirty = true);
         }
         
+        [RequiredMember]
         public State<T> UseState<T>(T defaultValue = default)
         {
             return new State<T>(() => _isDirty = true, defaultValue);
         }
         
+        [RequiredMember]
         public TProvider UseContextProvider<TProvider>() where TProvider : class, IContextProvider<TNode>
         {
             TProvider provider = GetParent<TProvider>();
@@ -52,18 +60,21 @@ namespace Kekser.ComponentSystem.ComponentBase
             return provider;
         }
         
+        [RequiredMember]
         public virtual void Mount(TNode parent)
         {
             BaseRenderer<TNode>.Log(() => "Mounting " + GetType().Name);
             OnMount();
         }
         
+        [RequiredMember]
         public virtual void Unmount()
         {
             BaseRenderer<TNode>.Log(() => "Unmounting " + GetType().Name);
             OnUnmount();
         }
 
+        [RequiredMember]
         public virtual void Render()
         {
             _isDirty = false;
@@ -71,6 +82,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             OnRender();
         }
         
+        [RequiredMember]
         public virtual void SetContext(BaseContext<TNode> ctx)
         {
             _ctx = ctx;
@@ -79,6 +91,7 @@ namespace Kekser.ComponentSystem.ComponentBase
             Props = DefaultProps;
         }
         
+        [RequiredMember]
         public TParent GetParent<TParent>() where TParent : class, IFragment<TNode>
         {
             if (this is TParent parent)
