@@ -25,6 +25,8 @@ namespace Kekser.ComponentSystem.ComponentUI
     
     public abstract class UIComponent<TElement, TProps>: UIFragment<TProps> where TElement: VisualElement, new() where TProps : class, new()
     {
+        private int _contextCreationAttempts = 0;
+        
         private static readonly List<(PropertyInfo, PropertyInfo)> StylePropMap = 
             typeof(Style)
                 .GetProperties()
@@ -104,8 +106,22 @@ namespace Kekser.ComponentSystem.ComponentUI
         public override void SetContext(BaseContext<VisualElement> ctx)
         {
             base.SetContext(ctx);
-            _fragmentRoot = new TElement();
-            _fragmentNode = _fragmentRoot;
+            try
+            {
+                _fragmentRoot = new TElement();
+                _fragmentNode = _fragmentRoot;
+            }
+            catch (Exception e)
+            {
+                _contextCreationAttempts++;
+                if (_contextCreationAttempts > 5)
+                {
+                    Debug.LogError($"Error while creating {typeof(TElement).Name} for {GetType().Name}. Aborting.");
+                    return;
+                }
+                Debug.LogError($"Error while creating {typeof(TElement).Name} for {GetType().Name}. Trying again.");
+                SetContext(ctx);
+            }
         }
     }
 }
