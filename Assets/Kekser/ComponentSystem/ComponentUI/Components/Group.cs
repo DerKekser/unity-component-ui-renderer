@@ -1,6 +1,9 @@
-﻿namespace Kekser.ComponentSystem.ComponentUI.Components
+﻿using UnityEngine.Scripting;
+
+namespace Kekser.ComponentSystem.ComponentUI.Components
 {
-    public class Group: UIComponent
+    [Preserve]
+    public sealed class Group: UIComponent
     {
         protected override void OnRender()
         {

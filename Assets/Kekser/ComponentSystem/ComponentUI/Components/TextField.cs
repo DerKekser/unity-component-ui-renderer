@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -11,6 +12,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<string>> onChange { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class TextField: UIComponent<UnityEngine.UIElements.TextField, TextFieldProps>
     {
         private void Change(ChangeEvent<string> eChangeEvent)

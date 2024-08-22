@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -12,6 +13,8 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<string>> onChange { get; set; } = new();
         public OptionalValue<List<string>> options { get; set; } = new();
     }
+    
+    [Preserve]
     public sealed class DropdownField: UIComponent<UnityEngine.UIElements.DropdownField, DropdownFieldProps>
     {
         public override DropdownFieldProps DefaultProps { get; } = new DropdownFieldProps()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -13,6 +14,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<List<string>> options { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class RadioButtonGroup: UIComponent<UnityEngine.UIElements.RadioButtonGroup, RadioButtonGroupProps>
     {
         public override RadioButtonGroupProps DefaultProps { get; } = new RadioButtonGroupProps()

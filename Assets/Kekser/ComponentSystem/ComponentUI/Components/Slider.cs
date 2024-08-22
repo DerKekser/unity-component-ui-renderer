@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -11,6 +12,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<float>> onChange { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class Slider: UIComponent<UnityEngine.UIElements.Slider, SliderProps>
     {
         private void Change(ChangeEvent<float> eChangeEvent)

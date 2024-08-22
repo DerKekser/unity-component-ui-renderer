@@ -1,5 +1,6 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -10,6 +11,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<System.Action<bool>> onChange { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class Toggle: UIComponent<UnityEngine.UIElements.Toggle, ToggleProps>
     {
         private void Change(UnityEngine.UIElements.ChangeEvent<bool> e)

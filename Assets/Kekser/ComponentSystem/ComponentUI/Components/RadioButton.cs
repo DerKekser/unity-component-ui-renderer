@@ -1,6 +1,7 @@
 ﻿using System;
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -12,6 +13,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<bool>> onChange { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class RadioButton: UIComponent<UnityEngine.UIElements.RadioButton, RadioButtonProps>
     {
         private void Change(ChangeEvent<bool> e)

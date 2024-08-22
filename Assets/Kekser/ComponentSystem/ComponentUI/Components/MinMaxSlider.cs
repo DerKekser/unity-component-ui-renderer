@@ -2,6 +2,7 @@
 using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentUI.UIProps;
 using UnityEngine;
+using UnityEngine.Scripting;
 using UnityEngine.UIElements;
 
 namespace Kekser.ComponentSystem.ComponentUI.Components
@@ -16,6 +17,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
         public OptionalValue<Action<float, float>> onChange { get; set; } = new();
     }
     
+    [Preserve]
     public sealed class MinMaxSlider: UIComponent<UnityEngine.UIElements.MinMaxSlider, MinMaxSliderProps>
     {
         private void Change(ChangeEvent<Vector2> e)
