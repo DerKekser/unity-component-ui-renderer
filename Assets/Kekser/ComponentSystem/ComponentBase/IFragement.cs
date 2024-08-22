@@ -1,7 +1,9 @@
 ﻿using Kekser.ComponentSystem.ComponentBase.PropSystem;
+using UnityEngine.Scripting;
 
 namespace Kekser.ComponentSystem.ComponentBase
 {
+    [RequireImplementors]
     public interface IFragment<TNode> where TNode: class, new()
     {
         TNode FragmentRoot { get; }
