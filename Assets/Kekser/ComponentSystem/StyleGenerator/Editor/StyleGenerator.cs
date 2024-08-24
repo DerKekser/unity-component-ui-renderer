@@ -180,6 +180,9 @@ namespace Kekser.ComponentSystem.StyleGenerator
                     return $"background-image: url('{value}')";
                 }),
                 
+            new StyleRule("cover", StyleRule.Unit.None, _ => "background-size: cover"),
+            new StyleRule("contain", StyleRule.Unit.None, _ => "background-size: contain"),
+                
             new StyleRule("color", StyleRule.Unit.String, value => $"color: {value}"),
             
             new StyleRule("font", StyleRule.Unit.Pixel, value => $"font-size: {value}"),
