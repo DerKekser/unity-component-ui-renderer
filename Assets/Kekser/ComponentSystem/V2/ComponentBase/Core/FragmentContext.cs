@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Kekser.ComponentSystem.V2.ComponentBase
+namespace Kekser.ComponentSystem.V2.ComponentBase.Core
 {
     public class FragmentContext : IFragmentContext
     {
@@ -9,6 +9,8 @@ namespace Kekser.ComponentSystem.V2.ComponentBase
         private object _props;
         private List<IFragmentContext> _children = new List<IFragmentContext>();
         private IFragmentContext _internalChildren;
+        
+        public IFragment Fragment => _fragment;
         
         public int? Key => _key;
         
@@ -28,6 +30,10 @@ namespace Kekser.ComponentSystem.V2.ComponentBase
         {
             _props = props;
         }
+        
+        public IFragmentContext[] Children => _children.ToArray();
+        
+        public IFragmentContext InternalChildren => _internalChildren;
         
         public void SetChildren(params IFragmentContext[] children)
         {

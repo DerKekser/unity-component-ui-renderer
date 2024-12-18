@@ -4,7 +4,7 @@ using Kekser.ComponentSystem.ComponentBase.PropSystem;
 using Kekser.ComponentSystem.ComponentBase.StateSystem;
 using Kekser.ComponentSystem.V2.ComponentBase.Components;
 
-namespace Kekser.ComponentSystem.V2.ComponentBase
+namespace Kekser.ComponentSystem.V2.ComponentBase.Core
 {
     public abstract class BaseFragment : IFragment
     {
@@ -81,6 +81,20 @@ namespace Kekser.ComponentSystem.V2.ComponentBase
             return _context;
         }
 
+        public virtual void Init()
+        {
+            OnMount();    
+        }
+
+        public virtual void Dispose()
+        {
+            OnUnmount();
+        }
+        
+        public virtual void Update() {}
+
+        protected virtual void OnMount() {}
+        protected virtual void OnUnmount() {}
         protected virtual IFragmentContext Render() => _<Children>(); // Defines the tree structure of the fragment and children
     }
 

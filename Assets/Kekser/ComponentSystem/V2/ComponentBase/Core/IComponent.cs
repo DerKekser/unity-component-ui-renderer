@@ -1,4 +1,4 @@
-﻿namespace Kekser.ComponentSystem.V2.ComponentBase
+﻿namespace Kekser.ComponentSystem.V2.ComponentBase.Core
 {
     public interface IComponent<TNode> : IFragment where TNode: class, new()
     {

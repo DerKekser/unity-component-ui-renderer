@@ -1,6 +1,7 @@
 ﻿using Kekser.ComponentSystem.ComponentUI.UIProps;
 using Kekser.ComponentSystem.V2.ComponentBase;
 using Kekser.ComponentSystem.V2.ComponentBase.Components;
+using Kekser.ComponentSystem.V2.ComponentBase.Core;
 using Kekser.ComponentSystem.V2.ComponentUI.Components;
 
 namespace Kekser.ComponentSystem.V2.ComponentUI.Test

@@ -1,4 +1,5 @@
 ﻿using Kekser.ComponentSystem.V2.ComponentBase;
+using Kekser.ComponentSystem.V2.ComponentBase.Core;
 using Kekser.ComponentSystem.V2.ComponentUI.Components;
 using UnityEngine.UIElements;
 using Label = Kekser.ComponentSystem.V2.ComponentUI.Components.Label;

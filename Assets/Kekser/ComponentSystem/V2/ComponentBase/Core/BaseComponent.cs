@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace Kekser.ComponentSystem.V2.ComponentBase
+﻿namespace Kekser.ComponentSystem.V2.ComponentBase.Core
 {
     public sealed class NoProps
     {

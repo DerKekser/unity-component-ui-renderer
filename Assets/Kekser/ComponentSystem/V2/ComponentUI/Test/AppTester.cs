@@ -1,5 +1,6 @@
 ﻿using System;
 using Kekser.ComponentSystem.V2.ComponentBase;
+using Kekser.ComponentSystem.V2.ComponentBase.Core;
 using UnityEngine;
 
 namespace Kekser.ComponentSystem.V2.ComponentUI.Test

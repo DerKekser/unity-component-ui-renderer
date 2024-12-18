@@ -1,5 +1,6 @@
 ﻿using Kekser.ComponentSystem.V2.ComponentBase;
 using Kekser.ComponentSystem.V2.ComponentBase.Components;
+using Kekser.ComponentSystem.V2.ComponentBase.Core;
 
 namespace Kekser.ComponentSystem.V2.ComponentUI.Test
 {
