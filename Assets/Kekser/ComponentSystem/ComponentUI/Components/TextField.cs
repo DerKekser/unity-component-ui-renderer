@@ -33,7 +33,7 @@ namespace Kekser.ComponentSystem.ComponentUI.Components
 
         protected override void OnRender()
         {
-            if (Props.value.IsSet)
+            if (Props.value.IsSet && FragmentRoot.value != Props.value)
                 FragmentRoot.value = Props.value;
         }
     }
